@@ -3,16 +3,16 @@
   <div class="container">
     <div class="item">
       <img src="../assets/SecondContent_1.png" alt="WATCH ULTRA 2 한 차원 높은 모험.">
-      <button @click="showPopup"> {{ more }} <i class="material-icons">arrow_forward_ios</i></button>
-      <OrderPopup @close="closePopup" ref="popup"/>
-      <a :href=SubPage> {{ nowOrder }} <i class="material-icons">arrow_forward_ios</i></a>
-      <router-link to="/SubPage">SubPage로 이동</router-link>
-      <router-view>페이지 이동</router-view>
-      <a :href=SubPage> {{ nowOrder }} <i class="material-icons">arrow_forward_ios</i></a>
-      <router-link to="/subpage">{{ nowOrder }} <i class="material-icons">arrow_forward_ios</i></router-link>
-      <router-link to="/subpage">{{ nowOrder }} <i class="material-icons">arrow_forward_ios</i></router-link>
-<button @click="redirectToSubpage">이동하기</button>
+      <div class="itemBtns">
+        <button @click="showPopup"> {{ more }} <i class="material-icons">arrow_forward_ios</i></button>
+        <OrderPopup @close="closePopup" ref="popup"/>
+        <!-- <button><a href="./SubPage.vue">{{nowOrder}}<i class="material-icons">arrow_forward_ios</i></a></button> -->
+      </div>
 
+
+       <button @click="goToAbout">Go to About Page</button>
+
+       <button @click="$router.push('./SubPage.vue')">제발되셈</button>
     </div>
   </div>
 
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      moreLink : './SubPage.vue',
+      moreLink : './SubPage',
       more : '더 알아보기',
       nowOrder : '지금 주문하기',
     }
@@ -42,7 +42,10 @@ export default {
     },
     closePopup() {
       this.$refs.popup.visible = false;
-    }
+    },
+    goToAbout() {
+      this.$router.push({ name: 'SubPage' });
+    },
   }
 }
 </script>
