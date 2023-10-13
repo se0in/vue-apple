@@ -1,5 +1,5 @@
 <template>
-  <h1><!-- ThirdContent --></h1>
+  <h1>ThirdContent</h1>
   
 </template>
 

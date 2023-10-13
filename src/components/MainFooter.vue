@@ -1,5 +1,5 @@
 <template>
-  <h1><!-- MainFooter --></h1>
+  <h1>MainFooter</h1>
   
 </template>
 

@@ -9,12 +9,13 @@
 
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
 }
-
+li {list-style: none;}
+a {color: inherit;text-decoration: none;}
+img {display: block;}
+button {border: none; outline: none;background-color: inherit;}
 </style>

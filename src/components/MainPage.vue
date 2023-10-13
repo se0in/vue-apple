@@ -1,29 +1,28 @@
 <template>
-    <MainHeader /><!-- 
+    <MainHeader />
     <FirstContent />
     <SecondContent></SecondContent>
     <ThirdContent />
-    <MainFooter /> -->
-fsfd
+    <MainFooter />
 
   
 </template>
 
 <script>
 import MainHeader from './MainHeader.vue';
-// import FirstContent from './components/FirstContent.vue';
-// import SecondContent from './components/SecondContent.vue';
-// import ThirdContent from './components/ThirdContent.vue';
-// import MainFooter from './components/MainFooter.vue'; 
+import FirstContent from './FirstContent.vue';
+import SecondContent from './SecondContent.vue';
+import ThirdContent from './ThirdContent.vue';
+import MainFooter from './MainFooter.vue'; 
 
 export default {
   name: 'App',
   components: {
-    MainHeader,/* 
+    MainHeader,
     FirstContent,
     SecondContent,
     ThirdContent,
-    MainFooter */
+    MainFooter
   }
 }
 

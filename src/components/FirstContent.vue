@@ -1,5 +1,5 @@
 <template>
-  <h1><!-- FirstContent --></h1>
+  <h1>FirstContent</h1>
   
 </template>
 

@@ -6,13 +6,11 @@
       <div class="itemBtns">
         <button @click="showPopup"> {{ more }} <i class="material-icons">arrow_forward_ios</i></button>
         <OrderPopup @close="closePopup" ref="popup"/>
-        <!-- <button><a href="./SubPage.vue">{{nowOrder}}<i class="material-icons">arrow_forward_ios</i></a></button> -->
+        <!--  -->
+        <router-link to="/about"><button><a href="./SubPage.vue">{{nowOrder}}<i class="material-icons">arrow_forward_ios</i></a></button></router-link> |
       </div>
 
 
-       <button @click="goToAbout">Go to About Page</button>
-
-       <button @click="$router.push('./SubPage.vue')">제발되셈</button>
     </div>
   </div>
 
