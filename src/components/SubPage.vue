@@ -1,11 +1,11 @@
 <template>
-  <h1><!-- MainFooter --></h1>
+  <h1>SubPage</h1>
   
 </template>
 
 <script>
 export default {
-  name: 'MainFooter',
+  name: 'SubPage',
   props: {
     msg: String
   }
@@ -14,4 +14,3 @@ export default {
 
 <style lang="scss" scoped>
 </style>
-

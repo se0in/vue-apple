@@ -1,7 +1,7 @@
 <template>
     <MainHeader />
     <FirstContent />
-    <SecondContent />
+    <SecondContent></SecondContent>
     <ThirdContent />
     <MainFooter />
 </template>
@@ -40,7 +40,7 @@ export default {
   li {list-style-type: none;}
   a {color: inherit; text-decoration: none;}
   img {display: block;}
-
+  button {border: none; outline: none; background: inherit; font-size: inherit; font-family: inherit;cursor: pointer;}
   #app {
     font-family: 'Pretendard-Regular';
   }

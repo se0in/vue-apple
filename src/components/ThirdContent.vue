@@ -1,5 +1,5 @@
 <template>
-  <h1>ThirdContent</h1>
+  <h1><!-- ThirdContent --></h1>
   
 </template>
 
@@ -12,6 +12,5 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
 </style>
