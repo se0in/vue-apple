@@ -1,10 +1,11 @@
 <template>
-  <h1>MainHeader</h1>
+  <h1>HomeThird</h1>
+  
 </template>
 
 <script>
 export default {
-  name: 'MainHeader',
+  name: 'HomeThird',
   props: {
     msg: String
   }

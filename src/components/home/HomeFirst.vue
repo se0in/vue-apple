@@ -1,11 +1,11 @@
 <template>
-  <h1>ThirdContent</h1>
+  <h1><!-- HomeFirst --></h1>
   
 </template>
 
 <script>
 export default {
-  name: 'ThirdContent',
+  name: 'HomeFirst',
   props: {
     msg: String
   }

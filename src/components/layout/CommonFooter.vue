@@ -1,11 +1,11 @@
 <template>
-  <h1>MainFooter</h1>
+  <h1>CommonFooter</h1>
   
 </template>
 
 <script>
 export default {
-  name: 'MainFooter',
+  name: 'CommonFooter',
   props: {
     msg: String
   }

@@ -1,11 +1,10 @@
 <template>
-  <h1>FirstContent</h1>
-  
+  <h1>SubPage</h1>
 </template>
 
 <script>
 export default {
-  name: 'FirstContent',
+  name: 'SubPage',
   props: {
     msg: String
   }

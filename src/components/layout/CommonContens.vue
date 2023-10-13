@@ -1,11 +1,11 @@
 <template>
-  <h1>SubPage</h1>
-  fgdssgfds
+  <h1>CommonContent</h1>
+  
 </template>
 
 <script>
 export default {
-  name: 'SubPage',
+  name: 'CommonContent',
   props: {
     msg: String
   }
@@ -14,3 +14,4 @@ export default {
 
 <style lang="scss" scoped>
 </style>
+

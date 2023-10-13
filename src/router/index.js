@@ -3,21 +3,19 @@ import App from '../App.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/app', //렌더링 중첩 이슈 해결 / -> /app
     name: 'App',
     component: App
   },
-  {
-    path: '/main',
-    name: 'main',
+  { 
+    path: '/',
     component: () => import(
-      '../components/MainPage.vue')
+      '../components/home/HomePage.vue')
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/Sub',
     component: () => import(
-      '../components/SubPage.vue'
+      '../components/sub/SubPage.vue'
     )
   }
 ]
