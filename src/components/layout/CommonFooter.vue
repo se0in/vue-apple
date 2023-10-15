@@ -6,17 +6,17 @@
         <p>Apple TV+ 이용을 위해서는 가입이 필요합니다.</p>
       </div>
       <nav class="footer__nav">
-        <ul v-for="(navList, index) in footerNav" :key="index">
-          <li>
-            <h3 class="footer-nav__title" @click="handleNavToggle(index)"> {{ navList.title }} </h3>
-            <ul class="footer-nav__list"  v-show="showList[index]">
+        <ul class="footer-nav__flex-container">
+          <li v-for="(navList, index) in footerNav" :key="index" class="footer-nav__flex-item">
+            <h3 class="footer-nav__title" @click="handleNavToggle(index)" :class="{ 'rotate' : showList[index]}"> {{ navList.title }} </h3>
+            <ul class="footer-nav__list"  :class="{'slide-down' : showList[index]}">
               <li v-for="item in navList.list" :key="item">
                 <router-link to="/Sub2" class="footer-nav__link"> {{ item }} </router-link>
               </li>
             </ul>
           </li>
         </ul>
-        <p>다양한 쇼핑 방법: Apple Store를 방문하거나, 리셀러를 찾아보거나, 080-330-8877번으로 전화하세요.</p>
+        <p>다양한 쇼핑 방법: <a href="javascript:void(0);">Apple Store를 방문</a>하거나, <a href="javascript:void(0);">리셀러</a>를 찾아보거나, 080-330-8877번으로 전화하세요.</p>
       </nav>
       <nav class="footer__info">ddd</nav>
     </div>
@@ -62,14 +62,27 @@ export default {
   },
   methods : {
     handleNavToggle(index) {
-      this.showList[index] = !this.showList[index];
-      console.log('index: ', index);
-      console.log('this.showList[index]: ', this.showList[index]);
-      console.log('메뉴 클릭');
+      if (window.innerWidth < 768) {
+        this.showList[index] = !this.showList[index];
+      } else {
+        this.showList[index] = false
+      }
     }
   },
-  props: {
-    msg: String
+  created() {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+
+    // 화면 크기에 따라 showList 초기화
+    if (mediaQuery.matches) {
+      this.showList = new Array(this.footerNav.length).fill(false);
+    }
+
+    // 화면 크기 변화에 대응하여 showList 초기화
+    mediaQuery.addEventListener('change', (event) => {
+      if (event.matches) {
+        this.showList = new Array(this.footerNav.length).fill(false);
+      }
+    }); 
   }
 }
 </script>
@@ -100,8 +113,7 @@ export default {
     .footer__nav {
       .footer-nav__title {
         color: var(--footer-title-color);
-        padding: 10px 0;
-        border-bottom: 1px solid var(--footer-border-color);
+        padding: 12px 0 6px;
         cursor: pointer;
         position: relative;
         &::after {
@@ -111,14 +123,26 @@ export default {
           font-size: 14px;
           position: absolute;
           right: 0;
+          transition: .5s;
+        }
+        &.rotate::after {
+          transform: rotate(45deg);
+          transition: .5s;
         }
       }
       .footer-nav__list {
-        padding: 10px;
-        // display: none;
+        overflow: hidden;
+        max-height: 0;
+        padding: 0 0 6px 16px;
+        border-bottom: 1px solid var(--footer-border-color);
+
+        &.slide-down {
+          max-height: 1000px;
+          transition: max-height .5s ease;
+        }
         .footer-nav__link {
           display: block;
-          padding: 5px 0;
+          padding: 8px 0;
           &:hover {
             text-decoration: underline;
           }
@@ -129,5 +153,45 @@ export default {
       }
     }
   }
+
+
+
+@media screen and (min-width : 768px) {
+  footer {
+    .footer__nav {
+      .footer-nav__flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column; 
+        gap: 10px;
+        height: 450px;
+        
+        .footer-nav__title {
+          &::after {
+            display: none;
+          }
+        }
+        .footer-nav__flex-item {
+          margin-top: 10px;
+          .footer-nav__list {
+            overflow: visible;
+            max-height: 1000px;
+            border-bottom: none;
+            padding: 00;
+            .footer-nav__link {
+                  padding: 6px 0;
+            }
+          }
+        }
+      }
+      p {
+          a {
+            color: #0066cc;
+            text-decoration: underline;
+          }
+        }
+    }
+  }
+}
 </style>
 
