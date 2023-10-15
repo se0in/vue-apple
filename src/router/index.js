@@ -17,6 +17,12 @@ const routes = [
     component: () => import(
       '../components/sub/SubPage.vue'
     )
+  },
+  {
+    path: '/Sub2',
+    component: () => import(
+      '../components/sub/SubPage.vue'
+    )
   }
 ]
 

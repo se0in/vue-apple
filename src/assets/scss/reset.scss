@@ -24,8 +24,8 @@ img {
   display: block;
 }
 
-body {
-  font-family: 'Pretendard-Regular', 'Noto Sans KR', sans-serif;
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
 }
 
 button {
@@ -34,3 +34,31 @@ button {
   outline: none;
   cursor: pointer;
 }
+
+body {
+  font-family: 'Pretendard-Regular', 'Noto Sans KR', sans-serif;
+  color: var(--main-text-color);
+}
+
+/* common */
+:root {
+  --main-text-color : #080808;
+  --footer-title-color : #434343;
+  --footer-text-color : #6e6e73;
+  --footer-border-color : #ddd;
+}
+
+/* layout */
+.inner {
+  padding: 0 16px;
+}
+@media screen and (min-width : 768px) {
+  .inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    outline: 1px dotted red;
+  }
+}
+
+
+
