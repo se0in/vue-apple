@@ -1,25 +1,22 @@
 <template>
   <h1><!-- HomeFirst --></h1>
   <swiper
-    :slidesPerView="swiperOptions.slidesPerView"
+    :slidesPerView="1"
     :spaceBetween="0"
     :centeredSlides="true"
     :loop="true"
     :pagination="{
       clickable: true,
     }"
-    :autoplay="{
-        delay: 2000,
-        disableOnInteraction: false
-      }"
     :navigation="true"
     :modules="modules"
-    :loopAdditionalSlides = "2"
+    :variableWidth="true" 
   >
     <swiper-slide
+      :class=slide.class  
       v-for="slide in swiperSlide" 
       :key="slide"
-      class=slide.class>
+      >
       <img :src=slide.path alt="">
       <div class="slide__product">
         <h3> {{slide.product}} 
@@ -34,6 +31,8 @@
 
 <script>
   /* swiper 기본 필수 연결 */
+  import 'swiper/swiper-bundle.css';
+
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import { Pagination, Navigation } from 'swiper/modules';
   import 'swiper/css';
@@ -64,10 +63,15 @@ export default {
           product : 'WATCH', 
           productSub: 'SERIES 9', 
           text : '보다 똑똑. 보다 또렷. 보다 강력', 
-          release : '10월 13일 출시'}
+          release : '10월 13일 출시'},
+        { class : 'product4', 
+          path : require('../../assets/img/HomeFirst_4.svg'), 
+          product : 'MacBook Air 16', 
+          text : '크게 펼치고, 얇게 접다.', 
+          release : '출시 미정'}
       ],
       swiperOptions: {
-        slidesPerView: 1, // 초기값은 1
+        slidesPerView: 1, 
       }
     }
   },
@@ -78,69 +82,100 @@ export default {
     return {
       modules: [Pagination, Navigation],
     };
-  },
-  mounted() {
-    // 화면 크기가 변경될 때 스와이퍼 속성 업데이트
-    window.addEventListener('resize', this.updateSwiperOptions);
-    // 초기 설정
-    this.updateSwiperOptions();
-  },
-  methods: {
-    updateSwiperOptions() {
-      if (window.innerWidth >= 768) {
-        // 화면이 768px 이상일 때
-        this.swiperOptions.slidesPerView = 1.5; // 1.5로 변경
-      } else {
-        // 화면이 768px 미만일 때
-        this.swiperOptions.slidesPerView = 1; // 1로 변경
-      }
-    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@mixin BgWhiteColorBlack {
+  background-color: #000;
+  color: #fff;
+}
+@mixin BgBlackColorWhite {
+  background-color: #fafafa;
+  color: var(--main-text-color);
+}
+@mixin AbsoluteXCenter {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  @content; 
+}
 
 .swiper {
   width: 100%;
-  height: 400px;
+  height: 450px;
+  overflow: hidden;
+  .product1, .product3 {
+    @include BgWhiteColorBlack;
+  }
+  .product2 {
+    @include BgBlackColorWhite;
+    img {
+      transform: rotate(90deg) translate(10% , -16%) ;
+      margin: 0 auto;
+      object-fit: contain !important;
+      min-height: none;
+      height: 300px;
+    }
+  }
+  .product4 {
+    @include BgBlackColorWhite;
+  }
   .swiper-slide {
     position: relative;
     width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
 
     img {
       width: 100%;
-      height: 100%;
-      // object-fit: cover;
+      object-fit: cover;
+      min-height: 350px;
     }
     .slide__product {
-      background-color: rgba(119, 108, 108, 0.418);
-      position: absolute;
-      top: 0;
-      
+      text-align: center;
+      @include AbsoluteXCenter {
+        top: 30px;
+      };
       h3 {
-        span {}
+        font-size: 35px;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+        span {
+          color: #D60000;
+          display: block;
+          font-size: 15px;
+          letter-spacing: 2px;
+        }
       }
-      .product__text {}
-      .product__release {}
+      .product__text {
+        font-size: 18px;
+        padding: 10px;
+      }
+      .product__release {
+        color: var(--sub-text-color);
+        font-size: 14px;
+      }
     }
   }
-}
-
+}    
 
 @media screen and (min-width : 768px) {
   .swiper {
     height: 500px;
+    .product2 {
+      img {
+        transform: rotate(0deg);
+        max-width: none;
+      }
+    }
     .swiper-slide {
       img {
-        width: 80%;
-      }
-      .slide__product {
-        h3 {
-          span {}
-        }
-        .product__text {}
-        .product__release {}
+        max-width: 800px;
+        margin: 0 auto;
       }
     }
   }

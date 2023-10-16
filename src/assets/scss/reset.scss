@@ -4,6 +4,7 @@
   font-weight: 400;
   font-style: normal;
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
 
 /* reset */
 * {
@@ -47,6 +48,7 @@ body {
 /* common */
 :root {
   --main-text-color : #080808;
+  --sub-text-color : #999;
   --footer-title-color : #313131;
   --footer-text-color : #838383;
   --footer-border-color : #ddd;
@@ -62,6 +64,8 @@ body {
   display: block;
   clear: both;
 } 
+
+
 
 @media screen and (min-width : 768px) {
   .inner {
