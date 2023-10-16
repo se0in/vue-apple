@@ -8,6 +8,10 @@
     :pagination="{
       clickable: true,
     }"
+    :autoplay="{
+      delay: 3000, 
+      disableOnInteraction: false,
+    }"
     :navigation="true"
     :modules="modules"
     :variableWidth="true" 
@@ -34,7 +38,7 @@
   import 'swiper/swiper-bundle.css';
 
   import { Swiper, SwiperSlide } from 'swiper/vue';
-  import { Pagination, Navigation } from 'swiper/modules';
+  import { Pagination, Navigation, Autoplay} from 'swiper/modules';
   import 'swiper/css';
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
@@ -80,7 +84,7 @@ export default {
   },
   setup() {
     return {
-      modules: [Pagination, Navigation],
+      modules: [Pagination, Navigation, Autoplay],
     };
   }
 }
@@ -107,6 +111,9 @@ export default {
   width: 100%;
   height: 450px;
   overflow: hidden;
+/*   .swiper-button-prev, .swiper-button-next {
+    color: red !important;
+  } */
   .product1, .product3 {
     @include BgWhiteColorBlack;
   }
