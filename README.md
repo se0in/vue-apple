@@ -57,3 +57,16 @@ App.vue를 아예 사용 안할 순 없다. 각각 나눈 페이지를 모으는
         height: 450px;
   }
   ```
+
+
+  vue에서 이미지를 가져올 때는 require를 가용하여 모듈로 가져오는 것이 일반적이다
+
+```javascript
+  return {
+    swiperSlide : [
+      require('../../assets/img/HomeFirst_1.png'),
+      require('../../assets/img/HomeFirst_2.png'),
+      require('../../assets/img/HomeFirst_3.png')
+    ]
+  }
+```
