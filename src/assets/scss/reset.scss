@@ -35,6 +35,10 @@ button {
   cursor: pointer;
 }
 
+small {
+  font-size: inherit;
+}
+
 body {
   font-family: 'Pretendard-Regular', 'Noto Sans KR', sans-serif;
   color: var(--main-text-color);
@@ -43,7 +47,7 @@ body {
 /* common */
 :root {
   --main-text-color : #080808;
-  --footer-title-color : #111111;
+  --footer-title-color : #313131;
   --footer-text-color : #838383;
   --footer-border-color : #ddd;
 }

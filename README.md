@@ -45,3 +45,15 @@ App.vue를 아예 사용 안할 순 없다. 각각 나눈 페이지를 모으는
   는 렌더링이 되어 화면이 전환된 곳이니 헤더/렌더링/푸터만 있는 페이지(App)가 있어야했다.
   <!-- <router-view></router-view>는 -->
   router-link to(전환될 위치)와 연결되니 (라우터 관련) 화면이 전환될 곳이 넣어줄 것!
+
+
+  애플 footer 처럼 순서는 같지만 웹에서 왼쪽 상단부터 쌓여서 정렬하는 법
+  ```scss
+  .footer-nav__flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column; 
+        gap: 10px;
+        height: 450px;
+  }
+  ```
