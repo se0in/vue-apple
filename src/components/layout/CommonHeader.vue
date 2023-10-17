@@ -13,7 +13,7 @@
 
 
 export default {
-  // name: 'CommonHeader',
+  name: 'CommonHeader',
   props: {
     msg: String
   }

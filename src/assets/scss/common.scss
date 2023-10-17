@@ -34,6 +34,9 @@ button {
   border: none;
   outline: none;
   cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 small {
@@ -51,6 +54,8 @@ body {
   --sub-text-color : #999;
   --footer-title-color : #313131;
   --footer-text-color : #838383;
+  --btn-border: 1px solid #ddd;
+  --btn-point-color: #1A84EE !important;
   --footer-border-color : #ddd;
   --swiper-theme-color: #a7a7a7 !important;
 }
@@ -66,7 +71,37 @@ body {
   clear: both;
 } 
 
+.slideBtn {
+  color: var(--btn-point-color);
+  padding: 8px 18px;
+  border-radius: 20px;
+  transition: .3s;
 
+  &::after {
+    content: '\e5e1';
+    font-family: 'Material Icons';
+    vertical-align: -1px;
+    margin-left: 5px;
+    font-size: 14px;
+    position: relative;
+  }
+  &:hover {
+    background-color: var(--btn-point-color);
+    color: #fff;
+    box-shadow: 1px 1px 5px var(--btn-point-color);
+    &::after {
+      animation: arrowToRight .7s 3 linear;
+    }
+  }
+}
+@keyframes arrowToRight {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -6px;
+  }
+}
 
 @media screen and (min-width : 768px) {
   .inner {

@@ -28,7 +28,12 @@
         </h3>
         <p class="product__text"> {{slide.text}} </p>
         <p class="product__release"> {{slide.release}} </p>
+        <div class="product__btn">
+          <BtnMore></BtnMore>
+          <BtnOrder></BtnOrder>
+        </div>
       </div>
+      
     </swiper-slide>
   </swiper>
 </template>
@@ -43,11 +48,17 @@
   import 'swiper/css/pagination';
   import 'swiper/css/navigation';
 
+  /* btn 연결 */
+  import BtnMore from '@/components/common/ButtonMore.vue';
+  import BtnOrder from '@/components/common/ButtonOrder.vue';
+
 export default {
   name: 'HomeFirst',
   components: {
     Swiper,
     SwiperSlide,
+    BtnMore,
+    BtnOrder
   },
   data() {
     return {
@@ -166,13 +177,20 @@ export default {
         color: var(--sub-text-color);
         font-size: 14px;
       }
+      .product__btn {
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        gap : 5px;
+        margin-top: 15px;
+      }
     }
   }
 }    
 
 @media screen and (min-width : 768px) {
   .swiper {
-    height: 500px;
+    height: 550px;
     .product2 {
       img {
         transform: rotate(0deg);
@@ -181,8 +199,14 @@ export default {
     }
     .swiper-slide {
       img {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
+      }
+      .slide__product {
+        .product__btn {
+          gap : 10px;
+          margin-top: 20px;
+        }
       }
     }
   }
