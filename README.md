@@ -1,62 +1,103 @@
-# vue-apple-project
+# Vue apple store
+Vue로 작업한 apple store
+<br>
+## 📣 프로젝트 소개
+- 개인프로젝트
+- Vue를 사용하여 apple store 리뉴얼 및 카피
 
-## Project setup
-```
-npm install
-```
+### 📅 작업 기간
+- 2023년 10월 15일 ~ 2023년 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 💻 사용 툴 및 작업 언어
+- Adobe XD (디자인)
+- Visual Studio Code
+    - Vue
 
-### Compiles and minifies for production
-```
-npm run build
-```
+<br>
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 🎮 주요기능
+- 반응형
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+|web|mobile|
+|:---:|:---:|
+|![image](path)|![image](path)|
+
+- 동적 요소
+
+|제목|제목|제목|
+|---|---|---|
+|![image](path)|![image](path)|![image](path)|
+|설명|설명|설명|
 
 
-라우터로 App.vue 말고 원하는 페이지로 첫화면 변경하는 법
-App.vue를 아예 사용 안할 순 없다. 각각 나눈 페이지를 모으는 곳이기 때문이다. 
-헤더 로고 부분을   <router-link to="/"> 루트로 바꾸고 
-<!-- <router-link to="/">로고</router-link>   |  
-  <router-link to="/Sub">스토어</router-link>
-  <router-link to="/Sub">Mac</router-link>
-  <router-link to="/Sub">iPad</router-link>
-  <router-link to="/Sub">iPhone</router-link>
-  <router-link to="/Sub">Watch</router-link> -->
+
+<br>
+
+## 📌 프로젝트 작업하며 얻은 코드
+
+<details>
+  <summary>라우터로 사용하여 App.vue 말고 원하는 페이지로 첫화면 변경하는 법</summary>
+  <br>
+
+  - 루트에 있는 App.vue를 아예 사용 안할 순 없었다. 각각 나눈 페이지를 모으는 곳으로 작업했기 때문이다.
+
+  1. 헤더 로고 부분을 <router-link to="/"> 최상위 루트(/)로 바꾸고 
+
+      ```template
+      //CommonHeader.vue
+
+      <router-link to="/">로고</router-link>   |  
+      <router-link to="/Sub">스토어</router-link>
+      <router-link to="/Sub">Mac</router-link>
+      <router-link to="/Sub">iPad</router-link>
+      <router-link to="/Sub">iPhone</router-link>
+      <router-link to="/Sub">Watch</router-link>
+      ```
   
-{ 
-    path: '/',
-    component: () => import(
-      '../components/pages/home/HomePage')
-  },
-  index.js 내가 원하는 (HomePage.vue)곳 path를 /루트로 바꿨더니 완료!
+  2. router/index.js에 내가 원하는 (HomePage.vue)곳 path를 /루트로 바꿨더니 완료!
 
-  <!-- <router-view></router-view> -->
-  는 렌더링이 되어 화면이 전환된 곳이니 헤더/렌더링/푸터만 있는 페이지(App)가 있어야했다.
-  <!-- <router-view></router-view>는 -->
-  router-link to(전환될 위치)와 연결되니 (라우터 관련) 화면이 전환될 곳이 넣어줄 것!
+    ```javascript
+    { 
+      path: '/',
+      component: () => import(
+        '../components/pages/home/HomePage')
+    },
+    ```
+  
+  - `<router-view></router-view>`
+    - 렌더링이 되어 화면이 전환된 곳이니 헤더/렌더링/푸터만 있는 페이지(App)가 있어야했다.
+    - router-link to(전환될 위치)와 연결되니 (라우터 관련) 화면이 전환될 곳이 넣어줄 것!
+</details>
 
 
-  애플 footer 처럼 순서는 같지만 웹에서 왼쪽 상단부터 쌓여서 정렬하는 법
-  ```scss
+<details>
+  <summary>apple store footer처럼 모바일과 순서는 같지만 웹 사이즈에서 왼쪽 상단부터 쌓이게 정렬하는 법</summary>
+  <br>
+
+  - div로 한 번 더 묶어야 하나 했지만 잘 생각해보니 쉽게 해결될 일이었다.
+
+   ```scss
+
+   //미디어쿼리
   .footer-nav__flex-container {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: column; 
-        gap: 10px;
-        height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; /* 세로 방향으로 나열하고 */
+    gap: 10px;
+    height: 450px; /* 높이값 정해주면 그 안에 채워짐 */
   }
   ```
+
+</details>
+
+
+  
+
+ 
+
+
+  
+ 
 
 
   vue에서 이미지를 가져올 때는 require를 가용하여 모듈로 가져오는 것이 일반적이다
