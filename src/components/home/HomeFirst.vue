@@ -124,9 +124,7 @@ export default {
   width: 100%;
   height: 450px;
   overflow: hidden;
-/*   .swiper-button-prev, .swiper-button-next {
-    color: red !important;
-  } */
+
   .product1, .product3 {
     @include BgWhiteColorBlack;
   }
