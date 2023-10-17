@@ -214,8 +214,6 @@ export default {
     }
   }
 
-
-
 @media screen and (min-width : 768px) {
   footer {
     .footer__nav {

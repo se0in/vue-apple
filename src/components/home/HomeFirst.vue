@@ -102,6 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 @mixin BgWhiteColorBlack {
   background-color: #000;
   color: #fff;
@@ -117,6 +118,7 @@ export default {
   transform: translateX(-50%);
   @content; 
 }
+
 
 .swiper {
   width: 100%;

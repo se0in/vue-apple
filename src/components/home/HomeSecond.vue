@@ -1,7 +1,17 @@
 <template>
   <h2>최신 제품. <span>따끈따끈한 신제품 이야기.</span></h2>
   <div v-for="card in card" :key="card" class="card__container">
-
+    <div :class=card.class>
+      <img :src=card.path alt="">
+      <div class="card__inbox">
+        <h3> {{card.productName}} <span> {{card.productSubName}} </span></h3>
+        <p> {{card.productDescription}} </p>
+        <div class="card__btn">
+          <BtnMore></BtnMore>
+          <BtnOrder></BtnOrder>
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -25,15 +35,15 @@
 
 <script>
 import PopupLayout from '../layout/PopupLayout.vue'
-// import BtnMore from '@/components/common/ButtonMore.vue';
-// import BtnOrder from '@/components/common/ButtonOrder.vue';
+import BtnMore from '@/components/common/ButtonMore.vue';
+import BtnOrder from '@/components/common/ButtonOrder.vue';
 
 export default {
   name: 'HomeSecond',
   components : {
     PopupLayout,
-    // BtnMore,
-    // BtnOrder,
+    BtnMore,
+    BtnOrder,
   },
   props: {
     msg: String
@@ -91,5 +101,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin BgWhiteColorBlack {
+  background-color: #000;
+  color: #fff;
+}
+@mixin BgBlackColorWhite {
+  background-color: #fafafa;
+  color: var(--main-text-color);
+}
+@mixin AbsoluteXCenter {
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  @content; 
+}
+
+
+h2 {
+  span {}
+}
+$footerUnderLine : 'text', 'nav', 'info';
+    @each $class in $footerUnderLine {
+      .footer__#{$class} {
+        padding: 0.625rem 0 1.125rem;
+
+        &:first-child {
+          border-bottom: 1px solid var(--footer-border-color);
+        }
+      }
+    } 
 
 </style>
