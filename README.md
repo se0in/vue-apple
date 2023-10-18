@@ -97,9 +97,9 @@ Vue로 작업한 apple store
     ```javascript
         return {
           swiperSlide : [
-            require('../../assets/img/HomeFirst_1.png'),
-            require('../../assets/img/HomeFirst_2.png'),
-            require('../../assets/img/HomeFirst_3.png')
+            require('@assets/img/HomeFirst_1.png'),
+            require('@assets/img/HomeFirst_2.png'),
+            require('@assets/img/HomeFirst_3.png')
           ]
         }
     ```

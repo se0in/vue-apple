@@ -1,20 +1,28 @@
 <template>
-  <!-- <HomeFirst /> -->
-  <HomeSecond />
-  <!-- <HomeThird /> -->
+  <div class="home__wrap">
+    <HomeFirst />
+    <HomeSecond />
+    <!-- <HomeThird /> -->
+  </div>
 </template>
 
 <script>
-// import HomeFirst from './HomeFirst.vue';
+import HomeFirst from './HomeFirst.vue';
 import HomeSecond from './HomeSecond.vue';
 // import HomeThird from './HomeThird.vue';
 
 export default {
   name: 'HomePage',
   components: {
-    // HomeFirst,
+    HomeFirst,
     HomeSecond,
     // HomeThird,
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .home__wrap {
+    margin-top: 50px;
+  }
+</style>

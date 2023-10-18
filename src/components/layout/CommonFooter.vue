@@ -37,7 +37,7 @@
       <nav class="footer__info">
         <div class="footer__info-flex">
           <span class="info__country">대한민국</span>
-          <small class="info__copyright">Copyright © 2023 Apple Inc. 모든 권리 보유.</small>
+          <small class="info__copyright">Copyright 2023 Apple Inc. 모든 권리 보유.</small>
           <ul class="info__nav">
             <li class="info__nav-list" v-for="infoList in footerInfo" :key="infoList">
               <router-link to="/Sub2"> {{infoList}} </router-link>
@@ -140,7 +140,7 @@ export default {
         &::after {
           content: '\e145';
           // 혹은 content: 'add';
-          font-family: 'Material Icons';
+          font-family: 'Material Symbols Outlined';
           font-size: 14px;
           position: absolute;
           right: 0;

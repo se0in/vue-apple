@@ -59,6 +59,18 @@ body {
   --footer-border-color : #ddd;
   --swiper-theme-color: #a7a7a7 !important;
 }
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #00000033;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+*::-webkit-scrollbar-track {
+  background-color: #e2e2e2;
+}
 
 /* layout */
 .inner {
@@ -79,7 +91,7 @@ body {
 
   &::after {
     content: '\e5e1';
-    font-family: 'Material Icons';
+    font-family: 'Material Symbols Outlined';
     vertical-align: -1px;
     margin-left: 5px;
     font-size: 14px;
@@ -88,7 +100,6 @@ body {
   &:hover {
     background-color: var(--btn-point-color);
     color: #fff;
-    box-shadow: 1px 1px 5px var(--btn-point-color);
     &::after {
       animation: arrowToRight .7s 3 linear;
     }

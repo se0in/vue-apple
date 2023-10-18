@@ -2,39 +2,23 @@
   <h2>최신 제품. <span>따끈따끈한 신제품 이야기.</span></h2>
   <div class="card__container"><!-- 전체 -->
     <div 
-    v-for="card in card" 
-    :key="card" 
+    v-for="(card, index) in cards" 
+    :key="index" 
     :class=card.class
     class="popupCard"
+    @click="showPopup(index)"
     ><!-- 반복 돌릴 것 -->
-      <img :src=card.path alt="">
-      <div class="card__inbox">
-        <h3> {{card.productName}} 
-          <span> {{card.productSubName}} </span>
-        </h3>
-        <p> {{card.productDescription}} </p>
-        <div class="card__btn">
-        </div>
-      </div>
+    <img :src=card.path alt="">
+    <div class="card__inbox">
+      <h3> {{card.productName}} 
+        <span> {{card.productSubName}} </span>
+      </h3>
+      <p> {{card.productDescription}} </p>
     </div>
   </div>
+</div>
 
-
-
-
-
-
-<!-- 모달 -->
-    <div class="itemBtn">
-        <button @click="showPopup"> 
-          {{ more }} 
-          <i class="material-icons">
-            arrow_forward_ios
-          </i>
-        </button>
-        <PopupLayout @close="closePopup" ref="popup"/>
-        
-      </div>
+<PopupLayout :visible="isPopupVisible" :imgIndex="popupImageIndex" @close="closePopup" />
 
 </template>
 
@@ -51,53 +35,61 @@ export default {
   },
   data() {
     return {
-      card : [
+      cards : [
         { class : 'card__item-1', 
-          path : require('../../assets/img/HomeSecond_1.png'),
+          path : require('@/assets/img/HomeSecond_1.png'),
           productName : 'WATCH',
           productSubName : 'ULTRA 2', 
           productDescription : '한 차원 높은 모험.'
         }, 
         { class : 'card__item-2', 
-          path : require('../../assets/img/HomeSecond_2.png'),
+          path : require('@/assets/img/HomeSecond_2.png'),
           productName : 'Carbon Neutral',
           productDescription : 'Apple 최초의 탄소 중립 제품 등장.'
         },
         { class : 'card__item-3', 
-          path : require('../../assets/img/HomeSecond_3.png'),
+          path : require('@/assets/img/HomeSecond_3.png'),
           productName : 'WATCH',
           productSubName : 'SE', 
           productDescription : '부담없이 빠져들다.'
         },
         { class : 'card__item-4', 
-          path : require('../../assets/img/HomeSecond_4.png'),
+          path : require('@/assets/img/HomeSecond_4.png'),
           productName : 'AirPods Pro',
           productDescription : '전에 없던 청취 경험. 적응형 오디오.'
         },
         { class : 'card__item-5', 
-          path : require('../../assets/img/HomeSecond_5.png'),
+          path : require('@/assets/img/HomeSecond_5.png'),
           productName : 'MacBook Air 15',
           productDescription : '크게 펼치고, 얇게 접다.'
         },
         { class : 'card__item-6', 
-          path : require('../../assets/img/HomeSecond_6.png'),
+          path : require('@/assets/img/HomeSecond_6.png'),
           productName : 'iPad Pro',
           productDescription : '막강한 성능의 M2 탑재'
         }
-      ]
+      ],
+      isPopupVisible: false,
     }
   },
-  methods : {
-    showPopup() {
-      this.$refs.popup.visible = true;
+  methods: {
+    showPopup(index) {
+      this.isPopupVisible = true;
+      this.popupImageIndex = index;
+      this.lockBodyScroll();
     },
     closePopup() {
-      this.$refs.popup.visible = false;
+      this.isPopupVisible = false;
+      this.popupImageIndex = null;
+      this.unlockBodyScroll(); 
     },
-    goToAbout() {
-      this.$router.push({ name: 'SubPage' });
+    lockBodyScroll() {
+      document.body.style.overflowY = 'hidden';
     },
-  }
+    unlockBodyScroll() {
+      document.body.style.overflowY = 'auto';
+    },
+  },
 }
 </script>
 
@@ -115,7 +107,7 @@ h2 {
   font-size: 30px;
   padding: 0 16px;
   word-break: keep-all;
-  margin-bottom: 20px;
+  margin: 70px 0 20px;
   span {
     color: var(--sub-text-color);
     display: block;
@@ -130,16 +122,7 @@ h2 {
   $itemNum : '1','2','3','4','5','6';
   @each $num in $itemNum {
 
-    .card__item-1 {
-      span {color: #FD701D}
-    }
-    .card__item-3 {
-      span {color: #D60000}
-    }
-    .card__item-4, .card__item-6 {
-      color: #fff;
-    }
-    .card__item-#{$num} { /* 반복 돌릴 것 */
+    .popupCard { /* 반복 돌릴 것 */
       border-radius: 10px;
       height: 400px;
       border: 1px solid #f1f1f1;
@@ -147,6 +130,15 @@ h2 {
       position: relative;
       cursor: pointer;
       transition: .3s;
+      &.card__item-1 {
+        span {color: #FD701D}
+      }
+      &.card__item-3 {
+        span {color: #D60000}
+      }
+      &.card__item-4, &.card__item-6 {
+        color: #fff;
+      }
 
       &:hover {
         transform: translateY(-3px);
@@ -185,7 +177,7 @@ h2 {
 h2 {
   text-align: center;
   font-size: 35px;
-  margin-bottom: 40px;
+  margin: 100px 0 30px;
   span {
     display: inline;
   }
