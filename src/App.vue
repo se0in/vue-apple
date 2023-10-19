@@ -1,6 +1,6 @@
 <template>
   <CommonHeaderWeb></CommonHeaderWeb>
-  <CommonHeaderMobile></CommonHeaderMobile>
+  <!-- <CommonHeaderMobile></CommonHeaderMobile> -->
   <router-view></router-view>
   <CommonFooter />
 
@@ -8,12 +8,12 @@
 
 <script>
 import CommonHeaderWeb from '@/components/layout/CommonHeaderWeb.vue';
-import CommonHeaderMobile from '@/components/layout/CommonHeaderMobile.vue';
+// import CommonHeaderMobile from '@/components/layout/CommonHeaderMobile.vue';
 import CommonFooter from '@/components/layout/CommonFooter.vue';
 export default {
   components : {
     CommonHeaderWeb,
-    CommonHeaderMobile,
+    // CommonHeaderMobile,
     CommonFooter
   }
 }

@@ -23,6 +23,6 @@ export default {
 
 <style lang="scss" scoped>
   .home__wrap {
-    margin-top: 50px;
+    margin-top: 40px;
   }
 </style>
