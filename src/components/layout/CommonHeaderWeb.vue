@@ -6,9 +6,9 @@
     <ul class="header__nav inner">
       <li v-for="(menu, index) in webMenu" :key="index" class="nav__for">
         <router-link to="/Sub">
-          <div class="nav__title">{{ menu.Onetitle }}</div>
+          <div class="nav__title" @mouseover="showMenu(index)" @mouseleave="hideMenu(index)">{{ menu.OneTitle }}</div>
         </router-link>
-        <div class="nav__list">
+        <div class="nav__list" v-show="activeMenu === index">
           <div class="inner look__wrap">
             <div class="look__list" v-for="(depth, depthIndex) in menu.childDepths" :key="depthIndex">
               <div class="look__title">{{ depth.twoTitle }}</div>
@@ -23,9 +23,9 @@
       </li>
     </ul>
     <ul class="header__util">
-      <li class="header__search util__list">
-        <span class="material-symbols-outlined util__icon">search</span>
-        <div class="util__area">
+      <li class="header__search util__list" @mouseleave="hideUtilArea('search')">
+        <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search')">search</span>
+        <div class="util__area" v-show="activeUtilArea === 'search'">
           <div class="inner">
             <div class="util__box">
               <span class="material-symbols-outlined">search</span>
@@ -57,9 +57,9 @@
           </div>
         </div>
       </li>
-      <li class="header__bag util__list">
-        <span class="material-symbols-outlined util__icon">shopping_bag</span>
-        <div class="util__area">
+      <li class="header__bag util__list" @mouseleave="hideUtilArea('bag')">
+        <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('bag')">shopping_bag</span>
+        <div class="util__area" v-show="activeUtilArea === 'bag'">
           <div class="inner">
             <div class="util__box">
               <p class="box__text1">장바구니가 비어 있습니다.</p>
@@ -88,7 +88,7 @@
         </div>
       </li>
     </ul>
-    <div class="nav__blur"></div>
+    <div class="nav__blur" v-show="activeMenu !== null || activeUtilArea !== null"></div>
   </header>
 </template>
 
@@ -103,7 +103,7 @@ export default {
     return {
       webMenu: [
         {
-          Onetitle: '스토어',
+          OneTitle: '스토어',
           childDepths: [{ 
             twoTitle: '쇼핑하기',
             twoList: ['최신 제품 쇼핑하기', 'Mac', 'iPad', 'iPhone', 'Apple Watch', '액세서리'],
@@ -116,7 +116,7 @@ export default {
             },],
         },
         {
-          Onetitle: 'Mac',
+          OneTitle: 'Mac',
           childDepths: [{ 
             twoTitle: 'Mac 살펴보기',
             twoList: ['Mac 모두 살펴보기', 'MacBook Air', 'MacBook Pro', 'iMac', 'Mac mini', 'Mac Studio','MAc Pro','디스플레이'],
@@ -129,7 +129,7 @@ export default {
             },],
         },
         {
-          Onetitle: 'iPad',
+          OneTitle: 'iPad',
           childDepths: [{ 
             twoTitle: 'iPad 살펴보기',
             twoList: ['iPad 모두 살펴보기', 'iPad Pro', 'iPad Air', 'iPad', 'iPad mini', 'Apple Pencil','키보드'],
@@ -142,7 +142,7 @@ export default {
             },],
         },
         {
-          Onetitle: 'iPhone',
+          OneTitle: 'iPhone',
           childDepths: [{ 
             twoTitle: 'iPhone 살펴보기',
             twoList: ['iPhone 모두 살펴보기', 'iPhone 15 Pro', 'iPhone 15', 'iPhone 14', 'iPhone 13', 'iPhone SE'],
@@ -155,7 +155,7 @@ export default {
             },],
         },
         {
-          Onetitle: 'Watch',
+          OneTitle: 'Watch',
           childDepths: [{ 
             twoTitle: 'Watch 살펴보기',
             twoList: ['Apple Watch 모두 살펴보기', 'Apple Watch Series 9', 'Apple Watch Ultra 2', 'Apple Watch SE', 'Apple Watch Nike', 'Apple Watch Hermés'],
@@ -168,7 +168,7 @@ export default {
             },],
         },
         {
-          Onetitle: 'AirPods',
+          OneTitle: 'AirPods',
           childDepths: [{ 
             twoTitle: 'AirPods 살펴보기',
             twoList: ['AirPods 모두 살펴보기', 'AirPods Pro 2세대', 'AirPods 2세대', 'AirPods 3세대', 'AirPods Max'],
@@ -181,7 +181,7 @@ export default {
             },],
         },
         {
-          Onetitle: '고객지원',
+          OneTitle: '고객지원',
           childDepths: [{ 
             twoTitle: '지원 상황 살펴보기',
             twoList: ['iPhone','Mac','iPad','Watch','AirPods','Music','TV'],
@@ -194,14 +194,36 @@ export default {
             },],
         },
         {
-          Onetitle: '더 살펴보기',
+          OneTitle: '더 살펴보기',
           childDepths: [{ 
             twoTitle: '추가 정보',
             twoList: ['TV 및 홈','엔터테인먼트','액세서리'],
           }],
         },
       ],
-  }
+      activeMenu : null, //활성 메뉴 인덱스를 저장할 변수
+      activeUtilArea : null
+    }
+  },
+  methods : {
+    showMenu(index) {
+      this.activeMenu = index; //인덱스를 설정하여 해당 메뉴의 하위메뉴 표시
+    },
+    hideMenu(index) {
+      if (this.activeMenu === index) {
+        this.activeMenu = null //마우스가 메뉴 항목 밖으로 나갈 때 비활성화
+      }
+    },
+    toggleUtilArea(area) {
+      if (this.activeUtilArea === area ) {
+        this.activeUtilArea = null; //이미 활성화된 경우 다시 클릭하면 숨김
+      }else {
+        this.activeUtilArea = area; //클릭한 아이콘에 해당하는 유틸리티 영역 활성화
+      }
+    },
+    hideUtilArea() {
+      this.activeUtilArea = null; //이미 활성화된 경우 다시 클릭하면 숨김
+    }
   }
 }
 
@@ -245,12 +267,12 @@ export default {
           width: 100%;
           text-align: center;
         }
-        &:hover .nav__list { 
+/*         &:hover .nav__list { 
           display: block;
         }
         &:hover .nav__blur { //스크립트로 블러에 손 대도 사라져야함
           display: block;
-        }
+        } */
           .nav__list {
             position: fixed;
             top: 40px;
@@ -259,7 +281,6 @@ export default {
             background-color: #f5f5f5;
             padding: 50px 0;
             z-index: 920;
-            display: none;
             
             .look__wrap {
               display: flex;
@@ -292,18 +313,19 @@ export default {
             }
           }
         }
-        
       }
     }
     .header__util {
       @include flexCenter();
-      gap: 10px;
       color: #ddd;
-      // width: 60px;
       .util__list {
         .util__icon {
           cursor: pointer;
           transition: .5s;
+          text-align: right;
+          width: 40px;
+          padding: 8px 0;
+
           &:hover {
             color : var(--sub-text-color)
           }  
@@ -318,7 +340,6 @@ export default {
         z-index: 9999;
         padding: 50px 0;
         color: var(--sub-text-color);
-        // display: none;
       }
       .util__box {
         span {
@@ -337,7 +358,7 @@ export default {
 
           &::placeholder {
             font-family: 'Noto Sans KR', 'Pretendard-Regular', sans-serif;
-            font-weight: 600;
+            font-weight: 500;
             letter-spacing: -2px;
             font-size: 30px;
           }
@@ -367,7 +388,6 @@ export default {
             margin-right: 8px;  
           }
         }
-        
       } 
     }
   }
@@ -377,11 +397,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100vh;
-  display: none;
   backdrop-filter: blur( 8px );
   -webkit-backdrop-filter: blur( 8px );
-}/* 
-&:hover .nav__blur { //스크립트로 블러에 손 대도 사라져야함
-          display: block;
-        } */
+}
 </style>
