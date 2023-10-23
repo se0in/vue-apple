@@ -4,11 +4,12 @@
       <router-link to="/"><img src="@/assets/img/apple_logo.svg" alt="APPLE"></router-link>
     </h1>
     <ul class="header__nav inner">
-      <li v-for="(menu, index) in webMenu" :key="index" class="nav__for">
+      <li v-for="(menu, index) in webMenu" :key="index" class="nav__for"  @mouseover="showMenu(index)" @mouseleave="hideMenu(index)">
         <router-link to="/Sub">
-          <div class="nav__title" @mouseover="showMenu(index)" @mouseleave="hideMenu(index)">{{ menu.OneTitle }}</div>
+          <div class="nav__title">{{ menu.OneTitle }}</div>
         </router-link>
-        <div class="nav__list" v-show="activeMenu === index">
+        <!-- 2depth menu -->
+        <div class="nav__list" :class="{ 'show-menu': activeMenu === index }">
           <div class="inner look__wrap">
             <div class="look__list" v-for="(depth, depthIndex) in menu.childDepths" :key="depthIndex">
               <div class="look__title">{{ depth.twoTitle }}</div>
@@ -23,10 +24,11 @@
       </li>
     </ul>
     <ul class="header__util">
-      <li class="header__search util__list" @mouseleave="hideUtilArea('search')">
+      <li class="header__search util__list">
         <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search')">search</span>
-        <div class="util__area" v-show="activeUtilArea === 'search'">
-          <div class="inner">
+        <div class="util__area" :class="{ 'toggle-util-area': activeUtilArea === 'search' }">
+
+          <div class="inner util__wrap">
             <div class="util__box">
               <span class="material-symbols-outlined">search</span>
               <input type="text" placeholder="apple.com 검색하기" autofocus>
@@ -57,10 +59,11 @@
           </div>
         </div>
       </li>
-      <li class="header__bag util__list" @mouseleave="hideUtilArea('bag')">
+      <li class="header__bag util__list">
         <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('bag')">shopping_bag</span>
-        <div class="util__area" v-show="activeUtilArea === 'bag'">
-          <div class="inner">
+        <div class="util__area" :class="{ 'toggle-util-area': activeUtilArea === 'bag' }">
+
+          <div class="inner util__wrap">
             <div class="util__box">
               <p class="box__text1">장바구니가 비어 있습니다.</p>
               <p class="box__text2">저장해둔 항목이 있는지 확인하려면 로그인하세요</p>
@@ -88,7 +91,11 @@
         </div>
       </li>
     </ul>
-    <div class="nav__blur" v-show="activeMenu !== null || activeUtilArea !== null"></div>
+    <div class="nav__blur " 
+    @mouseenter="hideUtilArea('search', 'bag')"
+    v-if="shouldShowBlur"
+    :class="{ 'show-nav-blur': shouldShowBlur  }">
+    </div>
   </header>
 </template>
 
@@ -119,7 +126,7 @@ export default {
           OneTitle: 'Mac',
           childDepths: [{ 
             twoTitle: 'Mac 살펴보기',
-            twoList: ['Mac 모두 살펴보기', 'MacBook Air', 'MacBook Pro', 'iMac', 'Mac mini', 'Mac Studio','MAc Pro','디스플레이'],
+            twoList: ['Mac 모두 살펴보기', 'MacBook Air', 'MacBook Pro', 'iMac', 'Mac mini', 'Mac Studio','Mac Pro','디스플레이'],
           },{
             twoTitle: 'Mac 쇼핑하기',
             twoList: ['Mac 쇼핑하기', 'Mac 액세서리', 'Apple Trade In', '할부 방식'],
@@ -202,31 +209,39 @@ export default {
         },
       ],
       activeMenu : null, //활성 메뉴 인덱스를 저장할 변수
-      activeUtilArea : null
+      activeUtilArea : null,
+      shouldShowBlur: false,
     }
   },
   methods : {
     showMenu(index) {
       this.activeMenu = index; //인덱스를 설정하여 해당 메뉴의 하위메뉴 표시
+      this.shouldShowBlur = true; 
     },
     hideMenu(index) {
       if (this.activeMenu === index) {
         this.activeMenu = null //마우스가 메뉴 항목 밖으로 나갈 때 비활성화
+        this.shouldShowBlur = false; 
       }
     },
     toggleUtilArea(area) {
       if (this.activeUtilArea === area ) {
         this.activeUtilArea = null; //이미 활성화된 경우 다시 클릭하면 숨김
+
       }else {
         this.activeUtilArea = area; //클릭한 아이콘에 해당하는 유틸리티 영역 활성화
+
       }
+      this.shouldShowBlur = !!this.activeUtilArea; // activeUtilArea가 있는 경우에만 블러 표시
     },
-    hideUtilArea() {
-      this.activeUtilArea = null; //이미 활성화된 경우 다시 클릭하면 숨김
+    hideUtilArea(area1, area2) {
+    if (this.activeUtilArea === area1 || this.activeUtilArea === area2) {
+      this.activeUtilArea = null; // 이미 활성화된 경우 숨김
+      this.shouldShowBlur = false; // 어떤 유틸리티 영역도 활성화되지 않으면 블러 숨김
     }
   }
+  }
 }
-
 </script>
 
 <style lang="scss" scoped>
@@ -235,7 +250,6 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-
   .header__web {
     @include flexCenter;
     background-color: #f5f5f5;
@@ -249,7 +263,7 @@ export default {
 
     .header__logo {
       height: 100%;
-      width: 70px;
+      width: 80px;
       img {
         width: 25px;
       }
@@ -267,27 +281,25 @@ export default {
           width: 100%;
           text-align: center;
         }
-/*         &:hover .nav__list { 
-          display: block;
-        }
-        &:hover .nav__blur { //스크립트로 블러에 손 대도 사라져야함
-          display: block;
-        } */
           .nav__list {
             position: fixed;
             top: 40px;
             left: 0;
             width: 100%;
             background-color: #f5f5f5;
-            padding: 50px 0;
             z-index: 920;
-            
+            transition: max-height .5s;
+            max-height: 0;
+            overflow: hidden;
+            &.show-menu {
+              max-height: 1000px;
+            }
             .look__wrap {
               display: flex;
+              padding: 50px 16px;
               gap: 50px;
 
             .look__list {
-              
               &:first-child {
                 font-size: 20px;
                 font-family: 'Noto Sans KR', 'Pretendard-Regular', sans-serif;
@@ -338,11 +350,18 @@ export default {
         left: 0;
         background-color: #f5f5f5;
         z-index: 9999;
-        padding: 50px 0;
         color: var(--sub-text-color);
-      }
-      .util__box {
-        span {
+        max-height: 0;
+        transition: max-height .5s;
+        overflow: hidden;
+        &.toggle-util-area {
+          max-height: 1000px;
+        }
+        .util__wrap {
+
+        padding: 50px 16px;
+        .util__box {
+          span {
           font-size: 30px;
           vertical-align: -10px;
           margin-right: 10px;
@@ -355,7 +374,7 @@ export default {
           background-color: transparent;
           border: none;
           outline: none;
-
+          
           &::placeholder {
             font-family: 'Noto Sans KR', 'Pretendard-Regular', sans-serif;
             font-weight: 500;
@@ -391,13 +410,22 @@ export default {
       } 
     }
   }
-.nav__blur {
-  position: fixed;
-  top: 40px;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  backdrop-filter: blur( 8px );
-  -webkit-backdrop-filter: blur( 8px );
+}
+    .nav__blur {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      transition: opacity 1s; /* opacity에 대한 트랜지션 효과 추가 */
+      -webkit-backdrop-filter: blur( 10px );
+      backdrop-filter: blur( 10px );
+      // opacity: 0;
+      display: none;
+      &.show-nav-blur {
+        // opacity: 1;
+        display: block;
+      }
+  }
 }
 </style>
