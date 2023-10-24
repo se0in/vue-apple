@@ -26,12 +26,12 @@
     </ul>
     <ul class="header__util">
       <li class="header__search util__list">
-        <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search')">search</span>
+        <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search'), setFocus()">search</span>
         <div class="util__area" :class="{ 'toggle-util-area': activeUtilArea === 'search' }">
           <div class="inner util__wrap">
             <div class="util__box">
               <span class="material-symbols-outlined">search</span>
-              <input type="text" placeholder="apple.com 검색하기" autofocus />
+              <input type="text" placeholder="apple.com 검색하기" ref="search" />
             </div>
             <ul class="util__link">
               <li class="link__title">빠른 링크</li>
@@ -384,6 +384,10 @@ export default {
         this.shouldShowBlur = false; // 어떤 유틸리티 영역도 활성화되지 않으면 블러 숨김
       }
     },
+    setFocus: function()
+    {
+      this.$refs.search.focus();
+    }
   },
 };    
 </script>
@@ -588,7 +592,6 @@ export default {
     transition: backdrop-filter .3s;
     width: 100%;
     backdrop-filter: blur(10px);
-    overflow: hidden;
   }
 }
 </style>

@@ -30,7 +30,6 @@ Vue로 작업한 apple store
 |설명|설명|설명|
 
 
-
 <br>
 
 ## 📌 프로젝트 작업하며 얻은 코드
@@ -115,5 +114,76 @@ Vue로 작업한 apple store
     #### 해결 방법
     - 원인 : swiper-slide를 3개만 만들어서 그런거였다
     - slidesPerView를  1.5로 등록하고 slidesPerView가 3개뿐이니 오류가 난 것. 4개로 늘리니 해결됐다!
+
+</details>
+
+
+<details>
+<summary>vue에서 input autofocus 하는 방법</summary>
+  <br>
+
+  - input autofocus 를 넣었는데 먹히지 않았다. 찾아보니 방법이 다르다고 함
+    
+
+    #### 해결 방법
+    1. 포커스가 될 input 태그에 ref값을 설정
+    2. 원하는 methods에 this.$refs.설정값.focus() 입력
+    3. 클릭 시 input영역이 나타날 곳에 `@click="methods명()" 추가 
+
+    ```html
+      <li class="header__search util__list">
+          <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search'), setFocus()">search</span>
+          <div class="util__area" :class="{ 'toggle-util-area': activeUtilArea === 'search' }">
+            <div class="inner util__wrap">
+              <div class="util__box">
+                <span class="material-symbols-outlined">search</span>
+                <input type="text" placeholder="apple.com 검색하기" ref="search" />
+              </div>
+              <!-- ...생략 -->
+            </div>
+          </div>
+        </li>
+    ```
+    ```javascript
+      //methods 부분  
+      setFocus: function()
+        {
+          this.$refs.search.focus();
+        }
+    ```
+
+</details>
+
+
+<details>
+<summary>vue에서 slideDown 효과 주기</summary>
+  <br>
+
+  - scss와 methods로 해결
+    
+
+    #### 해결 방법
+    1. scss로 레이아웃 잡고 toggle-util-area 클래스가 붙을 경우 max-height를 최대높이 1000px로 잡음
+    2. 클래스 붙기 전 max-height 0px로 숨기고 max-height에만 transition을 준다.
+    3. template에는 `:class="{ 'toggle-util-area': activeUtilArea === 'bag' }`로 조건을 걸어서 참일 때만 class가 붙는다.
+
+    ```scss
+      .util__area {
+      position: fixed;
+      width: 100%;
+      top: 40px;
+      left: 0;
+      background-color: #f5f5f5;
+      z-index: 990;
+      color: var(--sub-text-color);
+      max-height: 0;
+      transition: max-height 0.5s;
+      overflow: hidden;
+
+        &.toggle-util-area {
+          max-height: 1000px;
+        }
+       }   
+    ```
 
 </details>
