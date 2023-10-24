@@ -1,3 +1,5 @@
+
+
 @font-face {
   font-family: 'Pretendard-Regular';
   src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -6,60 +8,7 @@
 }
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
 
-/* reset */
-* {
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-img {
-  display: block;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-size: inherit;
-}
-
-button {
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-}
-
-small {
-  font-size: inherit;
-}
-
-body {
-  font-family: 'Pretendard-Regular', 'Noto Sans KR', sans-serif;
-  color: var(--main-text-color);
-}
-
-/* common */
-/* // --main-text-color : red; */
-:root {
-  --main-text-color : #080808;
-  --sub-text-color : #999;
-  --footer-title-color : #313131;
-  --footer-text-color : #838383;
-  --btn-border: 1px solid #ddd;
-  --btn-point-color: #1A84EE !important;
-  --footer-border-color : #ddd;
-  --swiper-theme-color: #a7a7a7 !important;
-}
+/* 스크롤바 */
 *::-webkit-scrollbar {
   width: 10px;
 }
@@ -84,28 +33,7 @@ body {
   clear: both;
 } 
 
-.slideBtn {
-  color: var(--btn-point-color);
-  padding: 8px 18px;
-  border-radius: 20px;
-  transition: .3s;
 
-  &::after {
-    content: '\e5e1';
-    font-family: 'Material Symbols Outlined';
-    vertical-align: -1px;
-    margin-left: 5px;
-    font-size: 14px;
-    position: relative;
-  }
-  &:hover {
-    background-color: var(--btn-point-color);
-    color: #fff;
-    &::after {
-      animation: arrowToRight .7s 3 linear;
-    }
-  }
-}
 @keyframes arrowToRight {
   0% {
     right: 0;

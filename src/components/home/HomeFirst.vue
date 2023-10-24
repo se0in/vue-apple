@@ -109,7 +109,7 @@ export default {
 }
 @mixin BgBlackColorWhite {
   background-color: #fafafa;
-  color: var(--main-text-color);
+  color: $main-text-color;
 }
 @mixin AbsoluteXCenter {
   position: absolute;
@@ -174,7 +174,7 @@ export default {
         padding: 10px;
       }
       .product__release {
-        color: var(--sub-text-color);
+        color: $sub-text-color;
         font-size: 14px;
       }
       .product__btn {
@@ -187,7 +187,6 @@ export default {
     }
   }
 }    
-
 @media screen and (min-width : 768px) {
   .swiper {
     height: 550px;

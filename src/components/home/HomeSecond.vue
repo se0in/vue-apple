@@ -109,7 +109,7 @@ h2 {
   word-break: keep-all;
   margin: 70px 0 20px;
   span {
-    color: var(--sub-text-color);
+    color: $sub-text-color;
     display: block;
   }
 }

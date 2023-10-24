@@ -22,7 +22,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .home__wrap {
-    margin-top: 40px;
-  }
+
 </style>

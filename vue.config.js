@@ -1,15 +1,21 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true
-})
+
+const path = require('path');
+
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `@import "@/assets/scss/_variables.scss";`,
+      },
+    },
+  },
   configureWebpack: {
     resolve: {
       alias: {
         // 별칭과 경로 설정
-        '@assets': '@/assets',
-        '@components': '@/components',
-        '@layout': '@/layout',
+        '@assets': path.resolve(__dirname, 'src/assets'),
+        '@components': path.resolve(__dirname, 'src/components'),
+        '@layout': path.resolve(__dirname, 'src/layout'),
       },
     },
   },

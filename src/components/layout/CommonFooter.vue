@@ -111,7 +111,7 @@ export default {
 <style lang="scss" scoped>
   footer {
     font-size: 13px;
-    color: var(--footer-text-color);
+    color: $footer-text-color;
     background-color: #f5f5f7;
     padding: 12px 0 8px;
     
@@ -121,7 +121,7 @@ export default {
         padding: 0.625rem 0 1.125rem;
 
         &:first-child {
-          border-bottom: 1px solid var(--footer-border-color);
+          border-bottom: 1px solid $footer-border-color;
         }
       }
     } 
@@ -133,7 +133,7 @@ export default {
     }
     .footer__nav {
       .footer-nav__title {
-        color: var(--footer-text-color);
+        color: $footer-text-color;
         padding: 0.75rem 0 0.375rem;
         cursor: pointer;
         position: relative;
@@ -155,7 +155,7 @@ export default {
         overflow: hidden;
         max-height: 0;
         padding: 0 0 0.375rem 1rem;
-        border-bottom: 1px solid var(--footer-border-color);
+        border-bottom: 1px solid $footer-border-color;
 
         &.slide-down {
           max-height: 62.5rem;
@@ -183,13 +183,13 @@ export default {
         flex-direction: column;
 
         .info__country {
-          color: var(--footer-title-color);
+          color: $footer-title-color;
         }
         .info__copyright {
           padding: 0.9375rem 0 0.625rem;
         }
         .info__nav {
-          color: var(--footer-title-color);
+          color: $footer-title-color;
           display: flex;
           column-gap: 0.625rem;
           row-gap: 0.25rem;
@@ -198,7 +198,7 @@ export default {
           .info__nav-list {
             &:not(:last-child):after {
               content: '';
-              border-right: 1px solid var(--footer-title-color);
+              border-right: 1px solid $footer-title-color;
               margin-left: 0.625rem;
             }
             &:hover {
@@ -225,7 +225,7 @@ export default {
         height: 28.125rem;
         
         .footer-nav__title {
-          color : var(--footer-title-color);
+          color : $footer-title-color;
           &::after {
             display: none;
           }

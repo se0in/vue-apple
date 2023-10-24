@@ -401,7 +401,7 @@ export default {
 
 .header__web {
   @include flexCenter;
-  background-color: #f5f5f5;
+  background-color: $header-color;
   font-size: 14px;
   padding: 0 16px;
   box-sizing: border-box;
@@ -409,6 +409,7 @@ export default {
   top: 0;
   width: 100%;
   z-index: 900;
+  box-shadow: 0 0 10px rgba(174, 174, 174, 0.4);
 
   .header__logo {
     height: 100%;
@@ -440,11 +441,12 @@ export default {
         top: 40px;
         left: 0;
         width: 100%;
-        background-color: #f5f5f5;
+        background-color: $header-color;
         z-index: 920;
         transition: max-height 0.5s;
         max-height: 0;
         overflow: hidden;
+        box-shadow: 0 10px 20px rgba(174, 174, 174, 0.2);
 
         &.show-menu {
           max-height: 1000px;
@@ -465,7 +467,7 @@ export default {
             .look__title {
               font-size: 13px;
               font-weight: 400;
-              color: var(--sub-text-color);
+              color: $sub-text-color;
               font-family: "Pretendard-Regular", "Noto Sans KR", sans-serif;
               margin-bottom: 16px;
             }
@@ -478,7 +480,7 @@ export default {
                 transition: 0.3s;
 
                 &:hover {
-                  color: var(--main-text-color);
+                  color: $main-text-color;
                 }
               }
             }
@@ -501,7 +503,7 @@ export default {
         padding: 8px 0;
 
         &:hover {
-          color: var(--sub-text-color);
+          color: $sub-text-color;
         }
       }
     }
@@ -513,7 +515,7 @@ export default {
       left: 0;
       background-color: #f5f5f5;
       z-index: 990;
-      color: var(--sub-text-color);
+      color: $sub-text-color;
       max-height: 0;
       transition: max-height 0.5s;
       overflow: hidden;
@@ -551,7 +553,7 @@ export default {
 
           .box__text1 {
             font-size: 30px;
-            color: var(--main-text-color);
+            color: $main-text-color;
           }
 
           .box__text2 {
@@ -563,19 +565,19 @@ export default {
           margin-top: 30px;
 
           li {
-            color: var(--main-text-color);
+            color: $main-text-color;
             font-size: 14px;
             padding: 6px 0;
 
             &.link__title {
-              color: var(--sub-text-color);
+              color: $sub-text-color;
               margin: 5px 0;
             }
 
             span {
               font-size: 16px;
               vertical-align: -3px;
-              color: var(--sub-text-color);
+              color: $sub-text-color;
               margin-right: 8px;
             }
           }

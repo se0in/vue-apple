@@ -1,0 +1,43 @@
+
+
+/* reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+small {
+  font-size: inherit;
+}
+
+body {
+  font-family: 'Pretendard-Regular', 'Noto Sans KR', sans-serif;
+  color: #080808;
+}

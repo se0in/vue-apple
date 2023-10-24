@@ -101,8 +101,7 @@ export default {
     }
 
   @media screen and (min-width : 768px) {
-    .popup {
-    }
+    
     .popup__wrap {
       max-width: 900px;
       left: 50%;
@@ -110,22 +109,9 @@ export default {
       transform: translate(-50%, -50%);
       border-radius: 20px;
 
-      button {
-        
-        span {
-          
-        }
-        &:hover {
-          span {
-            
-          }
-        }
-      }
+      
       .popup__content {
         border-radius: 0 0 20px 20px;
-        img {
-          
-        }
       }
     }
   }

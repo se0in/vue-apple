@@ -175,7 +175,7 @@ Vue로 작업한 apple store
       left: 0;
       background-color: #f5f5f5;
       z-index: 990;
-      color: var(--sub-text-color);
+      color: $sub-text-color;
       max-height: 0;
       transition: max-height 0.5s;
       overflow: hidden;
