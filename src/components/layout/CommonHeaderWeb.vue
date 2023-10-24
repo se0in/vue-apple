@@ -592,6 +592,8 @@ export default {
     transition: backdrop-filter .3s;
     width: 100%;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: backdrop-filter .3s, -webkit-backdrop-filter .3s;
   }
 }
 </style>

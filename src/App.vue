@@ -1,19 +1,19 @@
 <template>
-  <CommonHeaderWeb></CommonHeaderWeb>
-  <!-- <CommonHeaderMobile></CommonHeaderMobile> -->
+  <!-- <CommonHeaderWeb></CommonHeaderWeb> -->
+  <CommonHeaderMobile></CommonHeaderMobile>
   <router-view></router-view>
   <CommonFooter />
 
 </template>
 
 <script>
-import CommonHeaderWeb from '@/components/layout/CommonHeaderWeb.vue';
-// import CommonHeaderMobile from '@/components/layout/CommonHeaderMobile.vue';
+// import CommonHeaderWeb from '@/components/layout/CommonHeaderWeb.vue';
+import CommonHeaderMobile from '@/components/layout/CommonHeaderMobile.vue';
 import CommonFooter from '@/components/layout/CommonFooter.vue';
 export default {
   components : {
-    CommonHeaderWeb,
-    // CommonHeaderMobile,
+    // CommonHeaderWeb,
+    CommonHeaderMobile,
     CommonFooter
   }
 }
