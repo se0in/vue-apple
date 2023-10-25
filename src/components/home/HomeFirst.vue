@@ -103,21 +103,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@mixin BgWhiteColorBlack {
-  background-color: #000;
-  color: #fff;
-}
-@mixin BgBlackColorWhite {
-  background-color: #fafafa;
-  color: $main-text-color;
-}
-@mixin AbsoluteXCenter {
-  position: absolute;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  @content; 
-}
 
 
 .swiper {

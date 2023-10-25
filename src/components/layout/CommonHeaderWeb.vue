@@ -1,8 +1,10 @@
 <template>
   <header class="header__web">
-    <h1 class="header__logo">
-      <router-link to="/"><img src="@/assets/img/apple_logo.svg" alt="APPLE" /></router-link>
-    </h1>
+    <router-link to="/">
+      <h1 class="header__logo">
+        <img src="@/assets/img/apple_logo.svg" alt="APPLE" />
+      </h1>
+    </router-link>
     <ul class="header__nav inner" @mouseenter="hideUtilArea('search', 'bag')">
       <li v-for="(menu, index) in webMenu" :key="index" class="nav__for" @mouseenter="showMenu(index)"
         @mouseleave="hideMenu(index)">
@@ -393,11 +395,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin flexCenter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .header__web {
   @include flexCenter;
@@ -412,9 +410,10 @@ export default {
   box-shadow: 0 0 10px rgba(174, 174, 174, 0.4);
 
   .header__logo {
+    @include flexCenter;
     height: 100%;
     width: 80px;
-
+    height: 40px;
     img {
       width: 25px;
     }
@@ -492,7 +491,7 @@ export default {
 
   .header__util {
     @include flexCenter();
-    color: #ddd;
+    color: #999;
 
     .util__list {
       .util__icon {
@@ -503,7 +502,7 @@ export default {
         padding: 8px 0;
 
         &:hover {
-          color: $sub-text-color;
+          color: $main-text-color;
         }
       }
     }

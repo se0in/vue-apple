@@ -187,3 +187,26 @@ Vue로 작업한 apple store
     ```
 
 </details>
+
+<details>
+<summary>scss파일 (mixin, variables) 매번 import없이 전역으로 설정하기</summary>
+  <br>
+ 
+  #### 해결 방법
+  1. scss폴더에 파일 만들기 (scss변수를 모아놓은 파일은 파일 명 앞에 _를 붙이면 자동으로 변수모음파일이라고 인식한다고 함)
+  2. vue.config.vs 파일에 코드 추가
+  ```javascript
+    css: {
+      loaderOptions: {
+        sass: {
+          additionalData: `@import "@/assets/scss/_variables.scss"; @import "@/assets/scss/mixin.scss";`,
+        },
+      },
+    },
+  ```
+  3. 추가 후 꼭!! 빌드를 시켜줘야 함
+  4. App.vue에 import 시켜 줄 것
+  
+
+
+</details>

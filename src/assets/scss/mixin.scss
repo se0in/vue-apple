@@ -1,0 +1,33 @@
+@mixin flexCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin BgWhiteColorBlack {
+  background-color: #000;
+  color: #fff;
+}
+@mixin BgBlackColorWhite {
+  background-color: #fafafa;
+  color: $main-text-color;
+}
+
+@mixin AbsoluteXCenter {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  @content; 
+}
+
+
+@mixin mbMenu2Depth {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 800;
+  @content; 
+}

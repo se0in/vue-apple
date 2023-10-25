@@ -1,17 +1,72 @@
 <template>
   <header class="header__mobile">
-    <h1 class="header__logo">
-      <router-link to="/"><img src="@/assets/img/apple_logo.svg" alt="APPLE" /></router-link>
-    </h1>
+    <router-link to="/">
+      <h1 class="header__logo">
+        <img src="@/assets/img/apple_logo.svg" alt="APPLE" />
+      </h1>
+    </router-link>
     <nav>
-      <div class="header__icon header__search">
-        <span class="material-symbols-outlined header__icon-search">search</span>
+      <!-- search -->
+      <div class="header__util header__search">
+        <span class="material-symbols-outlined header__icon">search</span>
+        <div class="nav__sub">
+          <div class="sub__title">
+            <span class="material-symbols-outlined util__icon-search">search</span>
+            <input type="text" placeholder="검색" ref="search" />
+          </div>
+          <p class="link__title">빠른 링크</p>
+          <ul class="util__link">
+            <li v-for="search in util.search" :key="search">
+              <router-link to="/Sub">
+                <div class="list__wrap">
+                  <span class="material-symbols-outlined util__icon">arrow_forward</span>
+                  <span class="text_block">{{search}}</span>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="header__icon header__bag">
-        <span class="material-symbols-outlined header__icon-bag">shopping_bag</span>
+
+      <!-- bag -->
+      <div class="header__util header__bag">
+        <span class="material-symbols-outlined header__icon">shopping_bag</span>
+        <div class="nav__sub">
+          <div class="sub__title">
+            <p class="box__text1">장바구니가 비어 있습니다.</p>
+            <p class="box__text2">
+              저장해둔 항목이 있는지 확인하려면 로그인하세요
+            </p>
+          </div>
+          <p class="link__title">내 프로필</p>
+          <ul class="util__link">
+            <li v-for="(bagItem, index) in util.bag.icon" :key="index">
+              <router-link to="/Sub">
+                <div class="list__wrap">
+                  <span class="material-symbols-outlined util__icon">{{ bagItem }}</span>
+                  <span class="text_block">{{ util.bag.text[index] }}</span>
+                </div>
+              </router-link>
+            </li>
+
+          </ul>
+        </div>
       </div>
+
+
+
+
+
+
+
+
+
+
       <div class="header__menu">
-        <button class="hamburger">햄버거</button>
+        <button class="hamburger" :class="close" @click="menuOn">
+          <span></span>
+          <span></span>
+        </button>
         <!-- <ul class="menu__wrap">
           <li v-for="menu in mbMenu" :key="menu">
             <router-link to="/Sub">
@@ -279,40 +334,202 @@ export default {
           ],
         },
       ],
+      util : 
+        {
+          search : [
+            "Apple Store Online에서 쇼핑하기","액세서리","AirPods","AirTag","Apple Trade In"
+          ],
+          bag : {
+            icon : ["list_alt","favorite","person","login"],
+            text : ["주문","관심 목록","계정","로그인"]
+          }
+        }
+      
     };
   },
+  methods : {
+    /* menuOn() {
+      if(this.active) {
+
+      }
+    } */
+    /* if (this.activeMenu === index) {
+        this.activeMenu = null; //마우스가 메뉴 항목 밖으로 나갈 때 비활성화
+        this.shouldShowBlur = false;
+      } */
+    
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@mixin flexCenter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
   .header__mobile {
     @include flexCenter();
+    background-color: #f5f5f5b7;
+    font-size: 14px;
+    padding: 0 16px;
+    box-sizing: border-box;
     position: fixed;
+    top: 0;
     width: 100%;
     z-index: 900;
-    padding: 0 16px;
-    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(174, 174, 174, 0.4);
+    backdrop-filter: blur(10px);
     height: 45px;
-    box-sizing: border-box;
+
 
     .header__logo {
-      img {
-        width: 26px;
-      }
+    @include flexCenter;
+    height: 45px;
+    width: 80px;
+    img {
+      width: 25px;
     }
+  }
     nav {
       @include flexCenter();
-      .header__search {}
-      .header__bag {}
-      .header__icon {}
+      height: 45px;
+      
+      // width: 120px;
+      // .header__search {}
+      // .header__bag {}
+      .header__util {
+        @include flexCenter();
+        height: 100%;
+        flex: 1;
+        padding: 0 5px;
+        .header__icon {
+          color: #999;
+          transition: .5s;
+          cursor: pointer;
+
+          &:hover {
+            color: $main-text-color;
+          }
+        }
+        .nav__sub {/* 2depth */
+          @include mbMenu2Depth();
+          background-color: #fafafa;
+          padding: 50px 40px;
+          box-sizing: border-box;
+          display: none;
+          // 여기~~~~~~~~~~~~
+          
+          .sub__title {
+          margin-bottom: 30px;
+          .util__icon-search {
+            font-size: 30px;
+            vertical-align: -5px;
+            margin-right: 10px;
+          }
+          input {
+            width: calc(100% - 45px);
+            font-size: 30px;
+            height: 50px;
+            font-family: "Pretendard-Regular", "Noto Sans KR", sans-serif;
+            background-color: transparent;
+            border: none;
+            outline: none;
+  
+              &::placeholder {
+                font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
+                font-weight: 500;
+                letter-spacing: -2px;
+                font-size: 30px;
+              }
+            } 
+            .box__text1 {
+            font-size: 30px;
+            color: $main-text-color;
+          }
+
+          .box__text2 {
+            margin-top: 20px;
+          }
+          }
+          .link__title {
+            font-size: 16px;
+            color : $sub-text-color;
+            margin-bottom: 10px;
+          }
+          .util__link {
+            li {
+              font-size: 16px;
+              padding: 5px 0;
+              margin: 3px 0;
+              border-radius: 8px;
+              line-height: 1.5;
+              transition: .3s;
+              
+              &:hover {
+                background-color: rgb(236, 236, 236);
+              }
+              .list__wrap {
+                display: flex;
+                
+                .util__icon {
+                  color: $sub-text-color;
+                  font-size: 18px;
+                  margin-right: 10px;
+                  padding-left: 5px;
+                  padding-top: 2px;
+                }
+                .text_block {
+                  display: block;
+                  width: 100%;
+                }
+              }
+            }
+          }
+      
+        }
+      }
       .header__menu {
-        .hamburger {}
+        color: $main-text-color;
+        @include flexCenter();
+        height: 100%;
+
+        .hamburger {
+          cursor: pointer;
+          padding: 0 5px;
+          width: 40px;
+          height: 45px;
+          position: relative;
+          z-index: 900;
+          &:hover span {
+            background-color: $main-text-color;
+          }
+          span {
+            display: block;
+            width: 20px;
+            margin: 0 auto;
+            height: 2px;
+            background-color: #999;
+            transition: .5s;
+            &:nth-child(1) {
+              margin-bottom: 6px;
+            }
+            &:nth-child(2) {
+              margin-top: 6px;
+            }
+          }
+          &.close {
+            span {
+              transition: .5s;
+              background-color: $main-text-color;
+              // width: 25px;
+            &:nth-child(1) {
+              transform: rotate(45deg);
+              margin-bottom: -2px;
+            }
+            &:nth-child(2) {
+              transform: rotate(-45deg);
+              margin-top: -2px;
+              
+            }
+          }
+          }
+        }
       }
     }
   }

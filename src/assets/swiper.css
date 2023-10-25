@@ -4,7 +4,6 @@
   display: none;
 }
 .swiper-pagination-bullet-active {
-  background: #ddd !important;
-  box-shadow: 0 0 10px #999;
-  color: red;
+  background: #202020 !important;
+  box-shadow: 0 0 10px #e4e4e4;
 }

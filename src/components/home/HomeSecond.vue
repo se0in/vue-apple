@@ -94,14 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@mixin AbsoluteXCenter {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  @content; 
-}
+
 
 h2 {
   font-size: 30px;
