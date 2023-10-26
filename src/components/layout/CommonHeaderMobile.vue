@@ -7,67 +7,72 @@
     </router-link>
     <nav>
       <!-- search -->
-      <div class="header__util header__search">
-        <span class="material-symbols-outlined header__icon" @click="NextMenuShowButton(index, 'search')">search</span>
-        
-        <div class="nav__sub" v-if="menuAreaShow.search">
-          <div class="sub__title">
-            <span class="material-symbols-outlined util__icon-search">search</span>
-            <input type="text" placeholder="검색" ref="search" />
+      <div class="header__menu header__search">
+        <span class="material-symbols-outlined header__icon" @click="MenuShow(index, 'search'), setFocus()">search</span>
+
+        <transition name="slide" appear mode="out-in">
+          <div class="nav__sub" v-if="menuAreaShow.search" key="menuAreaShow.search">
+            <div class="sub__title">
+              <span class="material-symbols-outlined util__icon-search">search</span>
+              <input type="text" placeholder="검색" ref="search" autofocus/>
+            </div>
+            <p class="link__title">빠른 링크</p>
+            <ul class="util__link">
+              <li v-for="search in util.search" :key="search">
+                <router-link to="/Sub" @click="closeMenu">
+                  <div class="list__wrap">
+                    <span class="material-symbols-outlined util__icon">arrow_forward</span>
+                    <span class="text_block">{{ search }}</span>
+                  </div>
+                </router-link>
+              </li>
+            </ul>
           </div>
-          <p class="link__title">빠른 링크</p>
-          <ul class="util__link">
-            <li v-for="search in util.search" :key="search">
-              <router-link to="/Sub">
-                <div class="list__wrap">
-                  <span class="material-symbols-outlined util__icon">arrow_forward</span>
-                  <span class="text_block">{{search}}</span>
-                </div>
-              </router-link>
-            </li>
-          </ul>
-        </div>
-        
+        </transition>
       </div>
 
       <!-- bag -->
-      <div class="header__util header__bag">
-        <span class="material-symbols-outlined header__icon"  @click="NextMenuShowButton(index, 'bag')">shopping_bag</span>
-        <div class="nav__sub" v-if="menuAreaShow.bag">
-          <div class="sub__title">
-            <p class="box__text1">장바구니가 비어 있습니다.</p>
-            <p class="box__text2">
-              저장해둔 항목이 있는지 확인하려면 로그인하세요
-            </p>
-          </div>
-          <p class="link__title">내 프로필</p>
-          <ul class="util__link">
-            <li v-for="(bagItem, index) in util.bag.icon" :key="index">
-              <router-link to="/Sub">
-                <div class="list__wrap">
-                  <span class="material-symbols-outlined util__icon">{{ bagItem }}</span>
-                  <span class="text_block">{{ util.bag.text[index] }}</span>
-                </div>
-              </router-link>
-            </li>
+      <div class="header__menu header__bag">
+        <span class="material-symbols-outlined header__icon" @click="MenuShow(index, 'bag')">shopping_bag</span>
+        <transition name="slide" appear mode="out-in">
+          <div class="nav__sub" v-if="menuAreaShow.bag" key="menuAreaShow.bag">
+            <div class="sub__title">
+              <p class="box__text1">장바구니가 비어 있습니다.</p>
+              <p class="box__text2">
+                저장해둔 항목이 있는지 확인하려면 로그인하세요
+              </p>
+            </div>
+            <p class="link__title">내 프로필</p>
+            <ul class="util__link">
+              <li v-for="(bagItem, index) in util.bag.icon" :key="index">
+                <router-link to="/Sub" @click="closeMenu">
+                  <div class="list__wrap">
+                    <span class="material-symbols-outlined util__icon">{{ bagItem }}</span>
+                    <span class="text_block">{{ util.bag.text[index] }}</span>
+                  </div>
+                </router-link>
+              </li>
 
-          </ul>
-        </div>
+            </ul>
+          </div>
+        </transition>
       </div>
 
 
       <div class="header__menu">
-        <button class="hamburger" :class="{closeButton}" @click="hamburgerButtonHandler(), NextMenuShowButton(index, 'menu')">
+        <button class="hamburger" :class="{ closeButton }" @click="hamburgerButtonHandler(), MenuShow(index, 'menu')">
           <span></span>
           <span></span>
         </button>
-        <ul class="menu__wrap nav__sub" v-if="menuAreaShow.menu">
-          <li v-for="menu in mbMenu" :key="menu">
-            <router-link to="/Sub">
-              <div class="nav__title">{{ menu.OneTitle }}</div>
-            </router-link>
-          </li>
-        </ul>
+        <transition name="slide" appear mode="out-in">
+          <ul class="nav__sub" v-if="menuAreaShow.menu" key="menuAreaShow.search"> 
+            <li v-for="menu in mbMenu" :key="menu">
+              <router-link to="/Sub" @click="closeMenu">
+                <div class="nav__title">{{ menu.OneTitle }}</div>
+              </router-link>
+            </li>
+          </ul>
+        </transition>
       </div>
     </nav>
   </header>
@@ -328,106 +333,117 @@ export default {
           ],
         },
       ],
-      util : 
-        {
-          search : [
-            "Apple Store Online에서 쇼핑하기","액세서리","AirPods","AirTag","Apple Trade In"
-          ],
-          bag : {
-            icon : ["list_alt","favorite","person","login"],
-            text : ["주문","관심 목록","계정","로그인"]
-          }
-        },
-      menuAreaShow: {
-        search : false,
-        bag : false,
-        menu : false,
+      util:
+      {
+        search: [
+          "Apple Store Online에서 쇼핑하기", "액세서리", "AirPods", "AirTag", "Apple Trade In"
+        ],
+        bag: {
+          icon: ["list_alt", "favorite", "person", "login"],
+          text: ["주문", "관심 목록", "계정", "로그인"]
+        }
       },
-      closeButton : false,
+      menuAreaShow: {
+        search: false,
+        bag: false,
+        menu: false,
+      },
+      closeButton: false,
     };
   },
-  methods : {
-    NextMenuShowButton(index, type){
-      this.closeButton = true;
+  methods: {
+    MenuShow(index, type) {
       this.menuAreaShow[type] = !this.menuAreaShow[type];
-      console.log('왜 안돼?');
+      this.closeButton = !this.closeButton;
     },
     hamburgerButtonHandler() {
-      this.closeButton = !this.closeButton;
-      console.log('sss');
-      if(this.closeButton == true) {
-        console.log('true');
-        this.menuAreaShow.search = false;
-        this.menuAreaShow.bag = false;
-        this.menuAreaShow.menu = false;
-      }else{
-        console.log('false');
-  
+      if (this.closeButton == true) {
+        this.menuAreaShow.menu = true;
       }
+      this.menuAreaShow.search = false;
+      this.menuAreaShow.bag = false;
     },
-
-    
+    closeMenu() {
+      this.menuAreaShow.search = false;
+      this.menuAreaShow.bag = false;
+      this.menuAreaShow.menu = false;
+      this.closeButton = false;
+    },
+    setFocus() {
+  if (this.$refs.search) {
+    this.$refs.search.focus();
+  }
+}
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .header__mobile {
-    @include flexCenter();
-    background-color: #f5f5f5b7;
-    font-size: 14px;
-    padding: 0 16px;
-    box-sizing: border-box;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 900;
-    box-shadow: 0 0 10px rgba(174, 174, 174, 0.4);
-    backdrop-filter: blur(10px);
-    height: 45px;
+.header__mobile {
+  @include flexCenter();
+  background-color: #f5f5f5b7;
+  font-size: 14px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 900;
+  box-shadow: 0 0 10px rgba(174, 174, 174, 0.4);
+  backdrop-filter: blur(10px);
+  height: 45px;
 
 
-    .header__logo {
+  .header__logo {
     @include flexCenter;
     height: 45px;
     width: 80px;
-      img {
-        width: 25px;
-      }
-    }
-    nav {
-      @include flexCenter();
-      height: 45px;
-      
-      width: 120px;
-      // .header__search {}
-      // .header__bag {}
-      .header__util {
-        @include flexCenter();
-        height: 100%;
-        .header__icon {
-          padding: 10px 8px;
-          color: #999;
-          transition: .5s;
-          cursor: pointer;
 
-          &:hover {
-            color: $main-text-color;
-          }
+    img {
+      width: 25px;
+    }
+  }
+
+  nav {
+    @include flexCenter();
+    height: 45px;
+
+    // width: 120px;
+    // .header__search {}
+    // background-color: red;
+    // .header__bag {}
+    .header__menu {
+      @include flexCenter();
+      height: 100%;
+
+      .header__icon {
+        padding: 10px 8px;
+        color: #999;
+        transition: .5s;
+        cursor: pointer;
+        box-sizing: border-box;
+
+        &:hover {
+          color: $main-text-color;
         }
-        .nav__sub {/* 2depth */
-          @include mbMenu2Depth();
-          background-color: #fafafa;
-          padding: 50px 40px;
-          box-sizing: border-box;
-          
-          .sub__title {
+      }
+
+      .nav__sub {
+        /* 2depth */
+        @include mbMenu2Depth();
+        background-color: #fafafa;
+        padding: 50px 40px;
+        box-sizing: border-box;
+
+        .sub__title {
           margin-bottom: 30px;
+
           .util__icon-search {
             font-size: 30px;
             vertical-align: -5px;
             margin-right: 10px;
           }
+
           input {
             width: calc(100% - 45px);
             font-size: 30px;
@@ -436,15 +452,16 @@ export default {
             background-color: transparent;
             border: none;
             outline: none;
-  
-              &::placeholder {
-                font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
-                font-weight: 500;
-                letter-spacing: -2px;
-                font-size: 30px;
-              }
-            } 
-            .box__text1 {
+
+            &::placeholder {
+              font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
+              font-weight: 500;
+              letter-spacing: -2px;
+              font-size: 30px;
+            }
+          }
+
+          .box__text1 {
             font-size: 30px;
             color: $main-text-color;
           }
@@ -452,91 +469,100 @@ export default {
           .box__text2 {
             margin-top: 20px;
           }
-          }
-          .link__title {
-            font-size: 16px;
-            color : $sub-text-color;
-            margin-bottom: 10px;
-          }
-          .util__link {
-            li {
-              font-size: 16px;
-              padding: 5px 0;
-              margin: 3px 0;
-              border-radius: 8px;
-              line-height: 1.5;
-              transition: .3s;
-              
-              &:hover {
-                background-color: rgb(236, 236, 236);
-              }
-              .list__wrap {
-                display: flex;
-                
-                .util__icon {
-                  color: $sub-text-color;
-                  font-size: 18px;
-                  margin-right: 10px;
-                  padding-left: 5px;
-                  padding-top: 2px;
-                }
-                .text_block {
-                  display: block;
-                  width: 100%;
-                }
-              }
-            }
-          }
-      
         }
-      }
-      .header__menu {
-        color: $main-text-color;
-        @include flexCenter();
-        height: 100%;
 
-        .hamburger {
-          cursor: pointer;
-          padding: 0 5px;
-          width: 40px;
-          height: 45px;
-          position: relative;
-          z-index: 900;
-          &:hover span {
-            background-color: $main-text-color;
-          }
-          span {
-            display: block;
-            width: 18px;
-            margin: 0 auto;
-            height: 2px;
-            background-color: #999;
-            transition: .5s;
-            &:nth-child(1) {
-              margin-bottom: 6px;
+        .link__title {
+          font-size: 16px;
+          color: $sub-text-color;
+          margin-bottom: 10px;
+        }
+
+        .util__link {
+          li {
+            font-size: 16px;
+            padding: 8px 0;
+            border-radius: 8px;
+            line-height: 1.5;
+            transition: .3s;
+
+            &:hover {
+              background-color: rgb(236, 236, 236);
             }
-            &:nth-child(2) {
-              margin-top: 6px;
+
+            .list__wrap {
+              display: flex;
+
+              .util__icon {
+                color: $sub-text-color;
+                font-size: 18px;
+                margin-right: 10px;
+                padding-left: 5px;
+                padding-top: 2px;
+              }
+
+              .text_block {
+                display: block;
+                width: 100%;
+              }
             }
-          }
-          &.closeButton {
-            span {
-              transition: .2s;
-              background-color: $main-text-color;
-              // width: 25px;
-            &:nth-child(1) {
-              margin-bottom: -2px;
-              transform: rotate(45deg);
-            }
-            &:nth-child(2) {
-              margin-top: -2px;
-              transform: rotate(-45deg);
-              
-            }
-          }
           }
         }
       }
     }
   }
-</style>
+
+  .header__menu {
+    color: $main-text-color;
+    @include flexCenter();
+    height: 100%;
+
+    .hamburger {
+      cursor: pointer;
+      padding: 0 5px;
+      width: 40px;
+      height: 45px;
+      position: relative;
+      z-index: 900;
+
+      &:hover span {
+        background-color: $main-text-color;
+      }
+
+      span {
+        display: block;
+        width: 18px;
+        margin: 0 auto;
+        height: 2px;
+        background-color: #999;
+        transition: .5s;
+
+        &:nth-child(1) {
+          margin-bottom: 6px;
+        }
+
+        &:nth-child(2) {
+          margin-top: 6px;
+        }
+      }
+
+      &.closeButton {
+        span {
+          transition: .2s;
+          background-color: $main-text-color;
+
+          // width: 25px;
+          &:nth-child(1) {
+            margin-bottom: -2px;
+            transform: rotate(45deg);
+          }
+
+          &:nth-child(2) {
+            margin-top: -2px;
+            transform: rotate(-45deg);
+
+          }
+        }
+      }
+    }
+  }
+}</style>

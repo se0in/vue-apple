@@ -64,13 +64,13 @@ export default {
     cursor: pointer;
     z-index: 998;
   }
-    .popup__wrap {
-      position: absolute;
-      bottom: 0;
-      border-radius: 20px 20px 0 0;
-      width: 100%;
-      height: calc(100% - 30px);
-      background-color: #fff;
+  .popup__wrap {
+    position: absolute;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    height: calc(100% - 30px);
+    background-color: #fff;
       z-index: 999;
       button {
         text-align: right;
@@ -108,7 +108,7 @@ export default {
       top: 50%;
       transform: translate(-50%, -50%);
       border-radius: 20px;
-
+      width: calc(100% - 40px);
       
       .popup__content {
         border-radius: 0 0 20px 20px;

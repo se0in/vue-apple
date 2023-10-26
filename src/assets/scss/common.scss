@@ -43,6 +43,15 @@
   }
 }
 
+.slide-enter-active, .slide-leave-active {
+  transition: transform .5s;
+}
+
+.slide-enter-from, .slide-leave-to {
+  transform: translateY(-100%);
+}
+
+
 @media screen and (min-width : 768px) {
   .inner {
     max-width: 1000px;

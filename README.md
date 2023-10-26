@@ -210,3 +210,37 @@ Vue로 작업한 apple store
 
 
 </details>
+
+<details>
+<summary>transition 효과</summary>
+  <br>
+
+- 숨겨진 메뉴가 표시될 땐 transition 이 먹지 않고 사라질 때만 먹어서 고민
+
+  #### 해결 방법
+ - v-if가 false로 시작하면 transition이 안먹는건가 했는데 scss 클래스명 때문이었다. .slide-enter을 .slide-enter-from 로 바꾸니 해결됨
+
+  ```html
+    <transition name="slide" appear mode="out-in">
+          <div class="nav__sub"  v-if="menuAreaShow.search" key="menuAreaShow.search">
+              <div class="sub__title">
+              <!-- ...생략 -->
+                </li>
+              </ul>
+          </div>
+        </transition>
+  ```
+
+  ```scss
+    .slide-enter-active, .slide-leave-active {
+      transition: transform 1s;
+    }
+
+    .slide-enter-from, .slide-leave-to {
+      transform: translateY(-100%);
+    }
+  ```
+  
+
+
+</details>
