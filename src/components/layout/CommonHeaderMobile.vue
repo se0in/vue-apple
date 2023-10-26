@@ -8,8 +8,9 @@
     <nav>
       <!-- search -->
       <div class="header__util header__search">
-        <span class="material-symbols-outlined header__icon">search</span>
-        <div class="nav__sub">
+        <span class="material-symbols-outlined header__icon" @click="NextMenuShowButton(index, 'search')">search</span>
+        
+        <div class="nav__sub" v-if="menuAreaShow.search">
           <div class="sub__title">
             <span class="material-symbols-outlined util__icon-search">search</span>
             <input type="text" placeholder="검색" ref="search" />
@@ -26,12 +27,13 @@
             </li>
           </ul>
         </div>
+        
       </div>
 
       <!-- bag -->
       <div class="header__util header__bag">
-        <span class="material-symbols-outlined header__icon">shopping_bag</span>
-        <div class="nav__sub">
+        <span class="material-symbols-outlined header__icon"  @click="NextMenuShowButton(index, 'bag')">shopping_bag</span>
+        <div class="nav__sub" v-if="menuAreaShow.bag">
           <div class="sub__title">
             <p class="box__text1">장바구니가 비어 있습니다.</p>
             <p class="box__text2">
@@ -54,26 +56,18 @@
       </div>
 
 
-
-
-
-
-
-
-
-
       <div class="header__menu">
-        <button class="hamburger" :class="close" @click="menuOn">
+        <button class="hamburger" :class="{closeButton}" @click="hamburgerButtonHandler(), NextMenuShowButton(index, 'menu')">
           <span></span>
           <span></span>
         </button>
-        <!-- <ul class="menu__wrap">
+        <ul class="menu__wrap nav__sub" v-if="menuAreaShow.menu">
           <li v-for="menu in mbMenu" :key="menu">
             <router-link to="/Sub">
               <div class="nav__title">{{ menu.OneTitle }}</div>
             </router-link>
           </li>
-        </ul> -->
+        </ul>
       </div>
     </nav>
   </header>
@@ -343,20 +337,35 @@ export default {
             icon : ["list_alt","favorite","person","login"],
             text : ["주문","관심 목록","계정","로그인"]
           }
-        }
-      
+        },
+      menuAreaShow: {
+        search : false,
+        bag : false,
+        menu : false,
+      },
+      closeButton : false,
     };
   },
   methods : {
-    /* menuOn() {
-      if(this.active) {
-
+    NextMenuShowButton(index, type){
+      this.closeButton = true;
+      this.menuAreaShow[type] = !this.menuAreaShow[type];
+      console.log('왜 안돼?');
+    },
+    hamburgerButtonHandler() {
+      this.closeButton = !this.closeButton;
+      console.log('sss');
+      if(this.closeButton == true) {
+        console.log('true');
+        this.menuAreaShow.search = false;
+        this.menuAreaShow.bag = false;
+        this.menuAreaShow.menu = false;
+      }else{
+        console.log('false');
+  
       }
-    } */
-    /* if (this.activeMenu === index) {
-        this.activeMenu = null; //마우스가 메뉴 항목 밖으로 나갈 때 비활성화
-        this.shouldShowBlur = false;
-      } */
+    },
+
     
   }
 }
@@ -382,23 +391,22 @@ export default {
     @include flexCenter;
     height: 45px;
     width: 80px;
-    img {
-      width: 25px;
+      img {
+        width: 25px;
+      }
     }
-  }
     nav {
       @include flexCenter();
       height: 45px;
       
-      // width: 120px;
+      width: 120px;
       // .header__search {}
       // .header__bag {}
       .header__util {
         @include flexCenter();
         height: 100%;
-        flex: 1;
-        padding: 0 5px;
         .header__icon {
+          padding: 10px 8px;
           color: #999;
           transition: .5s;
           cursor: pointer;
@@ -412,8 +420,6 @@ export default {
           background-color: #fafafa;
           padding: 50px 40px;
           box-sizing: border-box;
-          display: none;
-          // 여기~~~~~~~~~~~~
           
           .sub__title {
           margin-bottom: 30px;
@@ -501,7 +507,7 @@ export default {
           }
           span {
             display: block;
-            width: 20px;
+            width: 18px;
             margin: 0 auto;
             height: 2px;
             background-color: #999;
@@ -513,18 +519,18 @@ export default {
               margin-top: 6px;
             }
           }
-          &.close {
+          &.closeButton {
             span {
-              transition: .5s;
+              transition: .2s;
               background-color: $main-text-color;
               // width: 25px;
             &:nth-child(1) {
-              transform: rotate(45deg);
               margin-bottom: -2px;
+              transform: rotate(45deg);
             }
             &:nth-child(2) {
-              transform: rotate(-45deg);
               margin-top: -2px;
+              transform: rotate(-45deg);
               
             }
           }
