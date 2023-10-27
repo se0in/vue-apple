@@ -129,6 +129,7 @@ Vue로 작업한 apple store
     1. 포커스가 될 input 태그에 ref값을 설정
     2. 원하는 methods에 this.$refs.설정값.focus() 입력
     3. 클릭 시 input영역이 나타날 곳에 `@click="methods명()" 추가 
+    4. 모바일 메뉴에선 검색 서브메뉴가 열릴 때 실행되도록 했다.
 
     ```html
       <li class="header__search util__list">
@@ -150,6 +151,19 @@ Vue로 작업한 apple store
         {
           this.$refs.search.focus();
         }
+    ```
+
+    - 모바일 메뉴
+    ```javascript
+       MenuShow(index, type) {
+        this.menuAreaShow[type] = !this.menuAreaShow[type];
+        this.closeButton = !this.closeButton;
+        if (this.menuAreaShow.search) {
+          this.$nextTick(() => {
+            this.$refs.search.focus();
+          });
+        }
+      },
     ```
 
 </details>

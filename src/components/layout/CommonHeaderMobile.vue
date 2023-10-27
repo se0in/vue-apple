@@ -8,13 +8,13 @@
     <nav>
       <!-- search -->
       <div class="header__menu header__search">
-        <span class="material-symbols-outlined header__icon" @click="MenuShow(index, 'search'), setFocus()">search</span>
+        <span class="material-symbols-outlined header__icon" @click=" MenuShow(index, 'search');">search</span>
 
         <transition name="slide" appear mode="out-in">
           <div class="nav__sub" v-if="menuAreaShow.search" key="menuAreaShow.search">
             <div class="sub__title">
               <span class="material-symbols-outlined util__icon-search">search</span>
-              <input type="text" placeholder="검색" ref="search" autofocus/>
+              <input type="text" placeholder="검색" ref="search" />
             </div>
             <p class="link__title">빠른 링크</p>
             <ul class="util__link">
@@ -60,16 +60,30 @@
 
 
       <div class="header__menu">
-        <button class="hamburger" :class="{ closeButton }" @click="hamburgerButtonHandler(), MenuShow(index, 'menu')">
+        <button class="hamburger" :class="{ closeButton }" @click="hamburgerButtonHandler(); MenuShow(index, 'menu');">
           <span></span>
           <span></span>
         </button>
         <transition name="slide" appear mode="out-in">
-          <ul class="nav__sub" v-if="menuAreaShow.menu" key="menuAreaShow.search"> 
+          <ul class="nav__sub" v-if="menuAreaShow.menu" key="menuAreaShow.search">
             <li v-for="menu in mbMenu" :key="menu">
-              <router-link to="/Sub" @click="closeMenu">
-                <div class="nav__title">{{ menu.OneTitle }}</div>
-              </router-link>
+              <!-- @click="closeMenu" -->
+              <div class="nav__title" @click="menu2DepthShow(index)">{{ menu.OneTitle }}</div>
+
+              <!-- 2뎁스 -->
+              <!-- <transition name="slideLeft" appear mode="out-in"> -->
+                <div class="nav__2depth" v-if="menuAreaShow[menu.OneTitle]" v-cloak>
+                  <div class="nav__inner" v-for="depth in menu.childDepths" :key="depth.twoTitle">
+                    <p class="list-title">{{ depth.twoTitle }}</p>
+                    <ul>
+                      <li class="list-name" v-for="list in depth.twoList" :key="list">
+                        <router-link to="/Sub"><span>{{ list }}</span></router-link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              <!-- </transition> -->
+
             </li>
           </ul>
         </transition>
@@ -323,15 +337,15 @@ export default {
             },
           ],
         },
-        {
-          OneTitle: "더 살펴보기",
-          childDepths: [
-            {
-              twoTitle: "추가 정보",
-              twoList: ["TV 및 홈", "엔터테인먼트", "액세서리"],
-            },
-          ],
-        },
+        /*  {
+           OneTitle: "더 살펴보기",
+           childDepths: [
+             {
+               twoTitle: "추가 정보",
+               twoList: ["TV 및 홈", "엔터테인먼트", "액세서리"],
+             },
+           ],
+         }, */
       ],
       util:
       {
@@ -346,15 +360,28 @@ export default {
       menuAreaShow: {
         search: false,
         bag: false,
-        menu: false,
+        menu: true,
       },
       closeButton: false,
     };
   },
+  watch: {
+    /* 'menuAreaShow.search': function(newValue) {
+      if (newValue) {
+        this.setFocus();
+      }
+    } */
+  },
+
   methods: {
     MenuShow(index, type) {
       this.menuAreaShow[type] = !this.menuAreaShow[type];
       this.closeButton = !this.closeButton;
+      if (this.menuAreaShow.search) {
+        this.$nextTick(() => {
+          this.$refs.search.focus();
+        });
+      }
     },
     hamburgerButtonHandler() {
       if (this.closeButton == true) {
@@ -369,12 +396,12 @@ export default {
       this.menuAreaShow.menu = false;
       this.closeButton = false;
     },
-    setFocus() {
-  if (this.$refs.search) {
-    this.$refs.search.focus();
-  }
-}
-  }
+    menu2DepthShow(index) {
+      // Toggle the visibility of the 2nd level menu based on the menu item's index
+      const menuTitle = this.mbMenu[index].OneTitle;
+      this.menuAreaShow[menuTitle] = !this.menuAreaShow[menuTitle];
+    }
+  },
 }
 </script>
 
@@ -415,6 +442,7 @@ export default {
     .header__menu {
       @include flexCenter();
       height: 100%;
+      color: $main-text-color;
 
       .header__icon {
         padding: 10px 8px;
@@ -431,7 +459,7 @@ export default {
       .nav__sub {
         /* 2depth */
         @include mbMenu2Depth();
-        background-color: #fafafa;
+        background-color: $mobile-menu-bg;
         padding: 50px 40px;
         box-sizing: border-box;
 
@@ -507,62 +535,117 @@ export default {
             }
           }
         }
-      }
-    }
-  }
 
-  .header__menu {
-    color: $main-text-color;
-    @include flexCenter();
-    height: 100%;
+        .nav__title {
+          font-size: 24px;
+          font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
+          font-weight: 500;
+          cursor: pointer;
+          padding: 5px 0;
+          position: relative;
 
-    .hamburger {
-      cursor: pointer;
-      padding: 0 5px;
-      width: 40px;
-      height: 45px;
-      position: relative;
-      z-index: 900;
+          // transition: 1s;
+          &::after {
+            transition: 1s;
+            position: absolute;
+            right: 0;
+            content: '\e5e1';
+            font-family: 'Material Symbols Outlined';
+            font-size: 20px;
+            transition: .3s;
+            margin-top: 5px;
+            opacity: 0;
+          }
 
-      &:hover span {
-        background-color: $main-text-color;
-      }
-
-      span {
-        display: block;
-        width: 18px;
-        margin: 0 auto;
-        height: 2px;
-        background-color: #999;
-        transition: .5s;
-
-        &:nth-child(1) {
-          margin-bottom: 6px;
+          &:hover:after {
+            opacity: 1;
+          }
         }
 
-        &:nth-child(2) {
-          margin-top: 6px;
+        .nav__2depth {
+          display: none;
+          position: absolute;
+          background-color: $mobile-menu-bg;
+          top: 50px;
+          left: 40px;
+          width: calc(100% - 80px);
+          height: 100%;
+          z-index: 970;
+          .nav__inner {
+            padding-bottom: 50px;
+            font-size: 16px;
+            &:nth-child(1) {
+              font-size: 24px;
+            }
+            .list-title {
+              font-size: 15px;
+              color: $sub-text-color;
+              margin-bottom: 10px;
+            }
+            ul {
+
+              .list-name {
+                padding: 5px 0;
+                  span {
+                  display: block;
+                }
+                }
+              }
+          }
+
         }
       }
 
-      &.closeButton {
-        span {
-          transition: .2s;
+      .hamburger {
+        cursor: pointer;
+        padding: 0 5px;
+        width: 40px;
+        height: 45px;
+        position: relative;
+        z-index: 900;
+
+        &:hover span {
           background-color: $main-text-color;
+        }
 
-          // width: 25px;
+        span {
+          display: block;
+          width: 18px;
+          margin: 0 auto;
+          height: 2px;
+          background-color: #999;
+          transition: .5s;
+
           &:nth-child(1) {
-            margin-bottom: -2px;
-            transform: rotate(45deg);
+            margin-bottom: 6px;
           }
 
           &:nth-child(2) {
-            margin-top: -2px;
-            transform: rotate(-45deg);
+            margin-top: 6px;
+          }
+        }
 
+        &.closeButton {
+          span {
+            transition: .2s;
+            background-color: $main-text-color;
+
+            // width: 25px;
+            &:nth-child(1) {
+              margin-bottom: -2px;
+              transform: rotate(45deg);
+            }
+
+            &:nth-child(2) {
+              margin-top: -2px;
+              transform: rotate(-45deg);
+
+            }
           }
         }
       }
+
+
     }
   }
 }</style>

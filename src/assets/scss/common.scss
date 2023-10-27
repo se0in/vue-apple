@@ -1,5 +1,5 @@
 
-
+/* 폰트 */
 @font-face {
   font-family: 'Pretendard-Regular';
   src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -7,6 +7,7 @@
   font-style: normal;
 }
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap');
+
 
 /* 스크롤바 */
 *::-webkit-scrollbar {
@@ -33,7 +34,17 @@
   clear: both;
 } 
 
+/* layout 미디어 쿼리 */
+@media screen and (min-width : 768px) {
+  .inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    outline: 1px dotted red;
+  }
+}
 
+
+/* 버튼 화살표 애니메이션 */
 @keyframes arrowToRight {
   0% {
     right: 0;
@@ -43,22 +54,16 @@
   }
 }
 
-.slide-enter-active, .slide-leave-active {
+/* transition 효과 */
+/* .slide-enter-active, .slide-leave-active {
   transition: transform .5s;
 }
 
 .slide-enter-from, .slide-leave-to {
   transform: translateY(-100%);
-}
+} */
 
 
-@media screen and (min-width : 768px) {
-  .inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    outline: 1px dotted red;
-  }
-}
 
 
 
