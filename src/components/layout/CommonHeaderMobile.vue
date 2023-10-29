@@ -58,7 +58,6 @@
         </transition>
       </div>
 
-
       <div class="header__menu">
         <button class="hamburger" :class="{ closeButton }" @click="hamburgerButtonHandler(); MenuShow(index, 'menu');">
           <span></span>
@@ -66,24 +65,24 @@
         </button>
         <transition name="slide" appear mode="out-in">
           <ul class="nav__sub" v-if="menuAreaShow.menu" key="menuAreaShow.search">
-            <li v-for="menu in mbMenu" :key="menu">
+            <li class="nav__sub-li" v-for="(menu, index) in mbMenu" :key="index">
               <!-- @click="closeMenu" -->
-              <div class="nav__title" @click="menu2DepthShow(index)">{{ menu.OneTitle }}</div>
+              <div class="nav__title" @click="show2DepthMenu(index)">{{ menu.OneTitle }}</div>
 
               <!-- 2뎁스 -->
-              <!-- <transition name="slideLeft" appear mode="out-in"> -->
-                <div class="nav__2depth" v-if="menuAreaShow[menu.OneTitle]" v-cloak>
-                  <div class="nav__inner" v-for="depth in menu.childDepths" :key="depth.twoTitle">
-                    <p class="list-title">{{ depth.twoTitle }}</p>
-                    <ul>
-                      <li class="list-name" v-for="list in depth.twoList" :key="list">
-                        <router-link to="/Sub"><span>{{ list }}</span></router-link>
-                      </li>
-                    </ul>
-                  </div>
+              <div class="nav__2depth" :class="{ nav2DepthShow: index === activeMenuIndex }">
+                <button class="backBtn" @click="backMenu">
+                  <span class="material-symbols-outlined">arrow_back_ios</span>
+                </button>
+                <div class="nav__inner" v-for="depth in menu.childDepths" :key="depth.twoTitle">
+                  <p class="list-title">{{ depth.twoTitle }}</p>
+                  <ul>
+                    <li class="list-name" v-for="list in depth.twoList" :key="list" @click="closeMenu">
+                      <router-link to="/Sub"><span>{{ list }}</span></router-link>
+                    </li>
+                  </ul>
                 </div>
-              <!-- </transition> -->
-
+              </div>
             </li>
           </ul>
         </transition>
@@ -93,9 +92,6 @@
 </template>
 
 <script>
-
-
-
 export default {
   name: 'CommonHeader',
   props: {
@@ -360,19 +356,13 @@ export default {
       menuAreaShow: {
         search: false,
         bag: false,
-        menu: true,
+        menu: false,
       },
       closeButton: false,
+      nav2DepthShow: false,
+      activeMenuIndex: null,
     };
   },
-  watch: {
-    /* 'menuAreaShow.search': function(newValue) {
-      if (newValue) {
-        this.setFocus();
-      }
-    } */
-  },
-
   methods: {
     MenuShow(index, type) {
       this.menuAreaShow[type] = !this.menuAreaShow[type];
@@ -395,11 +385,17 @@ export default {
       this.menuAreaShow.bag = false;
       this.menuAreaShow.menu = false;
       this.closeButton = false;
+      this.activeMenuIndex = false;
     },
-    menu2DepthShow(index) {
-      // Toggle the visibility of the 2nd level menu based on the menu item's index
-      const menuTitle = this.mbMenu[index].OneTitle;
-      this.menuAreaShow[menuTitle] = !this.menuAreaShow[menuTitle];
+    show2DepthMenu(index) {
+      if (this.activeMenuIndex === index) {
+        this.activeMenuIndex = null; // 닫음
+      } else {
+        this.activeMenuIndex = index; // 해당 메뉴 열기
+      }
+    },
+    backMenu() {
+      this.activeMenuIndex = false
     }
   },
 }
@@ -435,10 +431,6 @@ export default {
     @include flexCenter();
     height: 45px;
 
-    // width: 120px;
-    // .header__search {}
-    // background-color: red;
-    // .header__bag {}
     .header__menu {
       @include flexCenter();
       height: 100%;
@@ -462,75 +454,79 @@ export default {
         background-color: $mobile-menu-bg;
         padding: 50px 40px;
         box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: hidden;
 
-        .sub__title {
-          margin-bottom: 30px;
+        .nav__sub-li {
+          .sub__title {
+            margin-bottom: 30px;
 
-          .util__icon-search {
-            font-size: 30px;
-            vertical-align: -5px;
-            margin-right: 10px;
-          }
-
-          input {
-            width: calc(100% - 45px);
-            font-size: 30px;
-            height: 50px;
-            font-family: "Pretendard-Regular", "Noto Sans KR", sans-serif;
-            background-color: transparent;
-            border: none;
-            outline: none;
-
-            &::placeholder {
-              font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
-              font-weight: 500;
-              letter-spacing: -2px;
+            .util__icon-search {
               font-size: 30px;
+              vertical-align: -5px;
+              margin-right: 10px;
+            }
+
+            input {
+              width: calc(100% - 45px);
+              font-size: 30px;
+              height: 50px;
+              font-family: "Pretendard-Regular", "Noto Sans KR", sans-serif;
+              background-color: transparent;
+              border: none;
+              outline: none;
+
+              &::placeholder {
+                font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
+                font-weight: 500;
+                letter-spacing: -2px;
+                font-size: 30px;
+              }
+            }
+
+            .box__text1 {
+              font-size: 30px;
+              color: $main-text-color;
+            }
+
+            .box__text2 {
+              margin-top: 20px;
             }
           }
 
-          .box__text1 {
-            font-size: 30px;
-            color: $main-text-color;
-          }
-
-          .box__text2 {
-            margin-top: 20px;
-          }
-        }
-
-        .link__title {
-          font-size: 16px;
-          color: $sub-text-color;
-          margin-bottom: 10px;
-        }
-
-        .util__link {
-          li {
+          .link__title {
             font-size: 16px;
-            padding: 8px 0;
-            border-radius: 8px;
-            line-height: 1.5;
-            transition: .3s;
+            color: $sub-text-color;
+            margin-bottom: 10px;
+          }
 
-            &:hover {
-              background-color: rgb(236, 236, 236);
-            }
+          .util__link {
+            li {
+              font-size: 16px;
+              padding: 8px 0;
+              border-radius: 8px;
+              line-height: 1.5;
+              transition: .3s;
 
-            .list__wrap {
-              display: flex;
-
-              .util__icon {
-                color: $sub-text-color;
-                font-size: 18px;
-                margin-right: 10px;
-                padding-left: 5px;
-                padding-top: 2px;
+              &:hover {
+                background-color: rgb(236, 236, 236);
               }
 
-              .text_block {
-                display: block;
-                width: 100%;
+              .list__wrap {
+                display: flex;
+
+                .util__icon {
+                  color: $sub-text-color;
+                  font-size: 18px;
+                  margin-right: 10px;
+                  padding-left: 5px;
+                  padding-top: 2px;
+                }
+
+                .text_block {
+                  display: block;
+                  width: 100%;
+                }
               }
             }
           }
@@ -544,7 +540,6 @@ export default {
           padding: 5px 0;
           position: relative;
 
-          // transition: 1s;
           &::after {
             transition: 1s;
             position: absolute;
@@ -563,36 +558,63 @@ export default {
         }
 
         .nav__2depth {
-          display: none;
           position: absolute;
           background-color: $mobile-menu-bg;
-          top: 50px;
-          left: 40px;
-          width: calc(100% - 80px);
-          height: 100%;
-          z-index: 970;
+          top: 0;
+          left: 100%;
+          padding: 50px 40px;
+          box-sizing: border-box;
+          width: 100%;
+          z-index: 1000;
+          transition: left .5s;
+
+          &.nav2DepthShow {
+            left: 0;
+          }
+
+          .backBtn {
+            color: #999;
+            width: 40px;
+            height: 45px;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            background-color: $mobile-menu-bg ;
+            transition: .5s;
+
+            &:hover {
+              color: $main-text-color;
+            }
+
+            span {
+              font-size: 20px;
+            }
+          }
+
           .nav__inner {
             padding-bottom: 50px;
             font-size: 16px;
-            &:nth-child(1) {
+
+            &:nth-of-type(1) li {
               font-size: 24px;
             }
+
             .list-title {
               font-size: 15px;
               color: $sub-text-color;
               margin-bottom: 10px;
             }
-            ul {
 
+            ul {
               .list-name {
                 padding: 5px 0;
-                  span {
+
+                span {
                   display: block;
                 }
-                }
               }
+            }
           }
-
         }
       }
 
@@ -630,7 +652,6 @@ export default {
             transition: .2s;
             background-color: $main-text-color;
 
-            // width: 25px;
             &:nth-child(1) {
               margin-bottom: -2px;
               transform: rotate(45deg);
@@ -639,13 +660,10 @@ export default {
             &:nth-child(2) {
               margin-top: -2px;
               transform: rotate(-45deg);
-
             }
           }
         }
       }
-
-
     }
   }
 }</style>
