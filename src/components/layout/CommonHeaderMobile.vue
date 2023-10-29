@@ -457,76 +457,75 @@ export default {
         overflow-y: auto;
         overflow-x: hidden;
 
-        .nav__sub-li {
-          .sub__title {
-            margin-bottom: 30px;
 
-            .util__icon-search {
+        .sub__title {
+          margin-bottom: 30px;
+
+          .util__icon-search {
+            font-size: 30px;
+            vertical-align: -5px;
+            margin-right: 10px;
+          }
+
+          input {
+            width: calc(100% - 45px);
+            font-size: 30px;
+            height: 50px;
+            font-family: "Pretendard-Regular", "Noto Sans KR", sans-serif;
+            background-color: transparent;
+            border: none;
+            outline: none;
+
+            &::placeholder {
+              font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
+              font-weight: 500;
+              letter-spacing: -2px;
               font-size: 30px;
-              vertical-align: -5px;
-              margin-right: 10px;
-            }
-
-            input {
-              width: calc(100% - 45px);
-              font-size: 30px;
-              height: 50px;
-              font-family: "Pretendard-Regular", "Noto Sans KR", sans-serif;
-              background-color: transparent;
-              border: none;
-              outline: none;
-
-              &::placeholder {
-                font-family: "Noto Sans KR", "Pretendard-Regular", sans-serif;
-                font-weight: 500;
-                letter-spacing: -2px;
-                font-size: 30px;
-              }
-            }
-
-            .box__text1 {
-              font-size: 30px;
-              color: $main-text-color;
-            }
-
-            .box__text2 {
-              margin-top: 20px;
             }
           }
 
-          .link__title {
+          .box__text1 {
+            font-size: 30px;
+            color: $main-text-color;
+          }
+
+          .box__text2 {
+            margin-top: 20px;
+          }
+        }
+
+        .link__title {
+          font-size: 16px;
+          color: $sub-text-color;
+          margin-bottom: 10px;
+        }
+
+        .util__link {
+          li {
             font-size: 16px;
-            color: $sub-text-color;
-            margin-bottom: 10px;
-          }
+            padding: 8px 0;
+            border-radius: 8px;
+            line-height: 1.5;
+            transition: .3s;
 
-          .util__link {
-            li {
-              font-size: 16px;
-              padding: 8px 0;
-              border-radius: 8px;
-              line-height: 1.5;
-              transition: .3s;
+            &:hover {
+              background-color: rgb(236, 236, 236);
+            }
 
-              &:hover {
-                background-color: rgb(236, 236, 236);
+            .list__wrap {
+              display: flex;
+
+              .util__icon {
+                color: $sub-text-color;
+                font-size: 18px;
+                margin-right: 10px;
+                padding-left: 5px;
+                padding-top: 2px;
               }
 
-              .list__wrap {
-                display: flex;
-
-                .util__icon {
-                  color: $sub-text-color;
-                  font-size: 18px;
-                  margin-right: 10px;
-                  padding-left: 5px;
-                  padding-top: 2px;
-                }
-
-                .text_block {
-                  display: block;
-                  width: 100%;
-                }
+              .text_block {
+                display: block;
+                width: 100%;
               }
             }
           }
@@ -666,4 +665,5 @@ export default {
       }
     }
   }
-}</style>
+}
+</style>

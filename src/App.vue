@@ -1,6 +1,6 @@
 <template>
-  <!-- <CommonHeaderWeb></CommonHeaderWeb> -->
-  <CommonHeaderMobile></CommonHeaderMobile>
+  <CommonHeaderWeb v-if="!isMobile" />
+  <CommonHeaderMobile v-else />
   <div class="header-margin-top"></div>
   <router-view></router-view>
   <CommonFooter />
@@ -8,15 +8,29 @@
 </template>
 
 <script>
-// import CommonHeaderWeb from '@/components/layout/CommonHeaderWeb.vue';
+import CommonHeaderWeb from '@/components/layout/CommonHeaderWeb.vue';
 import CommonHeaderMobile from '@/components/layout/CommonHeaderMobile.vue';
 import CommonFooter from '@/components/layout/CommonFooter.vue';
 export default {
   components : {
-    // CommonHeaderWeb,
+    CommonHeaderWeb,
     CommonHeaderMobile,
     CommonFooter
-  }
+  },
+  data() {
+    return {
+      isMobile : false,
+    }
+  },
+  mounted() {
+    window.addEventListener("resize", this.checkIsMobile);
+    this.checkIsMobile(); // 초기 설정
+  },
+  methods: {
+    checkIsMobile() {
+      this.isMobile = window.innerWidth < 768; // 예시: 화면 폭이 768px 미만인 경우 모바일로 설정
+    },
+  },
 }
 
 
