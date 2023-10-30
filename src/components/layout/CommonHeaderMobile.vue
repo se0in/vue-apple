@@ -333,7 +333,7 @@ export default {
             },
           ],
         },
-        /*  {
+         {
            OneTitle: "더 살펴보기",
            childDepths: [
              {
@@ -341,7 +341,7 @@ export default {
                twoList: ["TV 및 홈", "엔터테인먼트", "액세서리"],
              },
            ],
-         }, */
+         },
       ],
       util:
       {
@@ -365,6 +365,7 @@ export default {
   },
   methods: {
     MenuShow(index, type) {
+      this.activeMenuIndex = false;
       this.menuAreaShow[type] = !this.menuAreaShow[type];
       this.closeButton = !this.closeButton;
       if (this.menuAreaShow.search) {
@@ -566,6 +567,7 @@ export default {
           width: 100%;
           z-index: 1000;
           transition: left .5s;
+          height: 100%;
 
           &.nav2DepthShow {
             left: 0;
@@ -578,7 +580,6 @@ export default {
             position: absolute;
             top: 5px;
             left: 10px;
-            background-color: $mobile-menu-bg ;
             transition: .5s;
 
             &:hover {

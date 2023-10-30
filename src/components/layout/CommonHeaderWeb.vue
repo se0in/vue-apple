@@ -387,10 +387,9 @@ export default {
       }
     },
     setFocus: function()
-    {
-      this.$refs.search.focus();
-    }
+    {this.$refs.search.focus();}
   },
+    
 };    
 </script>
 
