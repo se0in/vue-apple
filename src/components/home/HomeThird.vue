@@ -1,6 +1,6 @@
 <template>
   <div class="contentWrap">
-    <h2>시청할 모든 것을 <span>하나의 앱에 담다</span></h2>
+    <h2>시청할 모든 것을 하나의 앱에. <span>APPLE TV.</span></h2>
     <ul>
       <li v-for="list in contents" :key="list" class="content__list"
         :class="{ 'last-item': index === contents.length - 1 }">
@@ -107,7 +107,7 @@ export default {
           margin-top: 10px;
           color: #fff;
           text-shadow: 0 0 5px #000;
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     }

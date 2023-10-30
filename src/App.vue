@@ -45,11 +45,11 @@ export default {
 @import '@assets/swiper.css';
 
 .header-margin-top {
-  padding-top: 40px;
+  padding-top: 45px;
 }
 @media screen and (min-width : 768px) {
   .header-margin-top {
-    padding-top: 45px;
+    padding-top: 40px;
   }
 }
 </style>
