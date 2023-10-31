@@ -1,7 +1,7 @@
 <template>
   <CommonHeaderWeb v-if="!isMobile" />
   <CommonHeaderMobile v-else />
-  <div class="header-margin-top"></div>
+  <div class="content-margin_top"></div>
   <router-view></router-view>
   <CommonFooter />
 
@@ -44,12 +44,13 @@ export default {
 @import '@assets/scss/common.scss';
 @import '@assets/swiper.css';
 
-.header-margin-top {
+.content-margin_top {
   padding-top: 45px;
 }
 @media screen and (min-width : 768px) {
-  .header-margin-top {
+  .content-margin_top {
     padding-top: 40px;
   }
 }
+
 </style>

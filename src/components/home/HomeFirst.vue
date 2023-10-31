@@ -9,7 +9,7 @@
       clickable: true,
     }"
     :autoplay="{
-      delay: 4000, 
+      delay: 40000, 
       disableOnInteraction: false,
     }"
     :navigation="true"
