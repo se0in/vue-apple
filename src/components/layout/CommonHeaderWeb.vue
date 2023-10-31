@@ -18,7 +18,7 @@
               <div class="look__title">{{ depth.twoTitle }}</div>
               <ul>
                 <li v-for="(list, listIndex) in depth.twoList" :key="listIndex">
-                  <router-link to="/Sub">{{ list }}</router-link>
+                  <router-link to="/Sub" @click="closeMenu">{{ list }}</router-link>
                 </li>
               </ul>
             </div>
@@ -28,7 +28,7 @@
     </ul>
     <ul class="header__util">
       <li class="header__search util__list">
-        <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search'), setFocus()">search</span>
+        <span class="material-symbols-outlined util__icon" @click="toggleUtilArea('search'); setFocus();">search</span>
         <div class="util__area" :class="{ 'toggle-util-area': activeUtilArea === 'search' }">
           <div class="inner util__wrap">
             <div class="util__box">
@@ -37,26 +37,12 @@
             </div>
             <ul class="util__link">
               <li class="link__title">빠른 링크</li>
-              <li>
-                <span class="material-symbols-outlined">arrow_forward</span>
-                <router-link to="/Sub">Apple Store Online에서 쇼핑하기</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">arrow_forward</span>
-                <router-link to="/Sub">액세서리</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">arrow_forward</span>
-                <router-link to="/Sub">AirPods</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">arrow_forward</span>
-                <router-link to="/Sub">AirTag</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">arrow_forward</span>
-                <router-link to="/Sub">Apple Trade In</router-link>
-              </li>
+              <ul>
+                <li v-for="searchList in search.text" :key="searchList.text">
+                  <span class="material-symbols-outlined">{{ searchList.icon }}</span>
+                  <router-link :to="searchList.to" @click="closeMenu">{{ searchList.text }}</router-link>
+                </li>
+              </ul>
             </ul>
           </div>
         </div>
@@ -73,22 +59,12 @@
             </div>
             <ul class="util__link">
               <li class="link__title">내 프로필</li>
-              <li>
-                <span class="material-symbols-outlined">list_alt</span>
-                <router-link to="/Sub">주문</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">favorite</span>
-                <router-link to="/Sub">관심 목록</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">person</span>
-                <router-link to="/Sub">계정</router-link>
-              </li>
-              <li>
-                <span class="material-symbols-outlined">login</span>
-                <router-link to="/Sub">로그인</router-link>
-              </li>
+              <ul>
+                <li v-for="bagList in bag" :key="bagList">
+                  <span class="material-symbols-outlined">{{ bagList.icon }}</span>
+                  <router-link :to="bagList.to" @click="closeMenu">{{ bagList.text }}</router-link>
+                </li>
+              </ul>
             </ul>
           </div>
         </div>
@@ -351,6 +327,22 @@ export default {
           ],
         },
       ],
+      search: {
+        icon: "arrow_forward",
+        text: [
+          { icon: "arrow_forward", text: "Apple Store Online에서 쇼핑하기", to: "/Sub" },
+          { icon: "arrow_forward", text: "액세서리", to: "/Sub" },
+          { icon: "arrow_forward", text: "AirPods", to: "/Sub" },
+          { icon: "arrow_forward", text: "AirTag", to: "/Sub" },
+          { icon: "arrow_forward", text: "Apple Trade In", to: "/Sub" }
+        ]
+      },
+      bag: [
+        { icon: "list_alt", text: "주문", to: "/Sub" },
+        { icon: "favorite", text: "관심 목록", to: "/Sub" },
+        { icon: "person", text: "계정", to: "/Sub" },
+        { icon: "login", text: "로그인", to: "/Sub" },
+      ],
       activeMenu: null,
       activeUtilArea: null,
       shouldShowBlur: false,
@@ -386,16 +378,19 @@ export default {
         this.shouldShowBlur = false; // 어떤 유틸리티 영역도 활성화되지 않으면 블러 숨김
       }
     },
-    setFocus: function()
-    {this.$refs.search.focus();}
+    closeMenu() {
+      console.log('확인');
+      this.activeMenu = null;
+      this.activeUtilArea = null;
+      this.shouldShowBlur = false;
+    },
+    setFocus: function () { this.$refs.search.focus(); }
   },
-    
+
 };    
 </script>
 
 <style lang="scss" scoped>
-
-
 .header__web {
   @include flexCenter;
   background-color: $header-color;
@@ -413,6 +408,7 @@ export default {
     height: 100%;
     width: 80px;
     height: 40px;
+
     img {
       width: 25px;
     }
