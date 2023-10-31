@@ -2,9 +2,17 @@
   <div class="contentWrap">
     <h2>시청할 모든 것을 하나의 앱에. <span>APPLE TV.</span></h2>
     <ul>
-      <li v-for="list in contents" :key="list" class="content__list"
-        :class="{ 'last-item': index === contents.length - 1 }">
-        <img :src=list.path :alt=list.title class="content__image">
+      <li 
+        v-for="(list, index) in contents" 
+        :key="list.title" 
+        class="content__list"
+        :class="{ 'active': activeIndex === index }" 
+        @mouseenter="addHoverClass(index)"
+        @mouseleave="removeHoverClass(index)">
+        <img 
+          :src="list.path" 
+          :alt="list.title" 
+          class="content__image">
         <div class="content__text">
           <BtnWatching class="content__btn"></BtnWatching>
           <p>{{ list.text }}</p>
@@ -54,24 +62,45 @@ export default {
           text: '폐허가 된 위험한 세상에 소중한 반려견, 갓 만들어낸 로봇과 나만 덩그러니 남았다.',
           path: require('@assets/img/HomeThird_finch.png')
         },
-      ]
+      ],
+      activeIndex: 0
     }
-  }
+  },
+  created() {
+    // 3초마다 클래스명 변경을 위한 타이머 설정
+    setInterval(this.changeActiveIndex, 3000);
+  },
+  methods: {
+    changeActiveIndex() {
+      // 다음 항목으로 이동 (마지막 항목일 경우 처음 항목으로)
+      this.activeIndex = (this.activeIndex + 1) % this.contents.length;
+    },
+    addHoverClass(index) {
+      // 마우스가 요소에 진입할 때 호버 클래스 추가
+      this.activeIndex = index;
+    },
+    removeHoverClass() {
+      // 마우스가 요소에서 빠져나갈 때 호버 클래스 제거
+      this.activeIndex = -1; // 현재 호버 클래스를 제거하려면 인덱스를 초기화
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .contentWrap {
   h2 {
-  font-size: 30px;
-  padding: 0 16px;
-  word-break: keep-all;
-  margin: 70px 0 20px;
-  span {
-    color: $sub-text-color;
-    display: block;
+    font-size: 30px;
+    padding: 0 16px;
+    word-break: keep-all;
+    margin: 70px 0 20px;
+
+    span {
+      color: $sub-text-color;
+      display: block;
+    }
   }
-}
+
   ul {
     justify-content: space-between;
     width: 100%;
@@ -87,28 +116,21 @@ export default {
         height: 100%;
         object-fit: cover;
       }
+    }
 
-      &:hover {
-        .content__text {
-          bottom: 30px;
-          opacity: 1;
-        }
-      }
+    .content__text {
+      position: absolute;
+      gap: 20px;
+      left: 30px;
+      bottom: 30px;
+      opacity: 1;
+      transition: .5s;
 
-      .content__text {
-        position: absolute;
-        gap: 20px;
-        left: 30px;
-        bottom: 30px;
-        opacity: 1;
-        transition: .5s;
-
-        p {
-          margin-top: 10px;
-          color: #fff;
-          text-shadow: 0 0 5px #000;
-          font-size: 16px;
-        }
+      p {
+        margin-top: 10px;
+        color: #fff;
+        text-shadow: 0 0 5px #000;
+        font-size: 16px;
       }
     }
   }
@@ -117,24 +139,34 @@ export default {
 @media screen and (min-width : 768px) {
   .contentWrap {
     h2 {
-  text-align: center;
-  font-size: 35px;
-  margin: 100px 0 30px;
-  span {
-    display: inline;
-  }
-}
+      text-align: center;
+      font-size: 35px;
+      margin: 100px 0 30px;
+
+      span {
+        display: inline;
+      }
+    }
+
     ul {
       display: flex;
 
       .content__list {
         width: calc(100% / 5);
 
-        &:hover {
-          width: 100%;
+        img.content__image {
+          filter: brightness(50%);
+          transition: .5s;
         }
 
-        &:hover {
+        &:hover,
+        &.active {
+          width: 100%;
+
+          img.content__image {
+            filter: brightness(100%)
+          }
+
           .content__text {
             bottom: 30px;
             opacity: 1;
