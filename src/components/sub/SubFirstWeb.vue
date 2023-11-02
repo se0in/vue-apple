@@ -1,0 +1,212 @@
+<template>
+  <div class="rotate-iphone">
+    <div @scroll="handleScroll" class="scroll-container" ref="scrollContainer" @wheel="handleWheel">
+      <div class="scroll_wrap">
+        <img class="rotating-image" src="../../assets/img/SubFirst-iphone.png" alt="iphone" ref="iphoneImage"
+          v-if="iphoneImage">
+        <p class="scroll_text" ref="scrollText" :class="{ 'scrollTextShow': scrollText }">탁월한 선택.</p>
+        <div class="row_text" ref="rowText">
+          <ul>
+            <li class="rowList">쾌속으로 질주하는 프로세서.</li>
+            <li class="rowList">획기적인 배터리 성능.</li>
+            <li class="rowList">고속 5G 연결.</li>
+            <li class="rowList">오랜 사용을 염두에 둔 디자인.</li>
+            <li class="rowList">수준급 카메라.</li>
+            <li class="rowList">익숙해서 좋은 홈버튼.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      initialImageWidth: 200,
+      scrollThreshold: 800,
+      scrollText: false,
+      maxScrollPosition: 10000,
+      iphoneImage: true,
+      lastScrollPosition: 0,
+    };
+  },
+  methods: {
+    handleWheel(event) {
+      const scrollContainer = this.$refs.scrollContainer;
+      const scrollPosition = scrollContainer.scrollTop;
+      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 1 : scrollPosition - 100;
+      if (scrollPosition >= 3500) {
+        event.preventDefault();
+        return;
+      }
+      scrollContainer.scrollTop = targetScrollPosition;
+    },
+    handleScroll() {
+      const scrollContainer = this.$refs.scrollContainer;
+      const scrollPosition = scrollContainer.scrollTop;
+      const rotatingImage = this.$refs.iphoneImage;
+      const rowText = this.$refs.rowText;
+      this.lastScrollPosition = scrollPosition;
+      let rowList = document.querySelectorAll('.rowList');
+
+      if (rotatingImage) {
+
+        if (scrollPosition == 0) {
+          this.scrollText = false;
+          rotatingImage.style.transform = `rotate(0deg)`;
+          rotatingImage.style.width = `200px`;
+          rowText.style.display = 'none';
+
+        } else if (scrollPosition <= 100) {
+          this.scrollText = true;
+          rotatingImage.style.opacity = '1';
+          rowText.style.display = 'none';
+
+        } else if (scrollPosition <= 300) {
+          rotatingImage.style.opacity = '1';
+          rowText.style.display = 'none';
+
+        } else if (scrollPosition <= 600) {
+          const scaleFactor = 1 + scrollPosition / this.scrollThreshold;
+          const imageWidth = this.initialImageWidth * scaleFactor;
+          const rotationDegrees = Math.min(scrollPosition, 90);
+          rotatingImage.style.transform = `rotate(-${rotationDegrees}deg)`;
+          rotatingImage.style.width = `${imageWidth}px`;
+          rowText.style.display = 'none';
+          this.scrollText = false;
+          rotatingImage.style.opacity = '1';
+
+        } else if (scrollPosition <= 800) {
+          this.scrollText = false;
+          const scaleFactor = 1 + scrollPosition / this.scrollThreshold;
+          const imageWidth = this.initialImageWidth * scaleFactor;
+          const rotationDegrees = Math.min(scrollPosition, 90);
+          rotatingImage.style.transform = `rotate(-${rotationDegrees}deg)`;
+          rowText.style.display = 'none';
+          rotatingImage.style.width = `${imageWidth + rotationDegrees}px`;
+
+        } else if (scrollPosition <= 1000) {
+          this.scrollText = false;
+          rotatingImage.style.width = "205.6vh";
+          rowText.style.display = 'none';
+          rotatingImage.style.opacity = '1';
+
+        } else if (scrollPosition <= 1100) {
+          rotatingImage.style.transition = '.5s';
+          rotatingImage.style.opacity = '.3';
+          rowText.style.display = 'block';
+          rowText.style.opacity = '0'
+
+        } else if (scrollPosition <= 1200) {
+          rotatingImage.style.opacity = '0';
+          const opacity = (scrollPosition - 1100) / 100;
+          rowText.style.opacity = Math.min(opacity, 1);
+
+        } else if (scrollPosition <= 3408) {
+          rowText.style.opacity = '1';
+          rowText.style.pointerEvents = 'none';
+          rotatingImage.style.opacity = '0';
+          rowList.forEach((item) => {
+            const leftPosition = `-${scrollPosition - 500}` + 'px';
+            item.style.backgroundPosition = leftPosition + ' 0';
+          })
+        } else if (scrollPosition < 3409) {
+          rowText.style.pointerEvents = 'auto';
+        }
+      }
+    },
+  },
+};
+</script>
+
+
+<style lang="scss" scoped>
+.rotate-iphone {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 40px);
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    width: 0;
+  }
+
+  .scroll-container {
+    height: calc(100vh - 40px);
+    overflow-y: scroll;
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track,
+    &::-webkit-scrollbar-thumb {
+      width: 0;
+    }
+  }
+  .scroll_wrap {
+    height: 4200px;
+    img.rotating-image {
+      transition: transform 0.5s, width 0.5s, opacity 0.5s;
+      width: 200px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -18.2%;
+      bottom: 0;
+      margin: auto;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 1;
+    }
+
+    .scroll_text {
+      font-size: 50px;
+      font-weight: bold;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 80vh;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 2;
+      background: linear-gradient(90deg, #513bb5 30%, #9680ec 55%);
+      background-clip: text;
+      color: transparent;
+
+      &.scrollTextShow {
+        opacity: 1;
+      }
+    }
+
+    .row_text {
+      position: absolute;
+      display: none;
+      top: 0;
+      width: 100%;
+      height: calc(100vh - 40px);
+      z-index: 3;
+      overflow: hidden;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      ul {
+        height: 100%;
+        
+        .rowList {
+          width: 4300px;
+          overflow: hidden;
+          padding-left: 120px;
+          font-size: 36px;
+          line-height: calc((100vh - 40px) / 6);
+          color: #fff;
+          &:nth-child(1) {background: linear-gradient(90deg, #9ba8b6 0%, #180e4e 35%, #3b2990 40%, #c2846b 66%, #71a6df 87%, #aab9c9 98%);}
+          &:nth-child(2) {background: linear-gradient(90deg, #a5b6c0 0%, #19194a 26%, #1e124e 44%, #b36464 67%, #9bc6f3 86%, #bfd3df 99%);}
+          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #141f66 23%, #3d2591 40%, #934a5c 68%, #97bfeb 84%, #aebaf0 100%);}
+          &:nth-child(4) {background: linear-gradient(90deg, #98afa9 0%, #28326d 23%, #2f1d76 42%, #82445b 69%, #6397ce 83%, #c2ddd6 100%);}
+          &:nth-child(5) {background: linear-gradient(90deg, #a8bbad 0%, #1e1e57 27%, #342281 44%, #945961 68%, #578ac0 85%, #d2e7d8 99%);}
+          &:nth-child(6) {background: linear-gradient(90deg, #9696a5 0%, #231d4d 35%, #3b2990 40%, #bd7067 64%, #5d91c9 87%, #cfcfe4 98%);}
+        }
+      }
+    }
+  }
+}
+</style>

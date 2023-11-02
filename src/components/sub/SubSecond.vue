@@ -1,5 +1,11 @@
 <template>
-  <h1>두번째</h1>
+  <div class="content">
+    <div class="section_product">
+      <div class="swiper"></div>
+      <div class="choice"></div>
+    </div>
+    <div class="section_credit"></div>
+  </div>
 </template>
 
 <script>
@@ -12,4 +18,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.content {
+  margin-top: 100px;
+  
+}
 </style>

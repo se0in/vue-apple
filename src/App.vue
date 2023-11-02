@@ -28,13 +28,10 @@ export default {
   },
   methods: {
     checkIsMobile() {
-      this.isMobile = window.innerWidth < 768; // 예시: 화면 폭이 768px 미만인 경우 모바일로 설정
+      this.isMobile = window.innerWidth < 768; 
     },
   },
 }
-
-
-
 </script>
 
 <style>

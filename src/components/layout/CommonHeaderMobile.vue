@@ -457,6 +457,11 @@ export default {
         box-sizing: border-box;
         overflow-y: auto;
         overflow-x: hidden;
+        &::-webkit-scrollbar,
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar-thumb {
+          width: 0;
+        }
 
 
         .sub__title {

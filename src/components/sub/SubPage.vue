@@ -1,27 +1,41 @@
 <template>
-  <sub-first></sub-first>
-<!--   <sub-second></sub-second>
-  <sub-third></sub-third>
-  <sub-fourth></sub-fourth> -->
+  <SubFirstWeb v-if="!isMobile" />
+  <SubFirstMobile v-else />
+  <SubSecond />
+  <!-- <sub-third></sub-third> -->
+  <!-- <sub-fourth></sub-fourth> -->
 </template>
 
 <script>
-import SubFirst from './SubFirst.vue';
-/* import SubSecond from './SubSecond.vue';
-import SubThird from './SubThird.vue';
-import SubFourth from './SubFourth.vue'; */
+import SubFirstWeb from './SubFirstWeb.vue';
+import SubFirstMobile from './SubFirstMobile.vue';
+import SubSecond from './SubSecond.vue';
+// import SubThird from './SubThird.vue';
+// import SubFourth from './SubFourth.vue'; 
 
 export default {
   name: 'SubPage',
   components : {
-    SubFirst,
-/*     SubSecond,
-    SubThird,
+    SubFirstWeb,
+    SubFirstMobile,
+    SubSecond,
+  /*   SubThird,
     SubFourth */
   },
-  props: {
-    msg: String
-  }
+  data() {
+    return {
+      isMobile : false,
+    }
+  },
+  mounted() {
+    window.addEventListener("resize", this.checkIsMobile);
+    this.checkIsMobile(); // 초기 설정
+  },
+  methods: {
+    checkIsMobile() {
+      this.isMobile = window.innerWidth < 768;
+    },
+  },
 }
 </script>
 
