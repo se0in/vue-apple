@@ -36,8 +36,8 @@ export default {
     handleWheel(event) {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
-      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 1 : scrollPosition - 100;
-      if (scrollPosition >= 3500) {
+      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 20 : scrollPosition - 150;
+      if (scrollPosition >= 3600) {
         event.preventDefault();
         return;
       }
@@ -106,14 +106,15 @@ export default {
 
         } else if (scrollPosition <= 3408) {
           rowText.style.opacity = '1';
-          rowText.style.pointerEvents = 'none';
+          // rowText.style.pointerEvents = 'none';
           rotatingImage.style.opacity = '0';
           rowList.forEach((item) => {
             const leftPosition = `-${scrollPosition - 500}` + 'px';
             item.style.backgroundPosition = leftPosition + ' 0';
           })
         } else if (scrollPosition < 3409) {
-          rowText.style.pointerEvents = 'auto';
+          // rowText.style.pointerEvents = 'auto';
+          console.log('ss');
         }
       }
     },
@@ -184,10 +185,10 @@ export default {
       top: 0;
       width: 100%;
       height: calc(100vh - 40px);
-      z-index: 3;
+      z-index: -1;
       overflow: hidden;
       transition: opacity 0.5s;
-      pointer-events: none;
+      // pointer-events: none;
       ul {
         height: 100%;
         
