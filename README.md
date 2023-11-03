@@ -221,8 +221,6 @@ Vue로 작업한 apple store
   3. 추가 후 꼭!! 빌드를 시켜줘야 함
   4. App.vue에 import 시켜 줄 것
   
-
-
 </details>
 
 <details>
@@ -254,7 +252,33 @@ Vue로 작업한 apple store
       transform: translateY(-100%);
     }
   ```
-  
+</details>
 
+<details>
+<summary>메뉴 이동 후 top: 0;으로 올라가는 방벙</summary>
+  <br>
+
+- 스크롤이 내려가 있는 상황에서 라우터`<router-link></router-link>`클릭 시 스크롤이 내려가 있는 상태에서 `<router-view></router-view>`로 전환만 되어 있는 현상
+- 스크롤을 올려야 하는 불편함 발생
+
+#### 해결 방법
+- src/router/index.js에 함수 추가
+
+  ```javascript
+    //기존 코드
+    const router = createRouter({
+      history: createWebHistory(process.env.BASE_URL),
+      routes
+    })
+
+    //추가 후
+    const router = createRouter({
+      history: createWebHistory(process.env.BASE_URL),
+      routes,
+      scrollBehavior(){
+        return { top: 0 }
+      },
+    })  
+  ```
 
 </details>

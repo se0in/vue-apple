@@ -1,14 +1,14 @@
 <template>
-  <SubFirstWeb v-if="!isMobile" />
-  <SubFirstMobile v-else />
+  <!-- <SubFirstWeb v-if="!isMobile" />
+  <SubFirstMobile v-else /> -->
   <SubSecond />
   <!-- <sub-third></sub-third> -->
   <!-- <sub-fourth></sub-fourth> -->
 </template>
 
 <script>
-import SubFirstWeb from './SubFirstWeb.vue';
-import SubFirstMobile from './SubFirstMobile.vue';
+/* import SubFirstWeb from './SubFirstWeb.vue';
+import SubFirstMobile from './SubFirstMobile.vue'; */
 import SubSecond from './SubSecond.vue';
 // import SubThird from './SubThird.vue';
 // import SubFourth from './SubFourth.vue'; 
@@ -16,8 +16,8 @@ import SubSecond from './SubSecond.vue';
 export default {
   name: 'SubPage',
   components : {
-    SubFirstWeb,
-    SubFirstMobile,
+    /* SubFirstWeb,
+    SubFirstMobile, */
     SubSecond,
   /*   SubThird,
     SubFourth */

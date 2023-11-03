@@ -8,7 +8,7 @@
     <ul class="header__nav inner" @mouseenter="hideUtilArea('search', 'bag')">
       <li v-for="(menu, index) in webMenu" :key="index" class="nav__for" @mouseenter="showMenu(index)"
         @mouseleave="hideMenu(index)">
-        <router-link to="/Sub">
+        <router-link to="/Sub" @click="closeMenu">
           <div class="nav__title">{{ menu.OneTitle }}</div>
         </router-link>
         <!-- 2depth menu -->

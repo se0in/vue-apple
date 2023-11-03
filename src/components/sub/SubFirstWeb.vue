@@ -36,28 +36,30 @@ export default {
     handleWheel(event) {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
-      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 20 : scrollPosition - 150;
-      if (scrollPosition >= 3600) {
+      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 30 : scrollPosition - 850;
+      /* if (scrollPosition >= 3700) {
         event.preventDefault();
         return;
-      }
+      } */
       scrollContainer.scrollTop = targetScrollPosition;
     },
     handleScroll() {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
+      console.log('scrollPosition: ', scrollPosition);
       const rotatingImage = this.$refs.iphoneImage;
       const rowText = this.$refs.rowText;
       this.lastScrollPosition = scrollPosition;
       let rowList = document.querySelectorAll('.rowList');
 
       if (rotatingImage) {
-
+        /* 주석 지우지 말 것 */
         if (scrollPosition == 0) {
           this.scrollText = false;
           rotatingImage.style.transform = `rotate(0deg)`;
           rotatingImage.style.width = `200px`;
           rowText.style.display = 'none';
+          rotatingImage.style.opacity = '1';
 
         } else if (scrollPosition <= 100) {
           this.scrollText = true;
@@ -98,24 +100,26 @@ export default {
           rotatingImage.style.opacity = '.3';
           rowText.style.display = 'block';
           rowText.style.opacity = '0'
-
+          
         } else if (scrollPosition <= 1200) {
+          rowText.style.display = 'block';
           rotatingImage.style.opacity = '0';
           const opacity = (scrollPosition - 1100) / 100;
           rowText.style.opacity = Math.min(opacity, 1);
 
-        } else if (scrollPosition <= 3408) {
-          rowText.style.opacity = '1';
+        } else if (scrollPosition <= 3300) {
           // rowText.style.pointerEvents = 'none';
+          rowText.style.display = 'block';
+          rowText.style.opacity = '1';
           rotatingImage.style.opacity = '0';
           rowList.forEach((item) => {
-            const leftPosition = `-${scrollPosition - 500}` + 'px';
+            const leftPosition = `-${scrollPosition - 800}` + 'px';
             item.style.backgroundPosition = leftPosition + ' 0';
           })
-        } else if (scrollPosition < 3409) {
-          // rowText.style.pointerEvents = 'auto';
-          console.log('ss');
-        }
+
+        }/*  else if (scrollPosition < 3409) {
+          rowText.style.pointerEvents = 'auto';
+        } */
       }
     },
   },
@@ -199,12 +203,12 @@ export default {
           font-size: 36px;
           line-height: calc((100vh - 40px) / 6);
           color: #fff;
-          &:nth-child(1) {background: linear-gradient(90deg, #9ba8b6 0%, #180e4e 35%, #3b2990 40%, #c2846b 66%, #71a6df 87%, #aab9c9 98%);}
-          &:nth-child(2) {background: linear-gradient(90deg, #a5b6c0 0%, #19194a 26%, #1e124e 44%, #b36464 67%, #9bc6f3 86%, #bfd3df 99%);}
-          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #141f66 23%, #3d2591 40%, #934a5c 68%, #97bfeb 84%, #aebaf0 100%);}
-          &:nth-child(4) {background: linear-gradient(90deg, #98afa9 0%, #28326d 23%, #2f1d76 42%, #82445b 69%, #6397ce 83%, #c2ddd6 100%);}
-          &:nth-child(5) {background: linear-gradient(90deg, #a8bbad 0%, #1e1e57 27%, #342281 44%, #945961 68%, #578ac0 85%, #d2e7d8 99%);}
-          &:nth-child(6) {background: linear-gradient(90deg, #9696a5 0%, #231d4d 35%, #3b2990 40%, #bd7067 64%, #5d91c9 87%, #cfcfe4 98%);}
+          &:nth-child(1) {background: linear-gradient(90deg, #aab9c9 0%, #180e4e 10%, #3b2990 45%, #c2846b 65%, #71a6df 80%, #aab9c9 100%);}
+          &:nth-child(2) {background: linear-gradient(90deg, #bfd3df 0%, #19194a 10%, #1e124e 45%, #b36464 65%, #9bc6f3 80%, #bfd3df 100%);}
+          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #141f66 10%, #3d2591 45%, #934a5c 65%, #97bfeb 80%, #aebaf0 100%);}
+          &:nth-child(4) {background: linear-gradient(90deg, #c2ddd6 0%, #28326d 10%, #2f1d76 45%, #82445b 65%, #6397ce 80%, #c2ddd6 100%);}
+          &:nth-child(5) {background: linear-gradient(90deg, #d2e7d8 0%, #1e1e57 10%, #342281 45%, #945961 65%, #578ac0 80%, #d2e7d8 100%);}
+          &:nth-child(6) {background: linear-gradient(90deg, #cfcfe4 0%, #231d4d 10%, #3b2990 45%, #bd7067 65%, #5d91c9 80%, #cfcfe4 100%);}
         }
       }
     }
