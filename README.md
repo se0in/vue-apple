@@ -255,7 +255,7 @@ Vue로 작업한 apple store
 </details>
 
 <details>
-<summary>메뉴 이동 후 top: 0;으로 올라가는 방벙</summary>
+<summary>메뉴 이동 후 top: 0;으로 올라가는 방법</summary>
   <br>
 
 - 스크롤이 내려가 있는 상황에서 라우터`<router-link></router-link>`클릭 시 스크롤이 내려가 있는 상태에서 `<router-view></router-view>`로 전환만 되어 있는 현상
@@ -279,6 +279,29 @@ Vue로 작업한 apple store
         return { top: 0 }
       },
     })  
+  ```
+
+</details>
+
+<details>
+<summary>이미지 태그 하나만 놓고 :src를 data로 지정했을 시 fade 효과 주는 법</summary>
+  <br>
+
+- transition 효과를 주고 싶은데 v-if,v-show를 사용하지 않아도 적용되지 않는 상황
+- :class를 사용하여도 적용되지 않았다.
+
+#### 해결 방법
+- :key 다르게 부여하니 적용됨! 이래서 각각의 :key가 중요하다고 한 것을 실감함
+
+  ```html
+    <transition name="fade">
+      <img 
+      :src="imgList[ImgIndex].url" 
+      :alt="imgList[ImgIndex].alt"
+      :key="imgList[ImgIndex]"
+      >
+      <!-- :key를 각각 부여해야 했다. :key="imgList" 이따구로 하면 안됨!! -->
+    </transition>
   ```
 
 </details>

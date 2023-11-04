@@ -37,10 +37,10 @@ export default {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
       const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 30 : scrollPosition - 850;
-      /* if (scrollPosition >= 3700) {
+      if (scrollPosition >= 3600) {
         event.preventDefault();
         return;
-      } */
+      }
       scrollContainer.scrollTop = targetScrollPosition;
     },
     handleScroll() {
@@ -107,7 +107,7 @@ export default {
           const opacity = (scrollPosition - 1100) / 100;
           rowText.style.opacity = Math.min(opacity, 1);
 
-        } else if (scrollPosition <= 3300) {
+        } else if (scrollPosition > 1200) {
           // rowText.style.pointerEvents = 'none';
           rowText.style.display = 'block';
           rowText.style.opacity = '1';
@@ -197,18 +197,18 @@ export default {
         height: 100%;
         
         .rowList {
-          width: 4300px;
+          width: 3000px;
           overflow: hidden;
           padding-left: 120px;
           font-size: 36px;
           line-height: calc((100vh - 40px) / 6);
           color: #fff;
-          &:nth-child(1) {background: linear-gradient(90deg, #aab9c9 0%, #180e4e 10%, #3b2990 45%, #c2846b 65%, #71a6df 80%, #aab9c9 100%);}
-          &:nth-child(2) {background: linear-gradient(90deg, #bfd3df 0%, #19194a 10%, #1e124e 45%, #b36464 65%, #9bc6f3 80%, #bfd3df 100%);}
-          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #141f66 10%, #3d2591 45%, #934a5c 65%, #97bfeb 80%, #aebaf0 100%);}
-          &:nth-child(4) {background: linear-gradient(90deg, #c2ddd6 0%, #28326d 10%, #2f1d76 45%, #82445b 65%, #6397ce 80%, #c2ddd6 100%);}
-          &:nth-child(5) {background: linear-gradient(90deg, #d2e7d8 0%, #1e1e57 10%, #342281 45%, #945961 65%, #578ac0 80%, #d2e7d8 100%);}
-          &:nth-child(6) {background: linear-gradient(90deg, #cfcfe4 0%, #231d4d 10%, #3b2990 45%, #bd7067 65%, #5d91c9 80%, #cfcfe4 100%);}
+          &:nth-child(1) {background: linear-gradient(90deg, #aab9c9 0%, #3b2990 25%, #c2846b 55%, #71a6df 80%, #aab9c9 100%);}
+          &:nth-child(2) {background: linear-gradient(90deg, #bfd3df 0%, #1e124e 25%, #b36464 55%, #9bc6f3 80%, #bfd3df 100%);}
+          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #3d2591 25%, #934a5c 55%, #97bfeb 80%, #aebaf0 100%);}
+          &:nth-child(4) {background: linear-gradient(90deg, #c2ddd6 0%, #2f1d76 25%, #82445b 55%, #6397ce 80%, #c2ddd6 100%);}
+          &:nth-child(5) {background: linear-gradient(90deg, #d2e7d8 0%, #342281 25%, #945961 55%, #578ac0 80%, #d2e7d8 100%);}
+          &:nth-child(6) {background: linear-gradient(90deg, #cfcfe4 0%, #3b2990 25%, #bd7067 55%, #5d91c9 80%, #cfcfe4 100%);}
         }
       }
     }

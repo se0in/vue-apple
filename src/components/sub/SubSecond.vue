@@ -24,8 +24,12 @@
           :modules="modules"
           class="mySwiper"
         >
-          <swiper-slide data-hash="slide1">Slide 1</swiper-slide>
-          <swiper-slide data-hash="slide2">Slide 2</swiper-slide>
+          <swiper-slide data-hash="slide1">
+            <img src="@/assets/img/SubSwiper1.svg" alt="">  
+          </swiper-slide>
+          <swiper-slide data-hash="slide2">
+            <img src="@/assets/img/SubSwiper2.svg" alt="">  
+          </swiper-slide>
         </swiper>
 
 
@@ -36,14 +40,18 @@
         <div class="choice__box choice-model">
           <h3>모델.<span> 당신에게 딱 맞는 모델은?</span></h3>
           <div class="choice__select">
-            <button class="select__btn choice-btn">
+            <button 
+            class="select__btn choice-btn "
+            >
               <div class="select__left">
                 <p class="title__name">iPhone 15 Pro</p>
                 <p class="title__cm">15.5cm 디스플레이</p>
               </div>
               <p class="choice_price select__right">₩1,550,000부터</p>
             </button>
-            <button class="select__btn choice-btn">
+            <button 
+            class="select__btn choice-btn"
+            >
               <div class="select__left">
                 <p class="title__name">iPhone 15 Pro Max</p>
                 <p class="title__cm">17.0cm 디스플레이</p>
@@ -117,14 +125,17 @@
     msg: String
   },
   components: {
-      Swiper,
-      SwiperSlide,
-    },
-    setup() {
-      return {
-        modules: [Pagination, Navigation],
-      };
-    },
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      modules: [Pagination, Navigation],
+    };
+  },
+  methods : {
+    
+  }
 }
 </script>
 
@@ -169,7 +180,7 @@
           display: inline-block;
           box-sizing: border-box;
           border-radius: 25px;
-          background-color: #eee;
+          background-color: #f6f6f6;
         }
       }
     }
@@ -184,26 +195,25 @@
 
     .swiper__wrap {
       width: 100%;
-      height: 500px;
       background-color: #999;
+      border-radius: 20px;
+      overflow: hidden;
 
       .swiper {
+        width: 100%;
         height: 100%;
         .swiper-slide {
-        background: #8c5b5b;
+        width: 100%;
         height: 100%;
-
-        /* Center slide text vertically */
-        .swiper-slide img {
-
+        img {
+          min-height: 400px;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
-
-}
-
-
-
     }
+  }
 
     .choice {
       .choice__box {
@@ -220,7 +230,7 @@
 
         .choice__select {
           margin-top: 20px;
-
+          
           .select__btn {
             border: 1px solid #d3d3d3;
             border-radius: 15px;
@@ -230,7 +240,6 @@
             box-sizing: border-box;
             height: 100px;
             width: 100%;
-
             &:not(:first-child) {
               margin-top: 10px;
             }
@@ -283,7 +292,7 @@
 
               &::after {
                 position: absolute;
-                top: 63px;
+                top: 70px;
                 left: 33px;
                 display: none;
                 font-weight: bold;
@@ -362,7 +371,7 @@
         .choice__help {
           margin-top: 15px;
           border-radius: 15px;
-          background-color: #eeeeee;
+          background-color: #f6f6f6;
           padding: 20px;
           box-sizing: border-box;
           font-size: 14px;
@@ -416,7 +425,6 @@
       .swiper__wrap {
         width: calc(100% - 400px);
         height: calc(100vh - 160px);
-        background-color: #999;
         position: sticky;
         top: 100px;
       }

@@ -41,6 +41,10 @@
     margin: 0 auto;
     outline: 1px dotted red;
   }
+  .sub-inner {
+    max-width: 1260px;
+    margin: 100px auto 0;
+  }
 }
 
 
@@ -62,6 +66,7 @@
 .slide-enter-from, .slide-leave-to {
   transform: translateY(-100%);
 }
+
 
 
 
