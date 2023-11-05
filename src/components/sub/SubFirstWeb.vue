@@ -37,10 +37,10 @@ export default {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
       const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 30 : scrollPosition - 850;
-      if (scrollPosition >= 3600) {
+      /* if (scrollPosition >= 3600) {
         event.preventDefault();
         return;
-      }
+      } */
       scrollContainer.scrollTop = targetScrollPosition;
     },
     handleScroll() {

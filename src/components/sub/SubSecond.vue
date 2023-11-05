@@ -352,7 +352,7 @@
               }
 
               &:nth-child(4) {
-                background-color: #424446;
+                background-color: #202122;
 
                 &:hover:before {
                   display: block;
