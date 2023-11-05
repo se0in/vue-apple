@@ -106,8 +106,21 @@
         </div>
       </div>
     </div>
-    <div class="section_credit">
-      <!-- 밑에 넓은 부분 -->
+    <div class="choice__bottom">
+      <p class="credit__title">Apple Trade In. <span>새 iPhone 구입 시 사용할 수 있는 ₩50,000-₩1,060,000 상당의 크레딧을 얻는 법.</span></p>
+      <div class="choice__select">
+        <button class="select__btn">
+            <p class="btnTitle">iPhone 선택하기</p>
+            <p class="btnSub">몇 가지 질문에 답해주시면 예상 금액이 제시됩니다.</p>
+        </button>
+        <button class="select__btn">
+          <p class="btnTitle">보상 판매 안함</p>
+        </button>
+      </div>
+      <div class="choice__help">
+        <p>보상 판매 과정을 알아볼까요?</p>
+        <p>보상 판매 과정을 단계별로 자세히 알아보세요</p>
+      </div>
     </div>
   </div>
 </template>
@@ -141,7 +154,7 @@
 
 <style lang="scss" scoped>
 .content {
-  margin-top: 100px;
+  margin-top: 150px;
 
   .title {
     padding: 20px;
@@ -195,7 +208,6 @@
 
     .swiper__wrap {
       width: 100%;
-      background-color: #999;
       border-radius: 20px;
       overflow: hidden;
 
@@ -390,6 +402,59 @@
       }
     }
   }
+  .choice__bottom {
+    padding: 20px;
+    .credit__title {
+      font-size: 20px;
+      word-break: keep-all;
+      span {
+        display: block;
+        color: $sub-text-color;
+        font-size: 18px;
+      }
+    }
+    .choice__select {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .select__btn {
+        border: 1px solid #d3d3d3;
+        border-radius: 15px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        height: 80px;
+        width: 100%;
+        text-align: center;
+        p.btnTitle {
+          font-weight: bold;
+        }
+        p.btnSub {
+          font-size: 14px;
+          margin-top: 5px;
+          color: #999;
+        }
+      }
+    }
+    .choice__help {
+      margin-top: 15px;
+      border-radius: 15px;
+      background-color: #f6f6f6;
+      padding: 20px;
+      box-sizing: border-box;
+      font-size: 14px;
+      p {
+        &:first-child {
+          font-weight: bold;
+          margin-bottom: 6px;
+        }
+
+        &:nth-child(2) {
+          color: #535353;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (min-width : 768px) {
@@ -433,5 +498,17 @@
         width: 400px;
       }
     }
+    .choice__bottom {
+      margin-top:60px;
+      .credit__title {
+        span {
+          display: inline;
+        }
+      }
+      .choice__select {
+        flex-direction: row;
+      }
+    }
   }
-}</style>
+}
+</style>

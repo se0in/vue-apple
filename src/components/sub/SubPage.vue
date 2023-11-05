@@ -1,10 +1,9 @@
 <template>
-    <!-- ... 나머지 코드 ... -->
-    <SubFirstWeb v-if="!isMobile" />
-    <SubFirstMobile v-else />
-    <SubSecond />
-    <SubThird   />
-    <!-- <sub-fourth></sub-fourth> -->
+  <SubFirstWeb v-if="!isMobile" />
+  <SubFirstMobile v-else />
+  <SubSecond />
+  <SubThird />
+  <!-- <sub-fourth></sub-fourth> -->
 </template>
 
 <script>
@@ -16,16 +15,16 @@ import SubThird from './SubThird.vue';
 
 export default {
   name: 'SubPage',
-  components : {
+  components: {
     SubFirstWeb,
     SubFirstMobile,
     SubSecond,
     SubThird,
-     /*   SubFourth */
+    /*   SubFourth */
   },
   data() {
     return {
-      isMobile : false,
+      isMobile: false,
     }
   },
   mounted() {
@@ -36,12 +35,10 @@ export default {
     checkIsMobile() {
       this.isMobile = window.innerWidth < 768;
     },
-    
-    
+
+
   },
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

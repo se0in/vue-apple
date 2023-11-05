@@ -1,5 +1,5 @@
 <template>
-  <div class="content" @scroll="handleScroll">
+  <div class="content">
     <div class="sub-inner">
       <h2>보다 자세히 들여다보기.</h2>
       <div class="item__container">
@@ -60,35 +60,9 @@ export default {
       buttons: [1, 2, 3, 4, 5],
     }
   },
-
   methods: {
-    checkButtonPosition() {
-      /* const itemBtn = this.$refs.itemBtn;
-      const itemBtnRect = itemBtn.getBoundingClientRect();
-      const contentRect = this.$refs.content.getBoundingClientRect();
-
-      // 컨테이너 내에서 itemBtn의 위치를 계산합니다.
-      const btnTopRelativeToContent = itemBtnRect.top - contentRect.top;
-      const btnBottomRelativeToContent = btnTopRelativeToContent + itemBtnRect.height;
-
-      // 이벤트를 트리거할 임계값을 정의합니다
-      const triggerThreshold = 50; // 필요에 따라 이 값을 조정하세요
-
-      if (btnTopRelativeToContent >= 0 && btnBottomRelativeToContent <= contentRect.height + triggerThreshold) {
-        // 버튼이 트리거 임계값 내에 있을 때
-        this.$emit('button-in-trigger-zone');
-      } */
-
-      console.log('엥?');
-    },
-    handleScroll() {
-      // 스크롤 위치를 가져옵니다.
-      const scrollTop = this.$refs.content.scrollTop;
-      console.log('스크롤 위치:', scrollTop);
-      console.log('??');
-      // 이제 여기서 스크롤 위치를 사용할 수 있습니다.
-    },
     activateButton(buttonNumber) {
+      
       this.ImgIndex = buttonNumber;
     },
   }
@@ -96,6 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .content {
   // height: calc(100vh - 40px);
   background-color: #000;
@@ -140,7 +115,6 @@ export default {
       background-color: #5d5d5d70;
       backdrop-filter: blur(10px);
       display: flex;
-
       button {
         width: 22px;
         height: 22px;
