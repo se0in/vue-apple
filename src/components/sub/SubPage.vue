@@ -1,9 +1,9 @@
 <template>
-  <SubFirstWeb v-if="!isMobile" />
-  <SubFirstMobile v-else />
-  <SubSecond />
-  <SubThird />
-  <!-- <sub-fourth></sub-fourth> -->
+    <SubFirstWeb v-if="!isMobile" />
+    <SubFirstMobile v-else />
+    <SubSecond />
+    <SubThird/>
+    <SubFourth />
 </template>
 
 <script>
@@ -11,7 +11,7 @@ import SubFirstWeb from './SubFirstWeb.vue';
 import SubFirstMobile from './SubFirstMobile.vue';
 import SubSecond from './SubSecond.vue';
 import SubThird from './SubThird.vue';
-// import SubFourth from './SubFourth.vue'; 
+import SubFourth from './SubFourth.vue'; 
 
 export default {
   name: 'SubPage',
@@ -20,7 +20,7 @@ export default {
     SubFirstMobile,
     SubSecond,
     SubThird,
-    /*   SubFourth */
+    SubFourth,
   },
   data() {
     return {
@@ -35,8 +35,6 @@ export default {
     checkIsMobile() {
       this.isMobile = window.innerWidth < 768;
     },
-
-
   },
 }
 </script>

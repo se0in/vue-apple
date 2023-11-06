@@ -113,7 +113,7 @@ export default {
     font-size: 13px;
     color: $footer-text-color;
     background-color: #f5f5f7;
-    padding: 12px 0 8px;
+    padding: 70px 0;
     
     $footerUnderLine : 'text', 'nav', 'info';
     @each $class in $footerUnderLine {

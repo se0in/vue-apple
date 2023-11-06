@@ -37,16 +37,17 @@ export default {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
       const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 30 : scrollPosition - 850;
-      /* if (scrollPosition >= 3600) {
+      if (scrollPosition >= 3320) {
         event.preventDefault();
-        return;
-      } */
-      scrollContainer.scrollTop = targetScrollPosition;
+      }/* }else {
+          
+        } */
+        scrollContainer.scrollTop = targetScrollPosition;
     },
     handleScroll() {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
-      console.log('scrollPosition: ', scrollPosition);
+      // console.log('scrollPosition: ', scrollPosition);
       const rotatingImage = this.$refs.iphoneImage;
       const rowText = this.$refs.rowText;
       this.lastScrollPosition = scrollPosition;
@@ -65,10 +66,12 @@ export default {
           this.scrollText = true;
           rotatingImage.style.opacity = '1';
           rowText.style.display = 'none';
+          rowText.style.pointerEvents = 'auto';
 
         } else if (scrollPosition <= 300) {
           rotatingImage.style.opacity = '1';
           rowText.style.display = 'none';
+          rowText.style.pointerEvents = 'auto';
 
         } else if (scrollPosition <= 600) {
           const scaleFactor = 1 + scrollPosition / this.scrollThreshold;
@@ -79,6 +82,7 @@ export default {
           rowText.style.display = 'none';
           this.scrollText = false;
           rotatingImage.style.opacity = '1';
+          rowText.style.pointerEvents = 'auto';
 
         } else if (scrollPosition <= 800) {
           this.scrollText = false;
@@ -88,27 +92,30 @@ export default {
           rotatingImage.style.transform = `rotate(-${rotationDegrees}deg)`;
           rowText.style.display = 'none';
           rotatingImage.style.width = `${imageWidth + rotationDegrees}px`;
+          rowText.style.pointerEvents = 'auto';
 
         } else if (scrollPosition <= 1000) {
           this.scrollText = false;
           rotatingImage.style.width = "205.6vh";
           rowText.style.display = 'none';
           rotatingImage.style.opacity = '1';
+          rowText.style.pointerEvents = 'auto';
 
         } else if (scrollPosition <= 1100) {
           rotatingImage.style.transition = '.5s';
           rotatingImage.style.opacity = '.3';
           rowText.style.display = 'block';
           rowText.style.opacity = '0'
+          rowText.style.pointerEvents = 'auto';
           
         } else if (scrollPosition <= 1200) {
           rowText.style.display = 'block';
           rotatingImage.style.opacity = '0';
           const opacity = (scrollPosition - 1100) / 100;
           rowText.style.opacity = Math.min(opacity, 1);
+          rowText.style.pointerEvents = 'none';
 
         } else if (scrollPosition > 1200) {
-          // rowText.style.pointerEvents = 'none';
           rowText.style.display = 'block';
           rowText.style.opacity = '1';
           rotatingImage.style.opacity = '0';
@@ -116,10 +123,7 @@ export default {
             const leftPosition = `-${scrollPosition - 800}` + 'px';
             item.style.backgroundPosition = leftPosition + ' 0';
           })
-
-        }/*  else if (scrollPosition < 3409) {
-          rowText.style.pointerEvents = 'auto';
-        } */
+        } 
       }
     },
   },
@@ -150,6 +154,7 @@ export default {
   }
   .scroll_wrap {
     height: 4200px;
+    
     img.rotating-image {
       transition: transform 0.5s, width 0.5s, opacity 0.5s;
       width: 200px;
@@ -203,12 +208,12 @@ export default {
           font-size: 36px;
           line-height: calc((100vh - 40px) / 6);
           color: #fff;
-          &:nth-child(1) {background: linear-gradient(90deg, #aab9c9 0%, #3b2990 25%, #c2846b 55%, #71a6df 80%, #aab9c9 100%);}
-          &:nth-child(2) {background: linear-gradient(90deg, #bfd3df 0%, #1e124e 25%, #b36464 55%, #9bc6f3 80%, #bfd3df 100%);}
-          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #3d2591 25%, #934a5c 55%, #97bfeb 80%, #aebaf0 100%);}
-          &:nth-child(4) {background: linear-gradient(90deg, #c2ddd6 0%, #2f1d76 25%, #82445b 55%, #6397ce 80%, #c2ddd6 100%);}
-          &:nth-child(5) {background: linear-gradient(90deg, #d2e7d8 0%, #342281 25%, #945961 55%, #578ac0 80%, #d2e7d8 100%);}
-          &:nth-child(6) {background: linear-gradient(90deg, #cfcfe4 0%, #3b2990 25%, #bd7067 55%, #5d91c9 80%, #cfcfe4 100%);}
+          &:nth-child(1) {background: linear-gradient(90deg, #aab9c9 0%, #3a29909d 25%, #c2846b 55%, #71a6df 80%, #aab9c9 100%);}
+          &:nth-child(2) {background: linear-gradient(90deg, #bfd3df 0%, #1e124eaf 25%, #b36464 55%, #9bc6f3 80%, #bfd3df 100%);}
+          &:nth-child(3) {background: linear-gradient(90deg, #aebaf0 0%, #3c25919f 25%, #934a5c 55%, #97bfeb 80%, #aebaf0 100%);}
+          &:nth-child(4) {background: linear-gradient(90deg, #c2ddd6 0%, #2f1d769d 25%, #82445b 55%, #6397ce 80%, #c2ddd6 100%);}
+          &:nth-child(5) {background: linear-gradient(90deg, #d2e7d8 0%, #332281a8 25%, #945961 55%, #578ac0 80%, #d2e7d8 100%);}
+          &:nth-child(6) {background: linear-gradient(90deg, #cfcfe4 0%, #5842c7b4 25%, #bd7067 55%, #5d91c9 80%, #cfcfe4 100%);}
         }
       }
     }

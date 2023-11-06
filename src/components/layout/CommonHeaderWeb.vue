@@ -379,7 +379,6 @@ export default {
       }
     },
     closeMenu() {
-      console.log('확인');
       this.activeMenu = null;
       this.activeUtilArea = null;
       this.shouldShowBlur = false;

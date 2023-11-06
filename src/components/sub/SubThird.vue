@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content" @scroll="btnPositionEvent">
     <div class="sub-inner">
       <h2>보다 자세히 들여다보기.</h2>
       <div class="item__container">
@@ -60,11 +60,35 @@ export default {
       buttons: [1, 2, 3, 4, 5],
     }
   },
+  mounted() {
+    // window 객체에 스크롤 이벤트 리스너 추가
+    window.addEventListener("scroll", this.btnPositionEvent);
+  },
+  beforeUnmount() {
+    // 컴포넌트가 파괴되기 전에 스크롤 이벤트 리스너 제거
+    window.removeEventListener("scroll", this.btnPositionEvent);
+  },
   methods: {
     activateButton(buttonNumber) {
-      
       this.ImgIndex = buttonNumber;
     },
+    btnPositionEvent() {
+      const scrollHeight = window.scrollY || window.pageYOffset;
+      const itemBtn = this.$refs.itemBtn;
+      if(window.innerWidth < 768){
+        if(scrollHeight > 3500 && scrollHeight < 4100) {
+          itemBtn.style.position = 'fixed';
+        } else {
+          itemBtn.style.position = 'absolute';
+        }
+      }else {
+        if(scrollHeight > 2300 && scrollHeight < 2900) {
+          itemBtn.style.position = 'fixed';
+        } else {
+          itemBtn.style.position = 'absolute';
+        }
+      }
+    }
   }
 }
 </script>

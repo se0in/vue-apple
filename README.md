@@ -6,30 +6,54 @@ Vue로 작업한 apple store
 - Vue를 사용하여 apple store 리뉴얼 및 카피
 
 ### 📅 작업 기간
-- 2023년 10월 15일 ~ 2023년 
+- 2023년 10월 15일 ~ 2023년 11월 6일
 
 ### 💻 사용 툴 및 작업 언어
 - Adobe XD (디자인)
 - Visual Studio Code
-    - Vue
+    - Vue, SCSS
 
 <br>
 
 ## 🎮 주요기능
 - 반응형
+  ### 메인 페이지
+  |web|mobile|
+  |:---:|:---:|
+  |<img src="./src/assets/img/readme/readme_web-main.png" height="700"/>|<img src="./src/assets/img/readme/readme_mb-main.png" height="700"/>|
+  
+  ### 서브 페이지
+  |web|mobile|
+  |:---:|:---:|
+  |<img src="./src/assets/img/readme/readme_web-sub.png" height="700"/>|<img src="./src/assets/img/readme/readme_mb-sub.png" height="700"/>|
 
-|web|mobile|
-|:---:|:---:|
-|![image](path)|![image](path)|
+  ### menu
+  |web|mobile|
+  |:---:|:---:|
+  |<img src="./src/assets/img/readme/read-web-menu.png" height="300"/>|<img src="./src/assets/img/readme/read-mb-menu.png" height="300"/>|
+
+  ### footer
+  |web|mobile|
+  |:---:|:---:|
+  |<img src="./src/assets/img/readme/read-web-footer.png" height="300"/>|<img src="./src/assets/img/readme/read-mb-footer.png" height="300"/>|
+
 
 - 동적 요소
 
-|제목|제목|제목|
-|---|---|---|
-|![image](path)|![image](path)|![image](path)|
-|설명|설명|설명|
+### 메인 페이지
+|1.동영상|2.스와이퍼|3.팝업|4.호버 슬라이드|
+|---|---|---|---|
+|![image](./src/assets/img/readme/read-main1.png)|![image](./src/assets/img/readme/read-main2.png)|![image](./src/assets/img/readme/read-main3.png)|![image](./src/assets/img/readme/read-main4.png)|
+|동영상 재생 완료 후 이미지로 변경|vue로 스와이퍼 작업|클릭 시 팝업 띄움(팝업 내용은 이미지 처리)|시간 지남과 호버 시 영역 넓어지는 슬라이드|
+
+### 서브 페이지
+|1.스크롤 이벤트|2.position:sticky; 사용/스와이퍼|3.클릭 시 이미지 전환|4.동영상 삽입 + 스크롤 위치에 따른 이미지 확대|
+|---|---|---|---|
+|![image](./src/assets/img/readme/read-sub1.png)|![image](./src/assets/img/readme/read-sub2.png)|![image](./src/assets/img/readme/read-sub3.png)|![image](./src/assets/img/readme/read-sub4.png)|
+|스크롤 동적 이벤트|스와이퍼 이미지 고정, 우측 스크롤|해당 위치에 오면 하단 버튼 fixed 및 이미지 변경|해당 위치에 오면 하단 버튼 fixed 및 동영상 삽입|
 
 
+<br>
 <br>
 
 ## 📌 프로젝트 작업하며 얻은 코드
