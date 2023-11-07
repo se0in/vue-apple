@@ -13,50 +13,37 @@
     </div>
     <div class="section_product">
       <div class="swiper__wrap">
-        <swiper
-          :hashNavigation="{
-            watchState: true,
-          }"
-          :pagination="{
-            clickable: true,
-          }"
-          :navigation="true"
-          :modules="modules"
-          class="mySwiper"
-        >
+        <swiper 
+        :hashNavigation="{watchState: true,}" 
+        :pagination="{clickable: true,}" 
+        :navigation="true" 
+        :modules="modules" 
+        class="mySwiper">
           <swiper-slide data-hash="slide1">
-            <img src="@/assets/img/SubSwiper1.svg" alt="">  
+            <img src="@/assets/img/SubSwiper1.svg" alt="">
           </swiper-slide>
           <swiper-slide data-hash="slide2">
-            <img src="@/assets/img/SubSwiper2.svg" alt="">  
+            <img src="@/assets/img/SubSwiper2.svg" alt="">
           </swiper-slide>
         </swiper>
 
-
-
       </div>
       <div class="choice">
-        <!-- 선택하는 부분 클릭해야 다음 거 활성화 -->
-        <div class="choice__box choice-model">
+        <!-- 모델 선택 -->
+        <div class="choice__box choice-model opacity">
           <h3>모델.<span> 당신에게 딱 맞는 모델은?</span></h3>
           <div class="choice__select">
             <button 
-            class="select__btn choice-btn "
-            >
-              <div class="select__left">
-                <p class="title__name">iPhone 15 Pro</p>
-                <p class="title__cm">15.5cm 디스플레이</p>
-              </div>
-              <p class="choice_price select__right">₩1,550,000부터</p>
-            </button>
-            <button 
+            v-for="model in models" 
+            :key="model.text" 
             class="select__btn choice-btn"
-            >
+            :class="{ 'active': modelValue === model.text }" 
+            @click="buttonActive1(model.text)">
               <div class="select__left">
-                <p class="title__name">iPhone 15 Pro Max</p>
-                <p class="title__cm">17.0cm 디스플레이</p>
+                <p class="title__name">{{ model.text }}</p>
+                <p class="title__cm">{{ model.description }}</p>
               </div>
-              <p class="choice_price select__right">₩1,900,000부터</p>
+              <p class="choice_price select__right">{{ model.price }}</p>
             </button>
           </div>
           <div class="choice__help">
@@ -64,40 +51,44 @@
             <p>화면 크기와 배터리 사용 시간 등 차이점을 비교해보세요.</p>
           </div>
         </div>
-        <div class="choice__box choice-color">
+
+        <!-- 색상 선택 -->
+        <div 
+        class="choice__box choice-color" 
+        :class="{ 'opacity': modelValue }">
           <h3>색상.<span> 맘에 드는 색상을 선택하세요</span></h3>
           <div class="choice__select">
             <p class="color__text">색상</p>
             <div class="color__box">
-              <button></button>
-              <button></button>
-              <button></button>
-              <button></button>
+              <button 
+              v-for="color in colors" 
+              :key="color" 
+              @click="buttonActiveColor(color)"
+              :class="{ 'active': colorValue === color }" 
+              :disabled="!modelValue">
+              </button>
             </div>
           </div>
         </div>
-        <div class="choice__box choice-db">
+
+        <!-- 저장 용량 선택 -->
+        <div 
+        class="choice__box choice-db" 
+        :class="{ 'opacity': colorValue }">
           <h3>저장 용량.<span> 당신에게 알맞은 저장 용량은?</span></h3>
           <div class="choice__select">
-            <button class="select__btn choice-btn">
+            <button 
+            v-for="storage in storageOptions" 
+            :key="storage.value" 
+            class="select__btn choice-btn"
+            :class="{ 'active': priceValue === storage.value }" 
+            @click="buttonActive2(storage.value)"
+            :disabled="!colorValue">
               <div class="select__left">
-                <p class="title__name">256GB<sup>2</sup></p>
+                <p class="title__name">{{ storage.text }}</p>
               </div>
-              <p class="choice_price select__right">₩1,900,000</p>
+              <p class="choice_price select__right">{{ storage.price }}</p>
             </button>
-            <button class="select__btn choice-btn">
-              <div class="select__left">
-                <p class="title__name">512GB<sup>2</sup></p>
-              </div>
-              <p class="choice_price select__right">₩2,200,000</p>
-            </button>
-            <button class="select__btn choice-btn">
-              <div class="select__left">
-                <p class="title__name">1TB<sup>2</sup></p>
-              </div>
-              <p class="choice_price select__right">₩2,500,000</p>
-            </button>
-
           </div>
           <div class="choice__help">
             <p>모델 선택에 도움이 필요하신가요?</p>
@@ -110,8 +101,8 @@
       <p class="credit__title">Apple Trade In. <span>새 iPhone 구입 시 사용할 수 있는 ₩50,000-₩1,060,000 상당의 크레딧을 얻는 법.</span></p>
       <div class="choice__select">
         <button class="select__btn">
-            <p class="btnTitle">iPhone 선택하기</p>
-            <p class="btnSub">몇 가지 질문에 답해주시면 예상 금액이 제시됩니다.</p>
+          <p class="btnTitle">iPhone 선택하기</p>
+          <p class="btnSub">몇 가지 질문에 답해주시면 예상 금액이 제시됩니다.</p>
         </button>
         <button class="select__btn">
           <p class="btnTitle">보상 판매 안함</p>
@@ -126,13 +117,15 @@
 </template>
 
 <script>
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  import 'swiper/css';
-  import 'swiper/css/pagination';
-  import 'swiper/css/navigation';
-  import { Pagination, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
 
-  export default {
+import { ref } from 'vue';
+
+export default {
   name: 'SubPage',
   props: {
     msg: String
@@ -142,12 +135,49 @@
     SwiperSlide,
   },
   setup() {
+    const modelValue = ref(false);
+    const colorValue = ref(false);
+    const priceValue = ref(false);
+
     return {
       modules: [Pagination, Navigation],
+      modelValue,
+      priceValue,
+      colorValue,
     };
   },
-  methods : {
-    
+  data() {
+    return {
+      models: [
+        {
+          text: 'iPhone 15 Pro',
+          description: '15.5cm 디스플레이',
+          price: '₩1,550,000부터',
+        },
+        {
+          text: 'iPhone 15 Pro Max',
+          description: '17.0cm 디스플레이',
+          price: '₩1,900,000부터',
+        },
+      ],
+      colors: ['내추럴 티타늄', '블루 티타늄', '화이트 티타늄', '블랙 티타늄'],
+      storageOptions: [
+        { value: '256', text: '256GB²', price: '₩1,900,000' },
+        { value: '512', text: '512GB²', price: '₩2,200,000' },
+        { value: '1000', text: '1TB²', price: '₩2,500,000' },
+      ],
+    };
+  },
+  methods: {
+    buttonActive1(value) {
+      this.modelValue = value;
+    },
+    buttonActive2(value) {
+      this.priceValue = value;
+    },
+    buttonActiveColor(value) {
+      this.colorValue = value;
+    },
   }
 }
 </script>
@@ -214,22 +244,30 @@
       .swiper {
         width: 100%;
         height: 100%;
+
         .swiper-slide {
-        width: 100%;
-        height: 100%;
-        img {
-          min-height: 400px;
           width: 100%;
           height: 100%;
-          object-fit: cover;
+
+          img {
+            min-height: 400px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
       }
     }
-  }
 
     .choice {
       .choice__box {
         margin: 100px 0 20px;
+        transition: .3s;
+        opacity: 0.5;
+
+        &.opacity {
+          opacity: 1;
+        }
 
         h3 {
           font-size: 25px;
@@ -242,7 +280,7 @@
 
         .choice__select {
           margin-top: 20px;
-          
+
           .select__btn {
             border: 1px solid #d3d3d3;
             border-radius: 15px;
@@ -252,6 +290,11 @@
             box-sizing: border-box;
             height: 100px;
             width: 100%;
+
+            &.active {
+              border: 2px solid #3274dd;
+            }
+
             &:not(:first-child) {
               margin-top: 10px;
             }
@@ -308,11 +351,11 @@
                 left: 33px;
                 display: none;
                 font-weight: bold;
+                z-index: 1;
               }
 
               &::before {
                 content: '';
-                display: block;
                 width: 41px;
                 height: 41px;
                 border: 1px solid #ddd;
@@ -321,44 +364,60 @@
                 top: -5px;
                 left: -5px;
                 display: none;
+                z-index: 1;
               }
 
               &:nth-child(1) {
                 background-color: #BBB5A9;
 
-                &:hover:before {
+                &:hover:before,
+                &.active::before {
                   display: block;
                 }
 
-                &:hover:after {
+                &:hover:after,
+                &.active::after {
                   content: '- 내추럴 티타늄';
                   display: block;
+                  background-color: #ffffff;
+                  padding-right: 50px;
+                  z-index: 2;
                 }
               }
 
               &:nth-child(2) {
                 background-color: #3C4453;
 
-                &:hover:before {
+                &:hover:before,
+                &.active::before {
                   display: block;
                 }
 
-                &:hover:after {
+                &:hover:after,
+                &.active::after {
                   content: '- 블루 티타늄';
                   display: block;
+                  background-color: #ffffff;
+                  padding-right: 50px;
+                  z-index: 2;
                 }
               }
 
               &:nth-child(3) {
                 background-color: #F2F1EC;
 
-                &:hover:before {
+                &:hover:before,
+                &.active::before {
                   display: block;
                 }
 
-                &:hover:after {
+                &:hover:after,
+                &.active::after {
                   content: '- 화이트 티타늄';
                   display: block;
+                  background-color: #ffffff;
+                  padding-right: 50px;
+                  z-index: 2;
                 }
 
               }
@@ -366,13 +425,18 @@
               &:nth-child(4) {
                 background-color: #202122;
 
-                &:hover:before {
+                &:hover:before,
+                &.active::before {
                   display: block;
                 }
 
-                &:hover:after {
+                &:hover:after,
+                &.active::after {
                   content: '- 블랙 티타늄';
                   display: block;
+                  background-color: #ffffff;
+                  padding-right: 50px;
+                  z-index: 2;
                 }
 
               }
@@ -402,22 +466,27 @@
       }
     }
   }
+
   .choice__bottom {
     padding: 20px;
+
     .credit__title {
       font-size: 20px;
       word-break: keep-all;
+
       span {
         display: block;
         color: $sub-text-color;
         font-size: 18px;
       }
     }
+
     .choice__select {
       margin-top: 20px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      
       .select__btn {
         border: 1px solid #d3d3d3;
         border-radius: 15px;
@@ -426,9 +495,12 @@
         height: 80px;
         width: 100%;
         text-align: center;
+        cursor: default;
+
         p.btnTitle {
           font-weight: bold;
         }
+
         p.btnSub {
           font-size: 14px;
           margin-top: 5px;
@@ -436,6 +508,7 @@
         }
       }
     }
+
     .choice__help {
       margin-top: 15px;
       border-radius: 15px;
@@ -443,6 +516,7 @@
       padding: 20px;
       box-sizing: border-box;
       font-size: 14px;
+
       p {
         &:first-child {
           font-weight: bold;
@@ -498,13 +572,16 @@
         width: 400px;
       }
     }
+
     .choice__bottom {
-      margin-top:60px;
+      margin-top: 60px;
+
       .credit__title {
         span {
           display: inline;
         }
       }
+
       .choice__select {
         flex-direction: row;
       }

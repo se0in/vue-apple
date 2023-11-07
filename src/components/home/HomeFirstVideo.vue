@@ -1,9 +1,15 @@
 <template>
   <div class="container">
     <div class="container__inner">
-      <video autoplay muted ref="videoElement" :src="videoSource" @loadedmetadata="onVideoLoaded"
-        @ended="onVideoEnded">Your browser does not support the video tag.</video>
-      <img v-if="showImage" :src="currentImageSource" alt="티타늄 iPhone 15 Pro" />
+      <video 
+      autoplay muted ref="videoElement" 
+      :src="videoSource" 
+      @loadedmetadata="onVideoLoaded"
+      @ended="onVideoEnded">Your browser does not support the video tag.</video>
+      <img 
+      v-if="showImage" 
+      :src="currentImageSource" 
+      alt="티타늄 iPhone 15 Pro" />
       <BtnBuy class="buttonBuy" />
       <p>₩1,550,000부터</p>
     </div>

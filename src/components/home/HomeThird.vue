@@ -25,7 +25,6 @@
 <script>
 import BtnWatching from '@/components/common/ButtonAppleTv.vue';
 
-
 export default {
   name: 'HomeThird',
   props: {
@@ -67,7 +66,6 @@ export default {
     }
   },
   created() {
-    // 3초마다 클래스명 변경을 위한 타이머 설정
     setInterval(this.changeActiveIndex, 3000);
   },
   methods: {

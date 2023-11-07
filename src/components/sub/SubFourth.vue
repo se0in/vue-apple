@@ -13,7 +13,7 @@
         <div class="right-img" ref="imageContainer" @scroll="onScroll">
           <img src="../../assets/img/SubFourthRight.svg" alt="" class="image-zoom">
         </div>
-        <div class="left-text" >
+        <div class="left-text">
           <p><span>iPhone 사상 최초로 항공우주 등급의 티타늄 디자인</span>을 채택한 iPhone 15 Pro. 화성 탐사선에 쓰이는 소재와 동일한 합금을 사용했습니다.</p>
         </div>
         <div class="right-text">
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="fourth__btn" ref="itemBtn" :style="buttonStyle" >
+    <div class="fourth__btn" ref="itemBtn" :style="buttonStyle">
       <p>디자인 및 디스플레이에 대해 더 알아보기</p>
     </div>
   </div>
@@ -37,21 +37,20 @@ export default {
   data() {
     return {
       videoSource: require("@/assets/img/SubFourthVideo.mp4"),
-      buttonStyle: { 
-        position: 'absolute' 
+      buttonStyle: {
+        position: 'absolute'
       },
       scale: 1
     }
   },
   mounted() {
-    // window 객체에 스크롤 이벤트 리스너 추가
     window.addEventListener("scroll", this.btnPositionEvent);
     window.addEventListener("scroll", this.onScroll);
   },
   methods: {
     btnPositionEvent() {
       const scrollHeight = window.scrollY || window.pageYOffset;
-      
+
       if (window.innerWidth < 768) {
         if (scrollHeight > 4400 && scrollHeight < 6000) {
           this.buttonStyle.position = 'fixed';
@@ -64,36 +63,27 @@ export default {
         } else {
           this.buttonStyle.position = 'absolute';
         }
-        
-        // left-text와 right-text의 표시 여부를 결정
       }
-      
+
     },
     onScroll() {
-  const images = document.querySelectorAll(".image-zoom");
-  const scrollY = window.scrollY || window.pageYOffset;
+      const images = document.querySelectorAll(".image-zoom");
+      const scrollY = window.scrollY || window.pageYOffset;
 
-  images.forEach((image) => {
-    const imageContainer = image.parentElement;
-    const containerTop = imageContainer.getBoundingClientRect().top;
-    const containerHeight = imageContainer.clientHeight;
+      images.forEach((image) => {
+        const imageContainer = image.parentElement;
+        const containerTop = imageContainer.getBoundingClientRect().top;
+        const containerHeight = imageContainer.clientHeight;
 
-    let scale = 1 + 0.08 * Math.sin((containerTop - scrollY) / containerHeight);
-    
-    scale = Math.max(1, scale);
-    
-    scale = Math.min(1.1, scale);
-    
-    image.style.transform = `scale(${scale})`;
-  });
-}
+        let scale = 1 + 0.08 * Math.sin((containerTop - scrollY) / containerHeight);
 
+        scale = Math.max(1, scale);
 
+        scale = Math.min(1.1, scale);
 
-
-
-
-
+        image.style.transform = `scale(${scale})`;
+      });
+    }
   }
 }
 
@@ -125,7 +115,6 @@ export default {
       max-height: 400px;
       overflow: hidden;
       margin-bottom: 20px;
-      
 
       video {
         display: block;
@@ -139,7 +128,6 @@ export default {
       img {
         width: 100%;
         object-fit: cover;
-        /* transform: scale(1.5); */
       }
 
       p {
@@ -233,13 +221,9 @@ export default {
 
         p {
           width: calc(100% - 150px);
-
         }
       }
     }
-
   }
-
-
-
-}</style>
+}
+</style>

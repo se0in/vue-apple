@@ -333,15 +333,15 @@ export default {
             },
           ],
         },
-         {
-           OneTitle: "더 살펴보기",
-           childDepths: [
-             {
-               twoTitle: "추가 정보",
-               twoList: ["TV 및 홈", "엔터테인먼트", "액세서리"],
-             },
-           ],
-         },
+        {
+          OneTitle: "더 살펴보기",
+          childDepths: [
+            {
+              twoTitle: "추가 정보",
+              twoList: ["TV 및 홈", "엔터테인먼트", "액세서리"],
+            },
+          ],
+        },
       ],
       util:
       {
@@ -417,7 +417,6 @@ export default {
   backdrop-filter: blur(10px);
   height: 45px;
 
-
   .header__logo {
     @include flexCenter;
     height: 45px;
@@ -457,12 +456,12 @@ export default {
         box-sizing: border-box;
         overflow-y: auto;
         overflow-x: hidden;
+
         &::-webkit-scrollbar,
         &::-webkit-scrollbar-track,
         &::-webkit-scrollbar-thumb {
           width: 0;
         }
-
 
         .sub__title {
           margin-bottom: 30px;

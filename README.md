@@ -7,7 +7,7 @@ Vue로 작업한 apple store
 - 로고(메인 이동)를 제외한 이동 버튼은 모두 서브페이지로 이동합니다.
 
 ### 📅 작업 기간
-- 2023년 10월 15일 ~ 2023년 11월 6일
+- 2023년 10월 15일 ~ 2023년 11월 7일
 
 ### 💻 사용 툴 및 작업 언어
 - Adobe XD (디자인)
@@ -51,7 +51,7 @@ Vue로 작업한 apple store
 |1.스크롤 이벤트|2.position:sticky; 사용/스와이퍼|3.클릭 시 이미지 전환|4.동영상 삽입 + 스크롤 위치에 따른 이미지 확대|
 |---|---|---|---|
 |![image](./src/assets/img/readme/read-sub1.png)|![image](./src/assets/img/readme/read-sub2.png)|![image](./src/assets/img/readme/read-sub3.png)|![image](./src/assets/img/readme/read-sub4.png)|
-|스크롤 동적 이벤트|스와이퍼 이미지 고정, 우측 스크롤|해당 위치에 오면 하단 버튼 fixed 및 이미지 변경|해당 위치에 오면 하단 버튼 fixed 및 동영상 삽입|
+|스크롤 동적 이벤트|스와이퍼 이미지 sticky, 우측 스크롤, 버튼 클릭 전에는 다음 버튼 비활성화|해당 위치에 오면 하단 버튼 fixed 및 이미지 변경|해당 위치에 오면 하단 버튼 fixed 및 동영상 삽입|
 
 
 <br>
@@ -327,6 +327,39 @@ Vue로 작업한 apple store
       >
       <!-- :key를 각각 부여해야 했다. :key="imgList" 이따구로 하면 안됨!! -->
     </transition>
+  ```
+
+</details>
+
+<details>
+<summary>✨2023-11-07 추가 ✨버튼 클릭 전까지 다음 영역 비활성화 하는 법</summary>
+  <br>
+
+#### 해결 방법
+- 현재 클릭해야하는 부분은 opacity 1, 다음 영역은 0.5주고 클래스명을 붙여 1이 되도록  했다.
+- 클래스명 opacity가 붙기 전에는 버튼을 클릭하지 못하도록 했다.
+
+#### 참고
+  - 해당 페이지 (SubSecond)는 `setup(){}`에 `const priceValue = ref(false);`을 써 반응성 (다른 페이지는 data속성 사용)
+  - Vue 3에서는 setup 함수를 사용하는 것이 더 선호되는 방법이라고 함
+
+  ```html
+    <!-- 이전 ref속성이 true가 되면 opacity 추가 -->
+    <div 
+    class="choice__box choice-db" 
+    :class="{ 'opacity': colorValue }"
+    >
+      <h3>저장 용량.<span> 당신에게 알맞은 저장 용량은?</span></h3>
+      <div class="choice__select">
+        <!-- :disabled로 colorValue(이전 영역)가 false면 비활성화 -->
+        <button 
+        class="select__btn choice-btn"
+        :class="{ 'active': priceValue === '256' }"
+        @click="buttonActive2('256')"
+        :disabled="!colorValue"
+        >
+          
+      <!-- ... 생략 -->
   ```
 
 </details>

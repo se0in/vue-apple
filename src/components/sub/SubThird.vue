@@ -5,20 +5,13 @@
       <div class="item__container">
         <div class="item__max">
           <transition name="fade">
-            <img 
-            :src="imgList[ImgIndex].url" 
-            :alt="imgList[ImgIndex].alt" 
-            :key="imgList[ImgIndex]">
+            <img :src="imgList[ImgIndex].url" :alt="imgList[ImgIndex].alt" :key="imgList[ImgIndex]">
           </transition>
         </div>
 
-        <div class="item__btn" ref="itemBtn" >
-          <button 
-          v-for="(button, index) in buttons" 
-          :key="index" 
-          @click="activateButton(index)"
-          :class="{active: ImgIndex === index}"
-          >
+        <div class="item__btn" ref="itemBtn">
+          <button v-for="(button, index) in buttons" :key="index" @click="activateButton(index)"
+            :class="{ active: ImgIndex === index }">
           </button>
         </div>
       </div>
@@ -75,14 +68,14 @@ export default {
     btnPositionEvent() {
       const scrollHeight = window.scrollY || window.pageYOffset;
       const itemBtn = this.$refs.itemBtn;
-      if(window.innerWidth < 768){
-        if(scrollHeight > 3500 && scrollHeight < 4100) {
+      if (window.innerWidth < 768) {
+        if (scrollHeight > 3500 && scrollHeight < 4100) {
           itemBtn.style.position = 'fixed';
         } else {
           itemBtn.style.position = 'absolute';
         }
-      }else {
-        if(scrollHeight > 2300 && scrollHeight < 2900) {
+      } else {
+        if (scrollHeight > 2300 && scrollHeight < 2900) {
           itemBtn.style.position = 'fixed';
         } else {
           itemBtn.style.position = 'absolute';
@@ -94,9 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .content {
-  // height: calc(100vh - 40px);
   background-color: #000;
   overflow: hidden;
   margin-top: 100px;
@@ -139,12 +130,14 @@ export default {
       background-color: #5d5d5d70;
       backdrop-filter: blur(10px);
       display: flex;
+
       button {
         width: 22px;
         height: 22px;
         border-radius: 50%;
         display: inline-block;
         margin: 6px;
+
         &.active {
           outline: 2px solid #fff;
         }
@@ -172,4 +165,5 @@ export default {
       }
     }
   }
-}</style>
+}
+</style>
