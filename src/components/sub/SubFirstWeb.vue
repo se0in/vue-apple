@@ -33,28 +33,29 @@ export default {
     };
   },
   methods: {
+    /* 주석 지우지 말 것 */
     handleWheel(event) {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
       const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 30 : scrollPosition - 850;
-      if (scrollPosition >= 3320) {
+
+      // var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      // console.log('windowHeight: ', windowHeight);
+      /* if (scrollPosition >= 3320 || scrollPosition >= 4100) {
         event.preventDefault();
-      }/* }else {
-          
-        } */
-        scrollContainer.scrollTop = targetScrollPosition;
+      } */
+      scrollContainer.scrollTop = targetScrollPosition;
     },
     handleScroll() {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
-      // console.log('scrollPosition: ', scrollPosition);
+      console.log('scrollPosition: ', scrollPosition);
       const rotatingImage = this.$refs.iphoneImage;
       const rowText = this.$refs.rowText;
       this.lastScrollPosition = scrollPosition;
       let rowList = document.querySelectorAll('.rowList');
 
       if (rotatingImage) {
-        /* 주석 지우지 말 것 */
         if (scrollPosition == 0) {
           this.scrollText = false;
           rotatingImage.style.transform = `rotate(0deg)`;
@@ -107,7 +108,7 @@ export default {
           rowText.style.display = 'block';
           rowText.style.opacity = '0'
           rowText.style.pointerEvents = 'auto';
-          
+
         } else if (scrollPosition <= 1200) {
           rowText.style.display = 'block';
           rotatingImage.style.opacity = '0';
@@ -115,7 +116,7 @@ export default {
           rowText.style.opacity = Math.min(opacity, 1);
           rowText.style.pointerEvents = 'none';
 
-        } else if (scrollPosition > 1200) {
+        } else if (scrollPosition > 1201) {
           rowText.style.display = 'block';
           rowText.style.opacity = '1';
           rotatingImage.style.opacity = '0';
@@ -123,7 +124,7 @@ export default {
             const leftPosition = `-${scrollPosition - 800}` + 'px';
             item.style.backgroundPosition = leftPosition + ' 0';
           })
-        } 
+        }
       }
     },
   },
