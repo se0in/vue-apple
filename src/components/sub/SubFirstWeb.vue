@@ -39,10 +39,6 @@ export default {
       const scrollPosition = scrollContainer.scrollTop;
       const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 100 : scrollPosition - 850;
 
-      var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-      console.log('windowHeight: ', windowHeight);
-      console.log('테스트',window.innerWidth);
-      console.log('scrollPosition: ', scrollPosition);
       if(window.innerWidth >= 1500){
         if(scrollPosition <= 2500) {
           event.preventDefault();
@@ -56,7 +52,6 @@ export default {
     handleScroll() {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
-      console.log('scrollPosition: ', scrollPosition);
       const rotatingImage = this.$refs.iphoneImage;
       const rowText = this.$refs.rowText;
       this.lastScrollPosition = scrollPosition;

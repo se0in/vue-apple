@@ -43,17 +43,10 @@ export default {
           productDescription: '한 차원 높은 모험.'
         },
         {
-          class: 'card__item-2',
-          path: require('@/assets/img/HomeSecond_2.png'),
-          productName: 'Carbon Neutral',
-          productDescription: 'Apple 최초의 탄소 중립 제품 등장.'
-        },
-        {
-          class: 'card__item-3',
-          path: require('@/assets/img/HomeSecond_3.png'),
-          productName: 'WATCH',
-          productSubName: 'SE',
-          productDescription: '부담없이 빠져들다.'
+          class: 'card__item-6',
+          path: require('@/assets/img/HomeSecond_6.png'),
+          productName: 'iPad Pro',
+          productDescription: '막강한 성능의 M2 탑재'
         },
         {
           class: 'card__item-4',
@@ -62,17 +55,24 @@ export default {
           productDescription: '전에 없던 청취 경험. 적응형 오디오.'
         },
         {
+          class: 'card__item-2',
+          path: require('@/assets/img/HomeSecond_2.png'),
+          productName: 'Carbon Neutral',
+          productDescription: 'Apple 최초의 탄소 중립 제품 등장.'
+        },
+        {
           class: 'card__item-5',
           path: require('@/assets/img/HomeSecond_5.png'),
           productName: 'MacBook Air 15',
           productDescription: '크게 펼치고, 얇게 접다.'
         },
         {
-          class: 'card__item-6',
-          path: require('@/assets/img/HomeSecond_6.png'),
-          productName: 'iPad Pro',
-          productDescription: '막강한 성능의 M2 탑재'
-        }
+          class: 'card__item-3',
+          path: require('@/assets/img/HomeSecond_3.png'),
+          productName: 'WATCH',
+          productSubName: 'SE',
+          productDescription: '부담없이 빠져들다.'
+        },
       ],
       isPopupVisible: false,
     }

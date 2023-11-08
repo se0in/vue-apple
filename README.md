@@ -45,7 +45,7 @@ Vue로 작업한 apple store
 |1.동영상|2.스와이퍼|3.팝업|4.호버 슬라이드|
 |---|---|---|---|
 |![image](./src/assets/img/readme/read-main1.png)|![image](./src/assets/img/readme/read-main2.png)|![image](./src/assets/img/readme/read-main3.png)|![image](./src/assets/img/readme/read-main4.png)|
-|동영상 재생 완료 후 이미지로 변경|vue로 스와이퍼 작업|클릭 시 팝업 띄움(팝업 내용은 이미지 처리)|시간 지남과 호버 시 영역 넓어지는 슬라이드|
+|동영상 재생 완료 후 이미지로 변경|vue로 스와이퍼 작업|클릭 시 팝업(내용은 이미지 처리) 띄움. 워치,에어팟,맥북,아이패드 별 다른 이미지 연결|시간 지남과 호버 시 영역 넓어지는 슬라이드|
 
 #### 서브 페이지
 |1.스크롤 이벤트|2.position:sticky; 사용/스와이퍼|3.클릭 시 이미지 전환|4.동영상 삽입 + 스크롤 위치에 따른 이미지 확대|

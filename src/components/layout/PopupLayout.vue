@@ -18,11 +18,11 @@ export default {
     return {
       popupImg: [
         { path: require('@assets/img/popup_watch.png') },
-        { path: require('@assets/img/popup_watch.png') },
-        { path: require('@assets/img/popup_watch.png') },
-        { path: require('@assets/img/popup_airpod.png') },
-        { path: require('@assets/img/popup_macbook.png') },
         { path: require('@assets/img/popup_ipad.png') },
+        { path: require('@assets/img/popup_airpod.png') },
+        { path: require('@assets/img/popup_watch.png') },
+        { path: require('@assets/img/popup_macbook.png') },
+        { path: require('@assets/img/popup_watch.png') },
       ],
       currentIndex: 0,
     }

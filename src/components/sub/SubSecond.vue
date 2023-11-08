@@ -263,7 +263,7 @@ export default {
       .choice__box {
         margin: 100px 0 20px;
         transition: .3s;
-        opacity: 0.5;
+        opacity: 0.3;
 
         &.opacity {
           opacity: 1;
