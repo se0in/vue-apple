@@ -37,10 +37,17 @@ export default {
     handleWheel(event) {
       const scrollContainer = this.$refs.scrollContainer;
       const scrollPosition = scrollContainer.scrollTop;
-      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 30 : scrollPosition - 850;
+      const targetScrollPosition = event.deltaY > 0 ? scrollPosition + 100 : scrollPosition - 850;
 
-      // var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-      // console.log('windowHeight: ', windowHeight);
+      var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      console.log('windowHeight: ', windowHeight);
+      console.log('테스트',window.innerWidth);
+      console.log('scrollPosition: ', scrollPosition);
+      if(window.innerWidth >= 1500){
+        if(scrollPosition <= 2500) {
+          event.preventDefault();
+        }
+      }
       /* if (scrollPosition >= 3320 || scrollPosition >= 4100) {
         event.preventDefault();
       } */
@@ -62,6 +69,7 @@ export default {
           rotatingImage.style.width = `200px`;
           rowText.style.display = 'none';
           rotatingImage.style.opacity = '1';
+          rowText.style.pointerEvents = 'auto';
 
         } else if (scrollPosition <= 100) {
           this.scrollText = true;
@@ -101,15 +109,17 @@ export default {
           rowText.style.display = 'none';
           rotatingImage.style.opacity = '1';
           rowText.style.pointerEvents = 'auto';
-
+          
         } else if (scrollPosition <= 1100) {
+          this.scrollText = false;
           rotatingImage.style.transition = '.5s';
           rotatingImage.style.opacity = '.3';
           rowText.style.display = 'block';
           rowText.style.opacity = '0'
           rowText.style.pointerEvents = 'auto';
-
+          
         } else if (scrollPosition <= 1200) {
+          this.scrollText = false;
           rowText.style.display = 'block';
           rotatingImage.style.opacity = '0';
           const opacity = (scrollPosition - 1100) / 100;
@@ -134,6 +144,7 @@ export default {
 
 <style lang="scss" scoped>
 .rotate-iphone {
+  
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -147,6 +158,7 @@ export default {
   .scroll-container {
     height: calc(100vh - 40px);
     overflow-y: scroll;
+    pointer-events: auto;
     &::-webkit-scrollbar,
     &::-webkit-scrollbar-track,
     &::-webkit-scrollbar-thumb {
