@@ -323,9 +323,13 @@ Vue로 작업한 apple store
       <img 
       :src="imgList[ImgIndex].url" 
       :alt="imgList[ImgIndex].alt"
-      :key="imgList[ImgIndex]"
+      :key="imgList[ImgIndex].alt"
       >
-      <!-- :key를 각각 부여해야 했다. :key="imgList" 이따구로 하면 안됨!! -->
+      <!-- :key를 각각 부여해야 했다. :key="imgList" 이렇게 하면 안됨!! -->
+
+      <!-- 2023.11.09 수정 
+        :key를 인덱스로 가져오는 것은 비추 (리액트와 같은 개념이라고 함. 재랜더링 시 다시 읽어 성능 저하)
+       -->
     </transition>
   ```
 

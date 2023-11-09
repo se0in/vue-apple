@@ -5,7 +5,7 @@
       <div class="item__container">
         <div class="item__max">
           <transition name="fade">
-            <img :src="imgList[ImgIndex].url" :alt="imgList[ImgIndex].alt" :key="imgList[ImgIndex]">
+            <img :src="imgList[ImgIndex].url" :alt="imgList[ImgIndex].alt" :key="imgList[ImgIndex].alt">
           </transition>
         </div>
 
