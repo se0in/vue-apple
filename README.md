@@ -1,7 +1,8 @@
 # Vue apple store
-Vue로 작업한 apple store
 배포 링크 : https://seoin-apple.netlify.app
-<br>
+Vue로 작업한 apple store  
+
+<br><br>
 ## 📣 프로젝트 소개
 - 개인프로젝트
 - Vue를 사용하여 apple store 리뉴얼 및 카피
