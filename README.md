@@ -21,22 +21,22 @@ Vue로 작업한 apple store
   #### 메인 페이지
   |web|mobile|
   |:---:|:---:|
-  |<img src="./src/assets/img/readme/readme_web-main.png" height="700"/>|<img src="./src/assets/img/readme/readme_mb-main.png" height="700"/>|
+  |<img src="./src/assets/img/readme/readme_web-main.png" height="700" alt=""/>|<img src="./src/assets/img/readme/readme_mb-main.png" height="700" alt=""/>|
   
   #### 서브 페이지
   |web|mobile|
   |:---:|:---:|
-  |<img src="./src/assets/img/readme/readme_web-sub.png" height="700"/>|<img src="./src/assets/img/readme/readme_mb-sub.png" height="700"/>|
+  |<img src="./src/assets/img/readme/readme_web-sub.png" height="700" alt=""/>|<img src="./src/assets/img/readme/readme_mb-sub.png" height="700" alt=""/>|
 
   #### menu
   |web|mobile|
   |:---:|:---:|
-  |<img src="./src/assets/img/readme/read-web-menu.png" height="300"/>|<img src="./src/assets/img/readme/read-mb-menu.png" height="300"/>|
+  |<img src="./src/assets/img/readme/read-web-menu.png" height="300" alt=""/>|<img src="./src/assets/img/readme/read-mb-menu.png" height="300" alt=""/>|
 
   #### footer
   |web|mobile|
   |:---:|:---:|
-  |<img src="./src/assets/img/readme/read-web-footer.png" height="300"/>|<img src="./src/assets/img/readme/read-mb-footer.png" height="300"/>|
+  |<img src="./src/assets/img/readme/read-web-footer.png" height="300" alt=""/>|<img src="./src/assets/img/readme/read-mb-footer.png" height="300" alt=""/>|
 
 
 ### 동적 요소
