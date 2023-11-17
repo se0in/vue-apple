@@ -1,5 +1,6 @@
 # Vue apple store
 ✨ 링크 : https://seoin-apple.netlify.app ✨  
+(이미지 로딩이 좀 걸립니다😂😥)
 <br>
 Vue로 작업한 apple store  
 
