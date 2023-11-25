@@ -138,8 +138,7 @@ export default {
 
 
 <style lang="scss" scoped>
-.rotate-iphone {
-  
+.rotate-iphone { 
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -205,7 +204,6 @@ export default {
       z-index: -1;
       overflow: hidden;
       transition: opacity 0.5s;
-      // pointer-events: none;
       ul {
         height: 100%;
         
