@@ -74,6 +74,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   width: 100%;
+  overflow-x: hidden;
   background-color: #000;
 
   .container__inner {
@@ -82,9 +83,12 @@ export default {
     padding: 50px 0 200px;
     position: relative;
     text-align: center;
-
+    video {
+      width: 100%;
+    }
     img {
       position: absolute;
+      width: 100%;
       top: 50px;
       left: 50%;
       transform: translateX(-50%);
